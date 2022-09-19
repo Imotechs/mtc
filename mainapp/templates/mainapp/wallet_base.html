@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> StakeGames</title>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
+	<!-- bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
+	<!-- Plugin css -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/plugin.css'%}">
+	<!-- stylesheet -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/wallet/style.css'%}">
+	<!-- responsive -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/wallet/responsive.css'%}">
+</head>
+<script src="https://kit.fontawesome.com/bbbd3ef3a9.js" crossorigin="anonymous"></script>
+
+<body>
+	<!-- preloader area start -->
+	<div class="preloader" id="preloader">
+		<div class="loader loader-1">
+			<div class="loader-outter"></div>
+			<div class="loader-inner"></div>
+		</div>
+	</div>
+	<!-- preloader area end -->
+
+	<!-- Header Area Start  -->
+	<header class="header">
+		<!-- Top Header Area Start -->
+		<section class="top-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="content">
+							<div class="left-content">
+								<ul class="left-list">
+									<li>
+										.
+										<!-- <p>
+											<i class="fas fa-headset"><a href=""></a></i>	Support
+										</p> -->
+									</li>
+									<li>
+										<p>
+											<a href="{%url 'contact'%}"><i class="fas fa-envelope"></i></a>	
+										</p>
+									</li>
+									<li>
+										<div class="language-selector">
+											<select name="language" class="language">
+												<option value="1">English</option>
+												<option value="2">France</option>
+												<option value="3">Japan</option>
+											</select>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="right-content">
+								<ul class="right-list">
+									 <li>
+										.
+										<!--<div class="cart-icon tm-dropdown">
+											<i class="fas fa-cart-arrow-down"></i> 
+											<span class="cart-count"></span>
+											<div class="tm-dropdown-menu">
+												<ul class="list">
+													<li class="list-item">
+															<div class="close">
+																	<i class="fas fa-times"></i>
+															</div>
+														 <ul class="number-list">
+															<li>24</li>
+															<li>25</li>
+															<li>26</li>
+															<li>27</li>
+															<li>28</li>
+														</ul> 
+													</li>
+													
+												</ul>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="notofication tm-dropdown">
+											<span class="count"></span>
+											<div class="tm-dropdown-menu">
+													<ul class="list">
+														<li>
+															
+														</li>
+														
+													</ul>
+												</div>
+										</div>
+									</li> -->
+									{%if request.user.is_superuser%}
+									<li>
+										
+												<a href="{%url 'dashboard'%}" class="sign-in"  >
+													<i class="fas fa-user"></i> 
+												</a>
+											
+									</li>
+									{%endif%}
+									<li> {%if request.user.is_authenticated%}
+										<a href="{%url 'logout'%}" class="sign-in"  >
+											<i class="fas fa-user"></i> Logout
+										</a>
+										{%else%}
+										<a href="{%url 'login'%}" class="sign-in" data-toggle="modal" data-target="#login">
+											<i class="fas fa-user"></i> LogIn
+										</a>
+										{%endif%}
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Top Header Area End -->
+
+		<!--Main-Menu Area Start-->
+		<div class="mainmenu-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">                 
+						<nav class="navbar navbar-expand-lg navbar-light">
+							<a class="navbar-brand" href="index.html">
+								<img src="" alt="">
+							</a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu" aria-controls="main_menu"
+								aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse fixed-height" id="main_menu">
+								<ul class="navbar-nav ml-auto">
+									<li class="nav-item ">
+										{%if home%}
+										<a class="nav-link active " href="{%url 'home'%}"  role="button" data-toggle="" aria-haspopup="true"
+											aria-expanded="false">
+											Home 
+										<div class="mr-hover-effect"></div>
+										</a>
+										{%else%}
+										<a class="nav-link" href="{%url 'home'%}"  role="button" data-toggle="" aria-haspopup="true"
+											aria-expanded="false">
+											Home 
+										<div class="mr-hover-effect"></div>
+										</a>
+										{%endif%}
+										<!-- <ul class="dropdown-menu" >
+											<li><a class="dropdown-item" href="{%url 'home'%}"> <i class="fa fa-angle-double-right"></i>Home  </a></li>
+										</ul> -->
+									</li>
+									<li class="nav-item">
+										{%if game%}
+										<a class="nav-link active" href="{%url 'games'%}">Play Games
+												<div class="mr-hover-effect"></div></a>
+										{%else%}
+										<a class="nav-link" href="{%url 'games'%}">Play Games
+											<div class="mr-hover-effect"></div></a>
+										{%endif%}
+									</li>
+									<li class="nav-item">
+										{%if lot%}
+
+										<a class="nav-link active" href="{%url 'lot'%}">lottery
+											<div class="mr-hover-effect"></div></a>
+											{%else%}
+										<a class="nav-link" href="{%url 'lot'%}">lottery
+										<div class="mr-hover-effect"></div></a>
+											{%endif%}
+									</li>
+									<li class="nav-item">
+										{%if turn%}
+										<a class="nav-link active " href="{%url 'turn'%}" >
+											Tournaments 
+										<div class="mr-hover-effect"></div>
+										</a>
+										{%else%}
+										<a class="nav-link" href="{%url 'turn'%}" >
+											Tournaments 
+										<div class="mr-hover-effect"></div>
+										</a>
+										{%endif%}
+									</li>
+									<li class="nav-item">
+										{%if contact%}
+										<a class="nav-link active" href="{%url 'contact'%}">Contact
+											<div class="mr-hover-effect"></div>
+										</a>
+										{%else%}
+										<a class="nav-link" href="{%url 'contact'%}">Contact
+											<div class="mr-hover-effect"></div>
+										</a>
+										{%endif%}
+									</li>
+								</ul>
+								{%if request.user.is_authenticated%}
+								<a href="{%url 'wallet'%}" class="mybtn1"  data-toggle="" data-target="">Wallet</a>
+									{%else%}
+									<a href="{%url 'register'%}" class="mybtn1"  data-toggle="" data-target=""> Join us</a>
+
+									{%endif%}
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Main-Menu Area Start-->
+	</header>
+	<!-- Header Area End  -->
+	
+	<!-- Hero Area Start -->
+	{%for message in messages%}
+	<script>
+		alert('{{message}}')
+	</script>
+	{%endfor%}
+
+    {%block content%}
+
+    {%endblock content%}
+	
+	
+			
+		<div class="copy-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5">
+						<div class="left-area">
+							<p>Copyright © 2022.All Rights Reserved By <a href="">StakeGames</a>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-7">
+						<ul class="copright-area-links">
+							<li>
+								<a href="{%url 'terms'%}">Terms Of Use</a>
+							</li>
+							<li>
+								<a href="{%url 'testimonials'%}">Testimonials</a>
+							</li>
+							<li>
+								<a href="{%url 'contact'%}">Help Center</a>
+							</li>
+							<li>
+								<a href="{%url 'about'%}">About Us </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>					
+	<!-- jquery -->
+    
+    <script src="{%static 'mainapp/assets/js/jquery.js'%}"></script>
+	<!-- popper -->
+	<script src="{%static 'mainapp/assets/js/popper.min.js'%}"></script>
+	<!-- bootstrap -->
+	<script src="{%static 'mainapp/assets/js/bootstrap.min.js'%}"></script>
+	<!-- plugin js-->
+	<script src="{%static 'mainapp/assets/js/plugin.js'%}"></script>
+
+	<!-- MpusemoverParallax JS-->
+	<script src="{%static 'mainapp/assets/js/TweenMax.js'%}"></script>
+	<script src="{%static 'mainapp/assets/js/mousemoveparallax.js'%}"></script>
+	<!-- main -->
+	<script src="{%static 'mainapp/assets/js/main.js'%}"></script>
+</body>
+</html>

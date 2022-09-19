@@ -1,0 +1,703 @@
+{% extends 'mainapp/base.html'%}
+{%load static%}
+{%block content%}
+	<!-- Breadcrumb Area Start -->
+	<section class="breadcrumb-area bc-lottery">
+		<img class="bc-img" src="{%static 'mainapp/assets/images/breadcrumb/lottery.png'%}" alt="">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h4 class="title">
+						Lottery
+					</h4>
+					<ul class="breadcrumb-list">
+						<li>
+							<a href="{%url 'home'%}">
+									<i class="fas fa-Home "></i>
+									Home 
+							</a>
+						</li>
+						<li>
+							<span><i class="fas fa-chevron-right"></i> </span>
+						</li>
+						<li>
+							<a href="">Lottery</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Breadcrumb Area End -->
+	
+	<!-- Lottery Staticstics Area Start -->
+	<section class="lottery-area">
+		<div class="lottery-staticstics">
+			<div class="container">
+				<div class="row">
+					<!-- <div class="col-lg-4">
+						<div class="single-staticstics">
+							<div class="left">
+								<div class="icon">
+									<img src="{%static 'mainapp/assets/images/lottery/st1.png'%}" alt="">
+								</div>
+							</div>
+							<div class="right">
+								<h4 class="title">Lottery Jackpot</h4>
+								<div class="count">
+									<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+									<span>0.416250</span>
+								</div>
+							</div>
+						</div>
+					</div> -->
+					<div class="col-lg-4">
+						<div class="single-staticstics">
+							<div class="left">
+								<div class="icon">
+									<img src="{%static 'mainapp/assets/images/lottery/st2.png'%}" alt="">
+								</div>
+							</div>
+							<div class="right">
+								<h4 class="title">Today Bids</h4>
+								<div class="count">
+									<img src="{%static 'mainapp/assets/images/tikit-icon.png'%}" alt="">
+									<span>{{current_lot.bid_set.all.count}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="single-staticstics">
+							<div class="left">
+								<div class="icon">
+									<img src="{%static 'mainapp/assets/images/lottery/st2.png'%}" alt="">
+								</div>
+							</div>
+							<div class="right">
+								<h4 class="title">My Bids Today</h4>
+								<div class="count">
+									<img src="{%static 'mainapp/assets/images/tikit-icon.png'%}" alt="">
+									<span>{{my_bids_today.count}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="daily-lottery">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-8 col-md-10">
+						<div class="section-heading">
+							<h5 class="subtitle">
+								Try to check out our
+							</h5>
+							<h2 class="title">
+								Daily Lottery
+							</h2>
+							<p class="text">
+								We update our site regularly; more and more winners are added every day! To locate the most recent winner's information
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="draw-time">
+							<h5 class="subtitle">
+								Lottery Draw Ends In:
+							</h5>
+							<div class="draw-counter">
+								<p id = "times" hidden>{{current_lot.due_date|date:'M,d,Y H:i'}}</p>
+								<b id="days"> </b>D   <b id="hours"> </b>H  <b id="minutes"></b>M  <b id="seconds"> </b>S
+							</div>
+							<p class="text">
+								For Lucky Winners to be selected
+							</p>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="buy-tickets">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="buy-tickets-box">
+							<div class="heading">
+								<h4 class="title">
+									Buy Lottery Number
+								</h4>
+								
+							</div>
+							<div class="content">
+								<form method="POST">
+								<div class="game-numbers">
+									<h4 class="title">
+										LOTTERY NUMBERS
+									</h4>
+									<div class="number-box">
+										
+										<div class="manual-number">
+											<div class="top-content">
+												<input class="output" name = 'number' id="message" type="number" min="1" max="50" maxlength="2" readonly style="color: #fff; height: 4px; width: 90%; border: none; outline: none;"/><br><br>
+
+												<script>
+												function f(val) {      
+												document.getElementById("message").value = val;
+												}
+												</script>
+											</div>
+											<input class="output" type="number" name="amount" required  style="color: #fff; height: 3px; width: 90%; border: none; outline: none;margin-top:10px;" placeholder="Bid Amount"/>
+											{%csrf_token%}
+											<div class="main-content">
+												<div class="number-list">
+													<button type="button" value="1" onclick="f(this.value)">1</button>
+													<button type="button" value="2" onclick="f(this.value)">2</button>
+													<button type="button" value="3" onclick="f(this.value)">3</button>
+													<button type="button" value="4" onclick="f(this.value)">4</button>
+													<button type="button" value="5" onclick="f(this.value)">5</button>
+													<button type="button" value="6" onclick="f(this.value)">6</button>
+													<button type="button" value="7" onclick="f(this.value)">7</button>
+													<button type="button" value="8" onclick="f(this.value)">8</button>
+													<button type="button" value="9" onclick="f(this.value)">9</button>
+													<button type="button" value="10" onclick="f(this.value)">10</button>
+													<button type="button" value="11" onclick="f(this.value)">11</button>
+													<button type="button" value="12" onclick="f(this.value)">12</button>
+													<button type="button" value="13" onclick="f(this.value)">13</button>
+													<button type="button" value="14" onclick="f(this.value)">14</button>
+													<button type="button" value="15" onclick="f(this.value)">15</button>
+													<button type="button" value="16" onclick="f(this.value)">16</button>
+													<button type="button" value="17" onclick="f(this.value)">17</button>
+													<button type="button" value="18" onclick="f(this.value)">18</button>
+													<button type="button" value="19" onclick="f(this.value)">19</button>
+													<button type="button" value="20" onclick="f(this.value)">20</button>
+													<button type="button" value="21" onclick="f(this.value)">21</button>
+													<button type="button" value="22" onclick="f(this.value)">22</button>
+													<button type="button" value="23" onclick="f(this.value)">23</button>
+													<button type="button" value="24" onclick="f(this.value)">24</button>
+													<button type="button" value="25" onclick="f(this.value)">25</button>
+													<button type="button" value="26" onclick="f(this.value)">26</button>
+													<button type="button" value="27" onclick="f(this.value)">27</button>
+													<button type="button" value="28" onclick="f(this.value)">28</button>
+													<button type="button" value="29" onclick="f(this.value)">29</button>
+													<button type="button" value="30" onclick="f(this.value)">30</button>
+													<button type="button" value="31" onclick="f(this.value)">31</button>
+													<button type="button" value="32" onclick="f(this.value)">32</button>
+													<button type="button" value="33" onclick="f(this.value)">33</button>
+													<button type="button" value="34" onclick="f(this.value)">34</button>
+													<button type="button" value="35" onclick="f(this.value)">35</button>
+													<button type="button" value="36" onclick="f(this.value)">36</button>
+													<button type="button" value="37" onclick="f(this.value)">37</button>
+													<button type="button" value="38" onclick="f(this.value)">38</button>
+													<button type="button" value="39" onclick="f(this.value)">39</button>
+													<button type="button" value="40" onclick="f(this.value)">40</button>
+													<button type="button" value="41" onclick="f(this.value)">41</button>
+													<button type="button" value="42" onclick="f(this.value)">42</button>
+													<button type="button" value="43" onclick="f(this.value)">43</button>
+													<button type="button" value="44" onclick="f(this.value)">44</button>
+													<button type="button" value="45" onclick="f(this.value)">45</button>
+													<button type="button" value="46" onclick="f(this.value)">46</button>
+													<button type="button" value="47" onclick="f(this.value)">47</button>
+													<button type="button" value="48" onclick="f(this.value)">48</button>
+													<button type="button" value="49" onclick="f(this.value)">49</button>
+													<button type="button" value="50" onclick="f(this.value)">50</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12 text-center">
+											<button type="submit" class="mybtn1">Buy Number</button>
+										</div>
+									</div>
+								</form>
+								</div>
+								
+							
+							</div>
+							
+			
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			function f(val) {      
+			document.getElementById("message").value = val;
+			}
+		  </script>
+	</section>
+	<!-- Lottery Staticstics  Area End -->
+		
+	<!-- Latest Activities Area Start -->
+	<section class="activities">
+		<img class="shape shape1" src="{%static 'mainapp/assets/images/people/shape1.png'%}" alt="">
+		<img class="shape shape2" src="{%static 'mainapp/assets/images/people/shape2.png'%}" alt="">
+		<img class="shape shape3" src="{%static 'mainapp/assets/images/people/shape3.png'%}" alt="">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-10">
+					<div class="section-heading">
+						<h5 class="subtitle">
+							Daily Lottery
+						</h5>
+						<h2 class="title">
+							Latest Activites
+						</h2>
+						<p class="text">
+							The world’s first truly fair and global lottery. Each player has 
+							the highest chances to win the JACKPOT
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tab-menu-area">
+						<ul class="nav nav-lend mb-3" id="pills-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-all-bets-tab" data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true">Last Lottery Result</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-my-bets-tab" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="false">My Bids</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-history-tab" data-toggle="pill" href="#pills-history" role="tab" aria-controls="pills-history" aria-selected="false">History</a>
+							</li>
+						</ul>
+					</div>
+					<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-all-bets" role="tabpanel" aria-labelledby="pills-all-bets-tab">
+							<div class="responsive-table">
+								<td>Last Lucky Numbers</td>
+								<td><tr class="number-list">
+									{%for i in last_numbers%}
+									<td><button>{{i}}</button></td>
+								
+									{%endfor%}
+								</tr>
+								</td>
+								<table class="table">
+								<thead>
+									<tr>
+									<th scope="col">USER</th>
+									<th scope="col">Bid number</th>
+									<th scope="col">Date</th>
+									<th scope="col">Status</th>
+									</tr>
+								</thead>
+								<tbody>
+							
+									{%for winner in last_won_lot.bid_set.all%}
+									<tr>
+										<td>
+											{{winner.user.username}}
+										</td>
+										<td>
+											<div class="number-list">
+												<button  >{{winner.number}}</button>
+										
+											</div>
+										</td>
+										<td>
+											{{winner.date|date:'M,d'}}
+										</td>
+										{%if winner.win%}
+										<td class="bg-success" >
+											Jackpot
+										</td>
+										{%else%}
+										<td class="bg-warning" style="color: black;">
+											Lost
+										</td>
+										{%endif%}
+									</tr>
+									{%endfor%}
+								</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="pills-my-bets" role="tabpanel" aria-labelledby="pills-my-bets-tab">
+							<div class="responsive-table">
+									<table class="table">
+									<thead>
+										<tr>
+										<th scope="col">USER</th>
+										<th scope="col">Bid numbers</th>
+										<th scope="col">Date</th>
+										</tr>
+									</thead>
+									<tbody>
+										{%for bid in my_bids_today%}
+										<tr>
+											<td>
+												{{bid.user.username}}
+											</td>
+											<td>
+												<div class="number-list">
+												<button >{{bid.number}}</button>
+												</div>
+											</td>
+											<td>
+												{{bid.date|date:'M,d'}}
+											</td>
+										</tr>
+										{%endfor%}
+									</tbody>
+									</table>
+								</div>
+						</div>
+						<div class="tab-pane fade" id="pills-history" role="tabpanel" aria-labelledby="pills-history-tab">
+							<div class="responsive-table">
+									<table class="table">
+									<thead>
+										<tr>
+										<th scope="col">USER</th>
+										<th scope="col">Bid number</th>
+										<th scope="col">Date</th>
+										</tr>
+									</thead>
+									<tbody>
+										{%for bid in all_my_bids%}
+										<tr>
+											<td>
+												{{bid.user.username}}
+											</td>
+											<td>
+												<div class="number-list">
+												<button >{{bid.number}}</button>
+												</div>
+											</td>
+											<td>
+												{{bid.date|date:'M,d'}}
+											</td>
+										</tr>
+										{%endfor%}
+									</tbody>
+									</table>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- How it Work Area Start -->
+		<div class="how-it-work">
+			<img class="bg-shape" src="{%static 'mainapp/assets/images/howitwork/bg-shape.png'%}" alt="">
+			<div class="container">
+			<div class="row justify-content-center">
+					<div class="col-lg-8 col-md-10">
+						<div class="section-heading">
+							<h5 class="subtitle">
+									Want to see how 
+							</h5>
+							<h2 class="title">
+									How it works? 
+							</h2>
+							<p class="text">
+								We update our site regularly; more and more winners are added every day! To locate the most recent winner's information
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="single-work">
+							<img src="{%static 'mainapp/assets/images/howitwork/ic1.png'%}" alt="">
+							<h4 class="title">
+								Choose
+							</h4>
+							<p>
+								Select your lucky number or numbers, 
+								as you may love to put your eggs in many basket.
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="single-work">
+							<img src="{%static 'mainapp/assets/images/howitwork/ic2.png'%}" alt="">
+							<h4 class="title">
+								BUY
+							</h4>
+							<p>
+								bid on your lucky numbers accordingly.
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="single-work">
+							<img src="{%static 'mainapp/assets/images/howitwork/ic3.png'%}" alt="">
+							<h4 class="title">
+								WIN
+							</h4>
+							<p>
+								Be selected after our system runs the shuffling,
+								win and celebrate your 5X bids
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- How it Work Area Start -->
+	</section> 
+	<!-- Latest Activities Area End -->
+
+	<!-- lottery video Area Start -->
+	<section class="lottery-video">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="video-box">
+						<a href="#" class="video-play-btn video-icon mfp-iframe">
+							<img src="{%static 'mainapp/assets/images/play-icon-red.png'%}" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- lottery video Area End -->
+
+	<!-- Questions Area Start -->
+	<section class="question-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<img src="{%static 'mainapp/assets/images/question-left.png'%}" alt="">
+				</div>
+				<div class="col-lg-6">
+					<div class="section-heading">
+						<h5 class="subtitle">
+								If you have any
+						</h5>
+						<h2 class="title">
+								questions
+						</h2>
+						<p class="text">
+								Our top priorities are to protect your privacy, 
+								provide secure transactions, and safeguard your data. 
+						</p>
+						<p class="text">
+								When you're ready to play, registering an 
+								account is required so we know you're of legal age and so no one else can use your account.We answer the most commonly asked lotto 
+								questions..
+						</p>
+						<a href="{%url 'contact'%}" class="mybtn1">Ask</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Questions Area End -->
+
+	<!-- Recent Winners Area Start -->
+	<section class="recent-winners">
+		<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-8 col-md-10">
+						<div class="section-heading">
+							<h5 class="subtitle">
+								Try to Check out our
+							</h5>
+							<h2 class="title">
+									Recent Winners
+							</h2>
+							<p class="text">
+								We update our site regularly; more and more winners are added every day! To locate the most recent winner's information
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					{%for winner in last_winners%}
+					<div class="col-lg-4">
+						<div class="single-winer">
+							<div class="top-area">
+								<div class="left">
+									<h4 class="name">
+											{{winner.user.username}} 
+									</h4>
+									<p class="date">
+											{{winner.stake}}
+									</p>
+								</div>
+								<div class="right">
+									<p class="id">#{{winner.user.profile.uid}}</p>
+								</div>
+							</div>
+							<div class="bottom-area">
+								<div class="left">
+										{{winner.profit}} USDT
+								</div>
+								<div class="right">
+										<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					{%endfor%}
+				</div>
+				<div class="row">
+					<div class="col-lg-12 text-xl-center">
+						<a class="mybtn2" href="#">View All </a>
+					</div>
+				</div>
+		</div>
+	</section> 
+	<!-- Recent Winners Area End -->
+
+	<!-- Footer Area End -->
+	<div class='customAlert'>
+		<p class='message'></p>
+		<input type='button' class='confirmButton' value='Ok'>
+	</div>
+	<style>
+		
+.number-list {
+  margin: 0 -3px; }
+  .number-list button {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    display: inline-block;
+    margin: 3px;
+    font-weight: 600;
+    color: #f9314b;
+    border-radius: 50%;
+    background-image: -moz-linear-gradient(26deg, #0b122e 9%, #212643 39%, #363a58 100%);
+    background-image: -webkit-linear-gradient(26deg, #0b122e 9%, #212643 39%, #363a58 100%);
+    background-image: -ms-linear-gradient(26deg, #0b122e 9%, #212643 39%, #363a58 100%);
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.8); }
+    .number-list button.active {
+      background-image: -moz-linear-gradient(26deg, #382f21 9%, #8b642a 39%, #de9932 100%);
+      background-image: -webkit-linear-gradient(26deg, #382f21 9%, #8b642a 39%, #de9932 100%);
+      background-image: -ms-linear-gradient(26deg, #382f21 9%, #8b642a 39%, #de9932 100%);
+      color: #ffffff; }
+
+      .output{
+        grid-column: 1 / -1;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        flex-direction: column;
+        padding: 21px;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+
+      .output .current-operand {
+        color: white;
+        font-size: 2.5rem;
+    }
+
+		.customAlert {
+			display: none;
+			position: fixed;
+			max-width: 25%;
+			min-width: 250px !important;
+			min-height: 20%;
+			height: 355px;
+			left: 50%;
+			top: 50%;
+			padding: 10px;
+			box-sizing: border-box;
+			margin-left: -12.5%;
+			margin-top: -5.2%;
+			background: #088a68;
+		}
+
+		@media all and (max-width: 1300px) {
+			.message {
+			font-size: 14px !important;
+			}
+			input[type="button"] {
+			height: 15% !important;
+			}
+		}
+		@media all and (max-width: 570px) {
+			.message {
+			font-size: 14px !important;
+			}
+			input[type="button"] {
+			height: 10% !important;
+			}
+
+			.customAlert{
+				left: 28%;
+			}
+		}
+		.message {
+			padding: 5px;
+			color: white;
+			font-size: 14px;
+			line-height: 20px;
+			text-align: justify;
+		}
+
+		input[type="button"] {
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			width: 50%;
+			height: 36px;
+			margin-top: -45px;
+			margin-left: -25%;
+			outline: 0;
+			border: 0;
+			background: #04b486;
+			color: white;
+		}
+
+		input[type="button"]:hover {
+			transition: 0.3s;
+			cursor: pointer;
+			background: lighten(#04b486, 5%);
+		}
+
+		.rab {
+			width: 200px;
+			height: 30px;
+			outline: 0;
+			border: 0;
+			color: white;
+			background: darken(#04b486, 5%);
+		}
+
+		@keyframes fadeOut {
+			from {
+				opacity: 1;
+		}
+			to {
+				opacity: 0;
+			}
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+	</style>
+
+	<!-- Back to Top Start -->
+	<div class="bottomtotop">
+		<i class="fas fa-chevron-right"></i>
+	</div>
+	<!-- Back to Top End -->
+	<script src="{%static 'mainapp/assets/js/counter.js'%}"></script>
+
+{%endblock content%}

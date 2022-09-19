@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" >
+	{%load static%}
+<head>
+  <meta charset="UTF-8">
+  <title>Login & Singup</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="{%static 'mainapp/Register/style.css'%}" rel="stylesheet">
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="box-form">
+	<div class="left">
+		<div class="overlay">
+		<h1>StakeGames</h1>
+		<p >Enrich <strong style="color:cyan"> Yourself </strong> just by being smarter than our <br><strong style="color:cyan"> Robots </strong></p>
+		<span>
+			<p>Login Now</p>
+			<a href="{%url 'home'%}">Home</a>
+			<a href="{%url 'register'%}"> Join and play Now!</a>
+		</span>
+		
+		{%for error,message in msg.items%}
+		<p style="color: red;">{{error}} &nbsp;{{message}}</p>
+		{%endfor%}
+		</div>
+	</div>
+	
+	
+		<div class="right">
+		<h5>Login</h5>
+		<p>Don't have an account? <a href="{%url 'register'%}">Creat Your Account</a> it takes less than a minute</p>
+		{%for msg in messages%}
+		<script>
+			alert('{{msg}}')
+		</script>
+		{%endfor%}
+		
+	<form method="post">
+		<div class="inputs">
+			<input type="text" placeholder="Email or Username" name="username">
+			<br>
+			{%csrf_token%}
+			<input type="password" placeholder="Password" name="password">
+		</div>
+			
+			<br><br>
+			
+		<div class="remember-me--forget-password">
+
+	<label>
+		<input type="checkbox" name="item" />
+		<span class="text-checkbox">Remember me</span>
+	</label>
+			<p>forget password? <a href="{%url 'password_reset'%}">Reset</a></p>
+		</div>
+			
+			<br>
+			<button type="submit">Login</button>
+	</div>
+</form>
+</div>
+<!-- partial -->
+  
+</body>
+</html>

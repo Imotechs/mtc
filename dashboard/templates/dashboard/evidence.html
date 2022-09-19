@@ -1,0 +1,80 @@
+{%extends 'dashboard/base.html'%}
+{%load static%}
+{%block content%}
+          <link href="{%static 'dashboard/css/style.css'%}" rel="stylesheet">
+
+ <!-- Messages -->
+            <!-- End Bread crumb -->
+            <div class="container">
+      
+            <!-- Container fluid  -->
+            {% if messages %}
+
+            {% for message in messages %}
+                <div class = "alert alert-{{ message.tags }} fa fa-envelope">
+                  {{message}}
+                </div>
+            {%endfor%}
+      {% endif %}
+            <!-- Container fluid  -->
+                <!-- Start Page Content -->
+                
+                <!-- Start Page Content -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-title">
+                                <p>Evidence :{{alluploads}}</p>
+                             {%for upload in uploads%}
+                             <h4>User ID :{{upload.user.profile.uid}}</h4>
+                             <p>{{upload.user}} <smal>{{upload.date_upload|date:'M,d'}}</smal></p>
+                             <img src = "{{upload.evidence.url}}" alt="evidence">
+                             <hr>
+                             {%endfor%}
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="paginator">
+                                        {% if is_paginated %}
+                                              {% if page_obj.has_previous%}
+                                              <a class="btn btn-outline-info mb-4" href="?page=1"> First</a>
+                                              <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number}}"> Previous</a>
+                                        
+                                              {% endif %}
+                                                {% for num in page_obj.paginator.page_range %}
+                                        
+                                                  {% if page_obj.number == num%}
+                                                  <a class="btn btn-info mb-4" href="%?page={{num}}"> {{num}}</a>
+                                                  {%elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
+                                                  <a class="btn btn-outline-info mb-4" href="?page={{num}}"> {{num}}</a>
+                                        
+                                                  {%endif%}
+                                        
+                                                {%endfor%}
+                                        
+                                            {% if page_obj.has_next %}
+                                            <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}} "> Next</a>
+                                            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages}}"> Last</a>
+                                        
+                                            {% endif %}
+                                        
+                                        
+                                        {% endif %}
+                                      </div>
+                                  <style>
+                                      img{
+                                          width: 50%;
+                                          height: 35%;
+                                          align-self: center;
+                                          margin-left: 10%;
+                                      }
+                                      hr{
+                                          color: antiquewhite;
+                                          background-color: aliceblue;
+                                      }
+                                  </style>
+                                </div>
+                            </div>
+                        </div>
+                </div>              
+                {%endblock content%}
+
+

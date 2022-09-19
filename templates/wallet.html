@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</head>
+    <style>
+      body {
+        text-align: center;
+        padding: 20px 0;
+        background: #EBF0F5;
+      }
+        h1 {
+          color: #88B04B;
+          font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+          font-weight: 700;
+          font-size: 35px;
+          margin-bottom: 10px;
+          padding-top: 10px;
+        }
+        p {
+          color: #404F5E;
+          font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+          font-size:20px;
+          margin: 0;
+        }
+      i {
+        color: #9ABC66;
+        font-size: 40px;
+        line-height: 200px;
+      }
+      .left{
+        float:left;
+        width: 70%; 
+        padding: 0;
+        margin: 0;
+    
+      }
+      .right{
+        float:right;
+        width: 30%;
+        padding-right: 30px;
+        margin: 0; 
+      }
+      .cards {
+        background: white;
+        padding:  60px;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px #C8D0D8;
+        display: inline-block;
+        margin: 0 auto;
+      }
+
+     @media (min-width: 546px) {
+        .cards {
+            margin-top: 350px;
+            width: 700px;
+            height: 500px;
+        }
+
+        h1 {
+            font-size: 70px;
+        }
+        p {
+            font-size: 30px;
+        } 
+    }
+    </style>
+    <body>
+      <div class="cards">
+      <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+        <i class="checkmark"><img src ={{wallet_img}} alt = 'img' width="250"></i>
+      </div>
+        <h1>TRC20<small style="font-size: 25px;">[ USDT ]</small></h1>
+        <div style ="width: 100%; display: block;">
+        <p id="p1" style="margin-top:0px; margin-bottom:0px;font-family:  surogat" class="left" >{{wallet_str}}
+                       <p class="right"><b id="copied" style="display: none; font-size: 12px;">Copied!</b> 
+                        <i 
+                            style="margin-left: 5px; 
+                            cursor: pointer; 
+                            padding-top: 7px;
+                            font-weight: 700;" 
+                            class="fa fa-copy" onclick="copyToClipboard('#p1')">
+                        </i> </p>
+                        
+                    </div>
+        <div>
+            <p style="font-size: 14px; align-content: center; display: block;">...<br/> complete this transaction in your wallet using the USDT[TRC20]  address above</p>
+                <br>
+            <a href="{%url 'home'%}" class=" bg-success" style="color: white; text-decoration:none;"> Done</a>
+        </div>
+        <script>
+            var refbtn = document.getElementById('p1')
+            refbtn.style.display ='block'
+
+            function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+
+            var copy = document.getElementById('copied')
+            copy.style.display = "block";
+            }
+        </script>
+      </div>
+    </body>
+</html>

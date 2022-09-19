@@ -1,0 +1,406 @@
+{% extends 'mainapp/base.html'%}
+{%load static%}
+{%block content%}
+
+	<!-- Breadcrumb Area Start -->
+	<section class="breadcrumb-area play">
+		<img class="bc-img" src="{%static 'mainapp/assets/images/breadcrumb/play.png'%}" alt="">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h4 class="title">
+						Play Games
+					</h4>
+					<ul class="breadcrumb-list">
+						<li>
+							<a href="{%url 'home'%}">
+									<i class="fas fa-Home "></i>
+									Home
+							</a>
+						</li>
+						<li>
+							<span><i class="fas fa-chevron-right"></i> </span>
+						</li>
+						<li>
+							<a href="{%url 'home'%}">Play</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Breadcrumb Area End -->
+
+	<!-- Play Games Area Start -->
+	<section class="play-games">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="gaming-activities">
+							<div class="gaming-activities-inner">
+								<div class="row">
+									{%for game in games%}
+									<div class="col-lg-4 col-md-6">
+										<div class="single-activities">
+											<div class="top-area">
+												<div class="left">
+													<div class="icon">
+														<img src="{%static 'mainapp/assets/images/play/icon1.png'%}" alt="">
+														<span>
+															{{game.total_play}} <i class="fas fa-star"></i>
+														</span>
+													</div>
+												</div>
+												<div class="right">
+													<h4 class="title">
+														{{game.name}}
+													</h4>
+													<p class="text">
+													STAKEGAMES													
+												</p>
+												</div>
+											</div>
+											<div class="bottom-area">
+												<h4 class="title">People Playing:</h4>
+												<div class="players-count">
+													<ul class="players-list">
+														<li>
+															<img src="{%static 'mainapp/assets/images/play/people.png'%}" alt="">
+														</li>
+														<li>
+															<img src="{%static 'mainapp/assets/images/play/people.png'%}" alt="">
+														</li>
+														<li>
+															<img src="{%static 'mainapp/assets/images/play/people.png'%}" alt="">
+														</li>
+														<li>
+															<img src="{%static 'mainapp/assets/images/play/people.png'%}" alt="">
+														</li>
+													</ul>
+													<div class="count-num">
+													{%if game.games_set.count == 0%}
+													{{game.freegames_set.count}}+
+													{%else%}
+													{{game.games_set.count}}+
+
+													{%endif%}
+													</div>
+												</div>
+												<div class="pp">
+													<p>			{%if game.games_set.count == 0%}
+														{{game.freegames_set.count}}+
+														{%else%}
+														{{game.games_set.count}}+
+
+														{%endif%} People Played</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									{%endfor%}
+									<br>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="all-games">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<ul class="nav" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-tab1-tab" data-toggle="pill" href="#pills-tab1" role="tab" aria-controls="pills-tab1" aria-selected="true">
+									<div class="icon">
+										<img class="one" src="{%static 'mainapp/assets/images/play/ic6.png'%}" alt="">
+										<img class="two" src="{%static 'mainapp/assets/images/play/ic66.png'%}" alt="">
+									</div>
+									<span>VIP Games</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-tab2-tab" data-toggle="pill" href="#pills-tab2" role="tab" aria-controls="pills-tab2" aria-selected="false">
+								<div class="icon">
+									<img class="one" src="{%static 'mainapp/assets/images/play/ic1.png'%}" alt="">
+									<img class="two" src="{%static 'mainapp/assets/images/play/ic11.png'%}" alt="">
+								</div>
+								<span>Free Games</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-tab3-tab" data-toggle="pill" href="#pills-tab3" role="tab" aria-controls="pills-tab3" aria-selected="false">
+								<div class="icon">
+									<img class="one" src="{%static 'mainapp/assets/images/play/ic2.png'%}" alt="">
+									<img class="two" src="{%static 'mainapp/assets/images/play/ic22.png'%}" alt="">
+								</div>
+								<span>Desktop Games</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-tab4-tab" data-toggle="pill" href="#pills-tab4" role="tab" aria-controls="pills-tab4" aria-selected="false">
+								<div class="icon">
+									<img class="one" src="{%static 'mainapp/assets/images/play/ic3.png'%}" alt="">
+									<img class="two" src="{%static 'mainapp/assets/images/play/ic33.png'%}" alt="">
+								</div>
+								<span>Racing Games</span>
+								</a>
+							</li>
+							<!-- <li class="nav-item">
+								<a class="nav-link" id="pills-tab5-tab" data-toggle="pill" href="#pills-tab5" role="tab" aria-controls="pills-tab5" aria-selected="false">
+								<div class="icon">
+									<img class="one" src="{%static 'mainapp/assets/images/play/ic4.png'%}" alt="">
+									<img class="two" src="{%static 'mainapp/assets/images/play/ic44.png'%}" alt="">
+								</div>
+								<span>Running Games</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-tab6-tab" data-toggle="pill" href="#pills-tab6" role="tab" aria-controls="pills-tab6" aria-selected="false">
+								<div class="icon">
+									<img class="one" src="{%static 'mainapp/assets/images/play/ic5.png'%}" alt="">
+									<img class="two" src="{%static 'mainapp/assets/images/play/ic55.png'%}" alt="">
+								</div>
+								<span>Others</span>
+								</a>
+							</li> -->
+							</ul>
+							<div class="tab-content" id="pills-tabContent">
+							<div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="game-slider">
+											<div class="item">
+												<a href="{%url 'temple_runz'%}">
+												<div class="single-game">
+													<p>Temple Runz</p>
+													<img src="{%static 'mainapp/gameimgs/temple.jpg'%}" alt="">
+													<a href="{%url 'temple_runz'%}" class="mybtn2">PLay NoW !</a>
+												</div></a>
+											</div>
+											<div class="item">
+												<a href="{%url 'charades'%}">
+												<div class="single-game">
+													<p>Charades</p>
+													<img src="{%static 'mainapp/gameimgs/charades.jpg'%}" alt="">
+													<a href="{%url 'charades'%}" class="mybtn2">PLay NoW !</a>
+												</div></a>
+											</div>
+											<div class="item">
+												<a href="{%url 'color_run'%}">
+												<div class="single-game">
+													
+														<img src="{%static 'mainapp/gameimgs/ball.jpg'%}" alt="">
+														<a href="{%url 'color_run'%}" class="mybtn2">PLay NoW !</a>
+												</div></a>
+											</div>
+											<div class="item">
+												<a href="{%url 'pre_tower'%}">
+												<div class="single-game">
+													<p>Tower Building</p>
+
+														<img src="{%static 'mainapp/gameimgs/tower.png'%}" alt="">
+														<a href="{%url 'pre_tower'%}" class="mybtn2">PLay NoW !</a>
+												</div></a>
+											</div>
+											<div class="item">
+												<a href="{%url 'slider'%}">
+												<div class="single-game">
+													<p>Flippers</p>
+														<img src="{%static 'mainapp/gameimgs/tower1.jpg'%}" alt="">
+														<a href="{%url 'slider'%}" class="mybtn2">PLay NoW !</a>
+												</div></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									...
+								</div>
+							
+							</div>
+							<div class="tab-pane fade" id="pills-tab2" role="tabpanel" aria-labelledby="pills-tab2-tab">
+								
+								<div class="row">
+									<div class="col-lg-4 col-md-6">
+										<a href="{%url 'racer'%}">
+										<div class="single-game">
+											<p>Car Racing</p>
+											<img src="{%static 'mainapp/gameimgs/racer.jpg'%}" alt="">
+											<a href="{%url 'racer'%}" class="mybtn2">PLay NoW !</a>
+										</div></a>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<a href="{%url 'cube'%}">
+										<div class="single-game">
+											<p>Cube Master</p>
+											<img src="{%static 'mainapp/gameimgs/cube2.jpg'%}" alt="">
+											<a href="{%url 'cube'%}" class="mybtn2">PLay NoW !</a>
+										</div></a>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<a href="{%url 'bird_killer'%}">
+										<div class="single-game">
+											<p>Birds Hunter</p>
+											<img src="{%static 'mainapp/gameimgs/bird.jpg'%}" alt="">
+											<a href="{%url 'bird_killer'%}" class="mybtn2">PLay NoW !</a>
+										</div></a>
+									</div>
+									
+								</div>
+							</div>
+								
+							<!-- <div class="row">
+									<div class="col-lg-12 text-center">
+										<a href="#" class="mybtn1">View More</a>
+									</div>
+								</div>
+							</div> -->
+
+							<div class="tab-pane fade" id="pills-tab3" role="tabpanel" aria-labelledby="pills-tab3-tab">
+								<div class="row">
+									<div class="col-lg-4 col-md-6">
+										<a href="{%url 'racer'%}">
+										<div class="single-game">
+											<p>Car Racing</p>
+
+											<img src="{%static 'mainapp/gameimgs/racer2.webp'%}" alt="">
+											<a href="{%url 'racer'%}" class="mybtn2">PLay NoW !</a>
+										</div></a>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="pills-tab4" role="tabpanel" aria-labelledby="pills-tab4-tab">
+								<div class="row">
+									<div class="col-lg-4 col-md-6">
+										<a href="{%url 'racer'%}">
+										<div class="single-game">
+											<p>Car Racing</p>
+											<img src="{%static 'mainapp/gameimgs/racer.jpg'%}" alt="">
+											<a href="{%url 'racer'%}" class="mybtn2">PLay NoW !</a>
+										</div></a>
+									</div>	
+							</div>
+							<div class="tab-pane fade" id="pills-tab5" role="tabpanel" aria-labelledby="pills-tab5-tab">
+								<div class="row">
+									<div class="col-lg-4 col-md-6">
+										<a href="{%url 'temple_runz'%}" >
+										<div class="single-game">
+											<p>Tenple Runz</p>
+											<img src="{%static 'mainapp/gameimgs/temple.png'%}" alt="">
+											<a href="{%url 'temple_runz'%}" class="mybtn2">PLay NoW !</a>
+										</div></a>
+									</div>
+								</div>
+
+							</div>
+							<div class="tab-pane fade" id="pills-tab6" role="tabpanel" aria-labelledby="pills-tab6-tab">
+								<div class="row">
+									<div class="col-lg-4 col-md-6">
+										<div class="single-game">
+											<img src="assets/images/game/icon1.png" alt="">
+											<a href="#" class="mybtn2">PLay NoW !</a>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="single-game">
+											<img src="assets/images/game/icon2.png" alt="">
+											<a href="#" class="mybtn2">PLay NoW !</a>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="single-game">
+											<img src="assets/images/game/icon3.png" alt="">
+											<a href="#" class="mybtn2">PLay NoW !</a>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="single-game">
+											<img src="assets/images/game/icon1.png" alt="">
+											<a href="#" class="mybtn2">PLay NoW !</a>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="single-game">
+											<img src="assets/images/game/icon2.png" alt="">
+											<a href="#" class="mybtn2">PLay NoW !</a>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="single-game">
+											<img src="assets/images/game/icon3.png" alt="">
+											<a href="#" class="mybtn2">PLay NoW !</a>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 text-center">
+										<a href="#" class="mybtn1">View More</a>
+									</div>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!-- Play Games Area End -->
+
+	<!-- Recent Winners Area Start -->
+	<section class="recent-winners">
+		<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-8 col-md-10">
+						<div class="section-heading">
+							<h5 class="subtitle">
+								Try to Check out our
+							</h5>
+							<h2 class="title">
+									Recent Winners
+							</h2>
+							<p class="text">
+								We update our site regularly; more and more winners are added every day! To locate the most recent winner's information
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					{%for game in three_players%}
+						<div class="col-lg-4">
+							<div class="single-winer">
+								<div class="top-area">
+									<div class="left">
+										<h4 class="name">
+												{{game.user.username}}
+										</h4>
+										<p class="date">
+												{{game.date|date:'M,d'}}
+										</p>
+									</div>
+									<div class="right">
+										<p class="id">{{game.game.name}}}</p>
+									</div>
+								</div>
+								<div class="bottom-area">
+									<div class="left">
+											{{game.profit}} USDT
+									</div>
+									<div class="right">
+											<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
+						{%endfor%}
+				</div>
+				<div class="row">
+					<div class="col-lg-12 text-xl-center">
+						<a class="mybtn2" href="#">View All </a>
+					</div>
+				</div>
+		</div>
+	</section>
+	<!-- Recent Winners Area End -->
+	{%endblock content%}

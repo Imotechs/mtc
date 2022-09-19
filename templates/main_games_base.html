@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> StakeGames</title>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
+	<!-- bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
+	<!-- Plugin css -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/plugin.css'%}">
+	<!-- stylesheet -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/style.css'%}">
+	<!-- responsive -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/responsive.css'%}">
+</head>
+
+<body>
+	<!-- preloader area start -->
+	<div class="preloader" id="preloader">
+		<div class="loader loader-1">
+			<div class="loader-outter"></div>
+			<div class="loader-inner"></div>
+		</div>
+	</div>
+	<!-- preloader area end -->
+{% if title %}
+    <title>{{title}}</title>
+    {%else%}
+    <title> Playing game</title>
+    {%endif%}
+</head>
+<body>
+    <script src="{%static 'mainapp/assets/js/jquery.js'%}"></script>
+	<!-- popper -->
+	<script src="{%static 'mainapp/assets/js/popper.min.js'%}"></script>
+	<!-- bootstrap -->
+	<script src="{%static 'mainapp/assets/js/bootstrap.min.js'%}"></script>
+	<!-- plugin js-->
+	<script src="{%static 'mainapp/assets/js/plugin.js'%}"></script>
+
+	<!-- MpusemoverParallax JS-->
+	<script src="{%static 'mainapp/assets/js/TweenMax.js'%}"></script>
+	<script src="{%static 'mainapp/assets/js/mousemoveparallax.js'%}"></script>
+	<!-- main -->
+	<script src="{%static 'mainapp/assets/js/main.js'%}"></script>
+</body>
+</html>

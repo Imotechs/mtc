@@ -1,0 +1,580 @@
+{% extends 'mainapp/base.html'%}
+{%load static%}
+{%block content%}
+<div class="hero-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5 d-flex align-self-center">
+				<div class="left-content">
+					<div class="content">
+						
+						<h2 class="title">
+								PLay To WIN
+						</h2>
+						<p class="text">
+							Catch fun, Play or Join the
+							Contest with high rewards at StakeGames!	
+						</p>
+						<div class="links">
+							<a href="{%url 'login'%}" class="mybtn1 link1">Get Started Now!</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-7">
+				<div class="hero-img2 d-block d-md-none">
+					<img src="{%static 'mainapp/assets/images/heroarea.png'%}" alt="">
+				</div>
+				<div class="hero-img d-none d-md-block">
+					<img class="img-fluid full-image" src="{%static 'mainapp/assets/images/heroarea.png'%}" alt="">
+					<img class="shape phone" src="{%static 'mainapp/assets/images/h-shapes/phone.png'%}" alt="">
+					<img class="shape man" src="{%static 'mainapp/assets/images/h-shapes/man222.png'%}" alt="">
+					<img class="shape ripple" src="{%static 'mainapp/assets/images/h-shapes/ripple.png'%}" alt="">
+					<img class="shape ripple2" src="{%static 'mainapp/assets/images/h-shapes/ripple1.png'%}" alt="">
+					<img class="shape bitcoin1" src="{%static 'mainapp/assets/images/h-shapes/bitcoin1.png'%}" alt="">
+					<img class="shape bitcoin2" src="{%static 'mainapp/assets/images/h-shapes/bitcoin2.png'%}" alt="">
+					<img class="shape shape-icon" src="{%static 'mainapp/assets/images/h-shapes/shape.png'%}" alt="">
+					<img class="shape award-bg" src="{%static 'mainapp/assets/images/h-shapes/award/bg.png'%}" alt="">
+					<img class="shape award" src="{%static 'mainapp/assets/images/h-shapes/award/award.png'%}" alt="">
+					<img class="shape gift-bg" src="{%static 'mainapp/assets/images/h-shapes/giftbox/bg.png'%}" alt="">
+					<img class="shape gift" src="{%static 'mainapp/assets/images/h-shapes/giftbox/gift.png'%}" alt="">
+					<img class="shape shield-bg" src="{%static 'mainapp/assets/images/h-shapes/shield/bg.png'%}" alt="">
+					<img class="shape shield" src="{%static 'mainapp/assets/images/h-shapes/shield/shield.png'%}" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Hero Area End -->
+	<!-- Featured Game Area Start -->
+	<section class="featured-game">
+		<!-- Features Area Start -->
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-10">
+					<div class="section-heading">
+						
+
+						<p class="text">
+								Our latest featured GAMES! meet today's challenges & earn . Top 10 players receive prizes every hour!
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="game-slider">
+						<div class="item">
+							<a href="{%url 'charades'%}">
+							<div class="single-game">
+								<p>Charades</p>
+								<img src="{%static 'mainapp/gameimgs/charades.jpg'%}" alt="">
+								<a href="{%url 'charades'%}" class="mybtn2">PLay NoW !</a>
+							</div></a>
+						</div>
+						<div class="item">
+							<a href="{%url 'temple_runz'%}">
+							<div class="single-game">
+								<p>Temple Runz</p>
+								<img src="{%static 'mainapp/gameimgs/temple.jpg'%}" alt="">
+								<a href="{%url 'temple_runz'%}" class="mybtn2">PLay NoW !</a>
+							</div></a>
+						</div>
+						<div class="item">
+							<a href="{%url 'color_run'%}">
+							<div class="single-game">
+								<p>Color Runner</p>
+									<img src="{%static 'mainapp/gameimgs/ball.jpg'%}" alt="">
+									<a href="{%url 'color_run'%}" class="mybtn2">PLay NoW !</a>
+							</div></a>
+						</div>
+						<div class="item">
+							<a href="{%url 'pre_tower'%}">
+							<div class="single-game">
+								<p>Tower Building</p>
+									<img src="{%static 'mainapp/gameimgs/tower.png'%}" alt="">
+									<a href="{%url 'pre_tower'%}" class="mybtn2">PLay NoW !</a>
+							</div></a>
+						</div>
+						<div class="item">
+							<a href="{%url 'slider'%}" >
+							<div class="single-game">
+								<p>flipper</p>
+									<img src="{%static 'mainapp/gameimgs/tower1.jpg'%}" alt="">
+									<a href="{%url 'slider'%}" class="mybtn2">PLay NoW !</a>
+							</div></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="features">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="feature-box">
+							<div class="feature-box-inner">
+								<div class="row">
+									<div class="col-lg-4 col-md-6">
+										<div class="single-feature">
+											<div class="icon one">
+												<img src="{%static 'mainapp/assets/images/feature/icons6.png'%}" alt="">
+											</div>
+											<div class="content">
+												<h4 class="title">
+													Exclusive Offer
+												</h4>
+												<a href="#" class="link">read more <i class="fas fa-arrow-right"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="single-feature">
+											<div class="icon two">
+												<img src="{%static 'mainapp/assets/images/feature/icon2.png'%}" alt="">
+											</div>
+											<div class="content">
+												<h4 class="title">
+													Provably Fair
+												</h4>
+												<a href="#" class="link">read more <i class="fas fa-arrow-right"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="single-feature">
+											<div class="icon three">
+												<img src="{%static 'mainapp/assets/images/feature/icon3.png'%}" alt="">
+											</div>
+											<div class="content">
+												<h4 class="title">
+														24/7 Support
+												</h4>
+												<a href="#" class="link">read more <i class="fas fa-arrow-right"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Features Area End -->
+		
+	</section>
+	<!-- Featured Game Area	End -->
+
+	<!-- Latest Activities Area Start -->
+	 <section class="activities">
+		 <img class="shape shape1" src="{%static 'mainapp/assets/images/people/shape1.png'%}" alt="">
+		 <img class="shape shape2" src="{%static 'mainapp/assets/images/people/shape2.png'%}" alt="">
+		 <img class="shape shape3" src="{%static 'mainapp/assets/images/people/shape3.png'%}" alt="">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-10">
+					<div class="section-heading">
+						<h5 class="subtitle">
+							The Smarter Way 
+						</h5>
+						<h2 >
+							LeaderBoard
+						</h2>
+						</h2>
+						<p class="text">
+							Outstanding players takes home cash Prizes!
+
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tab-menu-area">
+						<ul class="nav nav-lend mb-3" id="pills-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-all-bets-tab" data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true">Top Gamers </a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-my-bets-tab" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="false">My Games</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-my-jackpots-tab" data-toggle="pill" href="#pills-my-jackpots" role="tab" aria-controls="pills-my-jackpots" aria-selected="false">jackpots</a>
+							</li>
+						</ul>
+					</div>
+					<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-all-bets" role="tabpanel" aria-labelledby="pills-all-bets-tab">
+							<div class="responsive-table">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">USER</th>
+											<th scope="col">GameID</th>
+										<th scope="col">CHANCE</th>
+										<th scope="col">GAME</th>
+										<th scope="col">PROFIT</th>
+										<th scope="col">DATE</th>
+										</tr>
+									</thead>
+									<tbody>
+										{%for game in top_players%}
+
+										<tr>
+										
+											<td>
+												{{game.user.username}}
+											</td>
+											<td>
+												b799b8724 {{game.id}}b
+											</td>
+				
+											<td>70%</td>
+											<td>{{game.game.name}}</td>
+											<td>
+												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+												{{game.profit|floatformat:3}}
+											</td>
+											<td>{{game.date|date:'M,d,Y'}}</td>
+
+										</tr>
+										{%endfor%}
+									
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="pills-my-bets" role="tabpanel" aria-labelledby="pills-my-bets-tab">
+							<div class="responsive-table">
+								<table class="table">
+									<thead>
+										{%if my_games is not none%}
+
+										<tr>
+											<th scope="col">USER</th>
+											<th scope="col">GameID</th>
+										<th scope="col">CHANCE</th>
+										<th scope="col">GAME</th>
+										<th scope="col">STAKE</th>
+										<th scope="col">PROFIT</th>
+										<th scope="col">DATE</th>
+										</tr>
+									</thead>
+									<tbody>
+										{%for game in my_games%}
+										<tr>
+										
+											<td>
+												{{game.user.username}}
+											</td>
+											<td>
+												b799b8724 {{game.id}}b
+											</td>
+				
+											<td>70%</td>
+											<td>{{game.game.name}}</td>
+											<td>
+												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+												{{game.stake|floatformat:3}}
+											</td>
+											<td>
+												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+												{{game.profit|floatformat:3}}
+											</td>
+											<td>{{game.date|date:'M,d,Y'}}</td>
+
+										</tr>
+										{%endfor%}
+										{%else%}
+									<tr><td>Your Played Games are shown here</td></tr>
+									{%endif%}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="pills-my-jackpots" role="tabpanel" aria-labelledby="pills-my-jackpots-tab">
+							<div class="responsive-table">
+								<table class="table">
+									<thead>
+										<tr>
+										<th scope="col">USER</th>
+										<th scope="col">BET ID</th>
+										<th scope="col">BET AMOUNT</th>
+										<th scope="col">CHANCE</th>
+										<th scope="col">GAME</th>
+										<th scope="col">PROFIT</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												Tom Bass
+											</td>
+											<td>
+												b799b8724b
+											</td>
+											<td>
+												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+												0.00000051
+											</td>
+											<td>70%</td>
+											<td>Dice</td>
+											<td>
+												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+												0.00000051
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Tom Bass
+											</td>
+											<td>
+												b799b8724b
+											</td>
+											<td>
+												<img src="assets/images/icon2.png" alt="">
+												0.00000051
+											</td>
+											<td>70%</td>
+											<td>Dice</td>
+											<td>
+												<img src="assets/images/icon2.png" alt="">
+												0.00000051
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Tom Bass
+											</td>
+											<td>
+												b799b8724b
+											</td>
+											<td>
+												<img src="assets/images/icon3.png" alt="">
+												0.00000051
+											</td>
+											<td>70%</td>
+											<td>Dice</td>
+											<td>
+												<img src="assets/images/icon3.png" alt="">
+												0.00000051
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Tom Bass
+											</td>
+											<td>
+												b799b8724b
+											</td>
+											<td>
+												<img src="assets/images/icon4.png" alt="">
+												0.00000051
+											</td>
+											<td>70%</td>
+											<td>Dice</td>
+											<td>
+												<img src="assets/images/icon4.png" alt="">
+												0.00000051
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Tom Bass
+											</td>
+											<td>
+												b799b8724b
+											</td>
+											<td>
+												<img src="assets/images/icon5.png" alt="">
+												0.00000051
+											</td>
+											<td>70%</td>
+											<td>Dice</td>
+											<td>
+												<img src="assets/images/icon5.png" alt="">
+												0.00000051
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Tom Bass
+											</td>
+											<td>
+												b799b8724b
+											</td>
+											<td>
+												<img src="assets/images/icons6.png" alt="">
+												0.00000051
+											</td>
+											<td>70%</td>
+											<td>Dice</td>
+											<td>
+												<img src="assets/images/icons6.png" alt="">
+												0.00000051
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Tom Bass
+											</td>
+											<td>
+												b799b8724b
+											</td>
+											<td>
+												<img src="assets/images/icon2.png" alt="">
+												0.00000051
+											</td>
+											<td>70%</td>
+											<td>Dice</td>
+											<td>
+												<img src="assets/images/icon2.png" alt="">
+												0.00000051
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Fun fact Area Start -->
+		<div class="funfact">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="single-fun">
+							<img src="{%static 'mainapp/assets/images/funfact/icon1.png'%}" alt="">
+							<div class="count-area">
+								<div class="count">15K</div>
+							</div>
+							<p>
+									Players
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="single-fun">
+							<img src="{%static 'mainapp/assets/images/funfact/icon2.png'%}" alt="">
+							<div class="count-area">
+								<div class="count">7+</div>
+							</div>
+							<p>
+									Games
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="single-fun">
+							<img src="{%static 'mainapp/assets/images/funfact/icon3.png'%}" alt="">
+							<div class="count-area">
+								<div class="count">9K+</div>
+							</div>
+							<p>
+									Winners
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Fun fact Area End -->
+	</section> 
+	<!-- Latest Activities Area End -->
+
+
+	<!-- Get Start Area Start -->
+	 <section class="get-start">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7 d-flex align-self-center">
+					<div class="left-area">
+						<div class="section-heading">
+							<h5 class="subtitle">
+								every day lots of  wins
+							</h5>
+							<h2 class="title ">
+									be one of them
+							</h2>
+							<p class="text">
+									Get started in less than 5 min - no credit card 
+									required.Gain early access to StakeGames and  Earn  like never before. 
+							</p>
+							<a href="{%url 'register'%}" class="mybtn1">Join  Now!</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5">
+					<div class="right-image">
+						<img src="{%static 'mainapp/assets/images/get-start.png'%}" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> 
+	<!-- Get Start Area End -->
+
+	<!-- Recent Winners Area Start -->
+	<section class="recent-winners">
+			<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-8 col-md-10">
+							<div class="section-heading">
+								<h5 class="subtitle">
+									Try to Check out our
+								</h5>
+								<h2 class="title">
+										Recent Winners
+								</h2>
+								<p class="text">
+									We update our site regularly; more and more winners are added every day! To locate the most recent winner's information
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						{%for game in three_players%}
+						<div class="col-lg-4">
+							<div class="single-winer">
+								<div class="top-area">
+									<div class="left">
+										<h4 class="name">
+												{{game.user.username}}
+										</h4>
+										<p class="date">
+												{{game.date|date:'M,d'}}
+										</p>
+									</div>
+									<div class="right">
+										<p class="id">{{game.game.name}}}</p>
+									</div>
+								</div>
+								<div class="bottom-area">
+									<div class="left">
+											{{game.profit}} USDT
+									</div>
+									<div class="right">
+											<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
+						{%endfor%}
+						
+					</div>
+					<div class="row">
+						<div class="col-lg-12 text-xl-center">
+							<a class="mybtn2" href="#">View All </a>
+						</div>
+					</div>
+			</div>
+		</section> 
+	<!-- Recent Winners Area End -->
+
+{%endblock content%}

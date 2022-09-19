@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> StakeGames</title>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
+	<!-- bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
+	<!-- Plugin css -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/plugin.css'%}">
+	<!-- stylesheet -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/wallet/style.css'%}">
+	<!-- responsive -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/wallet/responsive.css'%}">
+
+    <!-- font-awesome -->
+    <script src="https://kit.fontawesome.com/bbbd3ef3a9.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<!-- preloader area start -->
+	
+	<!-- preloader area end -->
+
+	<!-- Header Area Start  -->
+	<header class="header">
+		
+		<section class="top-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="content">
+							<div class="left-content">
+									
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Top Header Area End -->
+		
+		<!--Main-Menu Area Start-->
+	</header>
+	<!-- Header Area End  -->
+    {%for message in messages%}
+	<script>
+		alert('{{message}}')
+	</script>
+	{%endfor%}
+  
+    <section class="play-games">
+			
+      <div class="all-games">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12 text-center">
+                      <div class="wrapper">
+                          <div class="abf-list-item">
+                <div id="inst" class="wxShare hide">
+                  <div class="cards">
+                      <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+                          <img src="{%static 'users/games/Tower/assets/main-loading.gif'%}" height="200px" width="200px" class="bg">
+                      </div>
+                    <div style ="width: 100%; display: block;">
+                  
+                      <div ><b style="color: violet;">Instructions</b><br><span class="lightInstructions"><b>Build to the 10th floor and start making 5Xfloor number %<br>
+                              of your staking<br>For every successfull block drop without crashing</b><br>
+                              <b style="color: violet;">Example</b>
+                              <br>Mr. john stakes $500
+                              <br>He played and reached 10th floor, look at his earnings
+                              <br>10th floor &nbsp;> 5x10 = 50,50% of 500 = $250
+                              <br>11th floor &nbsp;> 5x11 = 55,55% of 500 = $275
+                              <br>12th floor &nbsp;> 5x12 = 60,60% of 500 = $300</b>
+                              <br>He could not make it to the 13th floor
+                              <br><b style="color: violet;">His Reword &nbsp;> 250 + 275 + 300 = $825</b>
+                              <br>
+                              <a href="{%url 'tower'%}" class="btn bg-success" style="color: rgb(14, 6, 6); text-decoration:none;"> Play Now</a></span>
+                              </div>
+                      </div>            
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    </section>
+
+      </body>
+</html>

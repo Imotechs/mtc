@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choice</title>
+</head>
+<body>
+    <style>
+        .childs{
+    display:none;
+}
+.parent:hover .childs{
+    display:block;
+}
+.dropdown{
+    display: inline-block;
+    margin: 10px;
+}
+.parent{
+    display: block;
+}
+.parent > a{
+    display: block;
+    background-color: #f1f1f1;
+    box-sizing: border-box;
+    padding: 7px 30px;
+}
+.dropdown .parent a span{
+    display: inline-block;
+    transition:0.4s;
+    font-size: 14px;
+}
+    /*for icon rotation*/
+.dropdown .parent:hover > a span{
+    transform:rotate(-90deg);
+}
+.childs{
+    background-color: #d3d3d3;
+}
+.childs li{
+    display: block;
+    border-bottom: 1px solid #f1f1f1;
+}
+.childs li a{
+    display: block;
+    box-sizing: border-box;
+    padding: 7px 30px;
+}
+/*main effect*/
+.dropdown-1 .childs{
+    display: none;
+}
+.dropdown-1 .parent:hover > .childs{
+    display: block;
+}    
+    </style>
+    <parent>
+        Parent Button Text
+        <childs>
+            Child 1
+            Child 2
+            Child 3
+        </childs>
+    </parent>
+    <ul class="dropdown dropdown-2">
+        <li class="parent"> <!-- parent -->
+            <a href="">DropDown 2 <span>👈</span></a> <!-- parent text -->
+            <ul class="childs"> <!-- childs -->
+                <li><a href="">- Service</a></li> <!-- single child -->
+                <li><a href="">- About Us</a></li> <!-- single child -->
+                <li><a href="">- Contact</a></li> <!-- single child -->
+            </ul>
+        </li>
+    </ul>
+    
+</body>
+</html>
