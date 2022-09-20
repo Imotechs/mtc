@@ -177,7 +177,7 @@
                     <div class="col-lg-12 text-center">
                         <div class="wrapper">
                             <div class="abf-list-item">
-                                <div class="abf-value">USDT: <span>{{payment.usd}}</span></div>
+                                <div class="abf-value">USDT: <span style = "font-size:18px;">{{payment.usd}} </span> </div>
                                 <div class="abf-value">{{request.user.profile.currency}}: <span>{{payment.amount}}</span></div>
                             </div>
                             <div class="buttonWrapper">
@@ -223,7 +223,7 @@
                                           <div class="abf-value"><b><span class="abf-status">Waiting payment</span></b></div>
                                         </div>
 										<a href="{%url 'completed' 'wallet' payment.id%}">
-											<i class="fas fa-angle-double-right" style="font-size: 14px;"> <span style="padding: 3px; font-size: 14px; color: #232c3d; background-color: #fff;">I have completed payment</span></i>
+											<i class="fas fa-angle-double-right" style="font-size: 13px;"> <span style="padding: 3px; font-size: 14px; color: #232c3d; background-color: #fff;">I 've completed payment</span></i>
 										</a>
                                       </div>
                                     </div>
@@ -286,15 +286,15 @@ function payWithPaystack(e) {
                                     Make Bank Transfer 
                                     <div class="abf-list-item">
                                         <div class="abf-label">Bank: </div>
-                                        <div class="abf-value">Wema Bank</div>
+                                        <div class="abf-value">Kuda Microfinance Bank</div>
                                     </div>
                                     <div class="abf-list-item">
                                         <div class="abf-label">Name: </div>
-                                        <div class="abf-value">Adzembeh Joshua</div>
+                                        <div class="abf-value"> Joshua Adzembeh</div>
                                     </div>
                                     <div class="abf-list-item">
                                         <div class="abf-label">Account No: </div>
-                                        <div class="abf-value" > <span id="p2">3448hhjszjha</span>  <i class="fa fa-copy" onclick="copyToClipboard('#p2')"></i><span id="copied2">Copied</span></div>
+                                        <div class="abf-value" > <span id="p2">2008965752</span>  <i class="fa fa-copy" onclick="copyToClipboard('#p2')"></i><span id="copied2">Copied</span></div>
                                     </div>
 									<a href="{%url 'completed' 'Bank Transfer' payment.id%}">
 										<i class="fas fa-angle-double-right" style="font-size: 14px;"> <span style="padding: 3px; font-size: 14px; color: #232c3d; background-color: #fff;">I have completed payment</span></i>

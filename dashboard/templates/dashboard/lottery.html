@@ -1,0 +1,70 @@
+{%extends 'dashboard/base.html'%}
+{%load static%}
+{%block content%}
+            <!-- Container fluid  -->
+            <div class="container">
+                <!-- Start Page Content -->
+                
+                <!-- Start Page Content -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Bids For Last lottery</h4></div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-de mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Amount</th>
+                                                <th>Number</th>
+                                                <th>Date</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for bid in bids%}
+                                            <tr>
+
+                                                <td>{{bid.user.username}}</td>
+                                                <td class="success">$ {{bid.stake}}</td>
+                                                <td>{{bid.number}}</td>
+                                                <td>{{bid.date|date:'M,d,Y'}}</td>
+                                                
+                                            </tr>
+                                            {%endfor%}
+                                            <div class="paginator">
+                                                {% if is_paginated %}
+                                                      {% if page_obj.has_previous%}
+                                                      <a class="btn btn-outline-info mb-4" href="?page=1"> First</a>
+                                                      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number}}"> Previous</a>
+                                                
+                                                      {% endif %}
+                                                        {% for num in page_obj.paginator.page_range %}
+                                                
+                                                          {% if page_obj.number == num%}
+                                                          <a class="btn btn-info mb-4" href="%?page={{num}}"> {{num}}</a>
+                                                          {%elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
+                                                          <a class="btn btn-outline-info mb-4" href="?page={{num}}"> {{num}}</a>
+                                                
+                                                          {%endif%}
+                                                
+                                                        {%endfor%}
+                                                
+                                                    {% if page_obj.has_next %}
+                                                    <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}} "> Next</a>
+                                                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages}}"> Last</a>
+                                                
+                                                    {% endif %}
+                                                
+                                                
+                                                {% endif %}
+                                              </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                    </div>
+                </div>              
+            <!-- End PAge Content -->
+            {%endblock content%}

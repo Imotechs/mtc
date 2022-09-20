@@ -1,4 +1,3 @@
-from turtle import color
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,ListView,CreateView,DetailView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
@@ -12,7 +11,7 @@ from django.utils import timezone
 from email.message import EmailMessage
 import smtplib
 from django.conf import settings
-from games.models import Games
+from games.models import Games, Lottery
 from users.models import Account
 import matplotlib.pyplot as plt
 from django.http import HttpResponse
@@ -304,3 +303,17 @@ def ploting_bar(request):
     plt.bar( users,profit)
     plt.show()
     return HttpResponse('ploting...')
+
+#lottery system
+class LotteryView(LoginRequiredMixin,UserPassesTestMixin,ListView):
+    template_name = 'dashboard/lottery.html'
+    model = Lottery
+    def get_context_data(self,*args, **kwargs):
+        context = super(LotteryView,self).get_context_data(*args,**kwargs)
+        lottery = Lottery.objects.filter(win = False).last()
+        context.update({'bids':lottery.bid_set.all()})
+        return context
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False

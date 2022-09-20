@@ -284,11 +284,13 @@ select:focus {
 
 .mybtn2 {
   font-size: 16px;
+  text-align: center;
   text-transform: uppercase;
   font-weight: 600;
   height: 50px;
   line-height: 50px;
   width: 190px;
+  margin-top: 5px;
   display: inline-block;
   color: #fff;
   border: 0px;
@@ -338,13 +340,15 @@ select:focus {
     font-weight: 700;
     text-transform: uppercase;
     color: #FFF;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    margin-top: 50px; }
     .section-heading .title.extra-padding {
       margin-bottom: 20px; }
   .section-heading .text {
     font-size: 24px;
     line-height: 34px;
-    font-weight: 300; }
+    font-weight: 300;
+    margin-top: 15px; }
 
 .navbar-light .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E"); }
@@ -1168,7 +1172,7 @@ select:focus {
 /* Hero Area Start */
 .hero-area {
   position: relative;
-  padding: 317px 0px 354px;
+  padding: 212px 0px 109px;
   position: relative;
   background: #070b28;
   overflow: hidden; }
@@ -1279,8 +1283,9 @@ select:focus {
 
 /* Hero Area End */
 /* Features Area Start */
+
 .features {
-  margin-top: -90px;
+  margin-top: 22px;
   padding-bottom: 112px; }
   .features.about-page {
     margin-top: 0px; }
@@ -1445,7 +1450,7 @@ select:focus {
       margin-top: -25px; }
   .featured-game .game-slider .owl-controls {
     text-align: center;
-    margin-top: 35px; }
+    margin-top: 5px; }
     .featured-game .game-slider .owl-controls .owl-nav {
       display: inline-block; }
       .featured-game .game-slider .owl-controls .owl-nav .owl-prev,
@@ -2085,6 +2090,8 @@ select:focus {
 
 /* community and Blog Area End */
 /* Play Games Area Start */
+
+ 
 .play-games {
   background: url(../images/play/playgame-bg.jpg);
   background-size: cover;
@@ -2094,7 +2101,8 @@ select:focus {
     margin-top: -120px; }
     .play-games .gaming-activities .gaming-activities-inner .single-activities {
       background: #252f5a;
-      padding: 0px 30px 20px; }
+      padding: 0px 30px 20px; 
+      margin-bottom: 23px;}
       .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -2447,6 +2455,22 @@ select:focus {
       background-image: -webkit-linear-gradient(26deg, #382f21 9%, #8b642a 39%, #de9932 100%);
       background-image: -ms-linear-gradient(26deg, #382f21 9%, #8b642a 39%, #de9932 100%);
       color: #ffffff; }
+
+      /* #fun1 {
+        float: left;
+        width: 25%;
+        height: 500px;
+      }
+      #fun2 {
+        float: left;
+        width: 25%;
+        height: 500px;
+      }
+      #fun3 {
+        float: left;
+        width: 25%;
+        height: 500px;
+      } */
 
 /* Lottery Staticstics Area End */
 /*  How it Work Area Start  */

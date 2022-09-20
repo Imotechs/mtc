@@ -44,6 +44,7 @@
 }
 .play-games .gaming-activities .gaming-activities-inner .single-activities {
   padding: 0px 30px 25px;
+  margin-bottom: 10px;
 }
 .play-games .all-games .nav li a {
   width: 120px;
@@ -187,7 +188,7 @@
     padding: 8px 0px;
 }
   .hero-area {
-    padding: 189px 0px 75px;
+    padding: 189px 0px 501px;
   }
   .hero-area .hero-img {
     top: 40px;
@@ -586,11 +587,6 @@ div#main_menu .navbar-nav{
   padding: 97px 0px 484px;
 }
 
-
-
-
-
-
 }
 
 @media  (max-width: 767px) {
@@ -755,7 +751,8 @@ div#main_menu .navbar-nav{
 }
 
 .featured-game .game-slider .item .single-game img {
-  width: 40rem;
+  width: 25rem;
+  height: 20rem;
 }
 
 }
@@ -1024,7 +1021,8 @@ div#main_menu .navbar-nav{
 }
 
 .featured-game .game-slider .item .single-game img {
-  width: 30rem;
+  width: 28rem;
+  height: 19rem;
 }
 }
 
@@ -1036,7 +1034,11 @@ div#main_menu .navbar-nav{
     margin-left: 20%;
     margin-bottom: 9px;
   }
-  
+ 
+  .row .allgames .mybtn2 {
+    margin-top: 5px;
+    margin-left: 70px;
+  }
   .recent-winners {
     background: #070b28;
     padding: 45px 0px 0px;
@@ -1129,13 +1131,29 @@ div#main_menu .navbar-nav{
 }
 
 
-@media  (max-width: 469px) {
-
-}
-
-
 @media  (max-width: 414px) {
+
+  .single-game img,
+.single-bonus .content img
+{
+  animation: unset;
+}
+  .featured-game .game-slider .item .single-game img {
+    width: 243px;
+    padding-bottom: 40px;
+  }
   
+  .single-game img {
+    margin-top: -20px;
+    width: 25rem;
+    -webkit-animation: opacityAnimation 2s linear infinite;
+    animation: opacityAnimation 2s linear infinite;
+}
+  .single-game {
+    height: 280px;
+    line-height: 280px;
+  }
+
   .header .top-header .content .left-content .left-list li {
     margin-right: 15px;
 }
@@ -1149,13 +1167,7 @@ div#main_menu .navbar-nav{
   font-size: 30px;
   line-height: 40px;
 }
-.single-game img {
-  max-width: 150px;
-}
-.single-game {
-  height: 280px;
-  line-height: 280px;
-}
+
 .lottery-area .daily-lottery .draw-time .draw-counter,
 .lottery-area .daily-lottery .draw-time .draw-counter span 
 {
@@ -1280,72 +1292,96 @@ div#main_menu .navbar-nav{
   padding: 232px 0px 94px;
 }
 
-
-
-
-
-
-
 }
 
+@media  (max-width: 413px) {
+
+  .single-game img {
+    margin-top: -20px;
+    width: 25rem;
+    -webkit-animation: opacityAnimation 2s linear infinite;
+    animation: opacityAnimation 2s linear infinite;
+  }
+
+  .single-game img,
+.single-bonus .content img
+{
+  animation: unset;
+}
+  .featured-game .game-slider .item .single-game img {
+    width: 330px;
+    padding-bottom: 40px;
+    height: 270px;
+  }
+}
 
 @media  (max-width: 390px) {
-  .featured-game .game-slider .item .single-game img {
-    width: 20rem;
-  }
   .breadcrumb-area .bc-img{
     display: none;
   }
 
+  .single-game img {
+    margin-top: -20px;
+    width: 25rem;
+    -webkit-animation: opacityAnimation 2s linear infinite;
+    animation: opacityAnimation 2s linear infinite;
+  }
 
-.tournament-time-box .timer-area {
-  padding: 50px 20px 50px;
+  .single-game img,
+.single-bonus .content img
+{
+  animation: unset;
 }
-.payment-method .method-slider {
-  padding: 0px 40px;
-}
-.community-blog .single-box{
-  display: flow-root;
-}
-.community-blog .single-box .img {
-  margin-right: 0px;
-  margin-bottom: 22px;
-}
+  .featured-game .game-slider .item .single-game img {
+    width: 243px;
+    padding-bottom: 40px;
+  }
+  
+  .tournament-time-box .timer-area {
+    padding: 50px 20px 50px;
+  }
+  .payment-method .method-slider {
+    padding: 0px 40px;
+  }
+  .community-blog .single-box{
+    display: flow-root;
+  }
+  .community-blog .single-box .img {
+    margin-right: 0px;
+    margin-bottom: 22px;
+  }
 
-.header .top-header .content .right-content .right-list > li .cart-icon.tm-dropdown .tm-dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  -webkit-transform: translateX(-30%);
-  -ms-transform: translateX(-30%);
-  transform: translateX(-30%);
-}
-.footer .subscribe-box .form-area input{
-  font-size: 14px;
-}
-.footer .subscribe-box .icon{
-  display: none;
-}
-.footer .subscribe-box .col-8{
-  max-width: 100%!important;
-  flex: 100%!important;
-}
-.footer .subscribe-box .heading-area .title {
-  margin-bottom: 32px;
-}
-.lottery-area .buy-tickets .buy-tickets-box .content {
-  padding: 20px 15px 20px;
-}
+  .header .top-header .content .right-content .right-list > li .cart-icon.tm-dropdown .tm-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translateX(-30%);
+    -ms-transform: translateX(-30%);
+    transform: translateX(-30%);
+  }
+  .footer .subscribe-box .form-area input{
+    font-size: 14px;
+  }
+  .footer .subscribe-box .icon{
+    display: none;
+  }
+  .footer .subscribe-box .col-8{
+    max-width: 100%!important;
+    flex: 100%!important;
+  }
+  .footer .subscribe-box .heading-area .title {
+    margin-bottom: 32px;
+  }
+  .lottery-area .buy-tickets .buy-tickets-box .content {
+    padding: 20px 15px 20px;
+  }
 
 }
 
 
 @media  (max-width: 343px) {
-  .index2 .hero-area {
-    padding: 258px 0px 264px;
-}
 .hero-area {
-  padding: 258px 0px 265px;
+  padding: 258px 0px 72px;
 }
 
 .breadcrumb-area.play
@@ -1391,11 +1427,6 @@ div#main_menu .navbar-nav{
 
 
 }
-
-
-
-
-
 
 
 

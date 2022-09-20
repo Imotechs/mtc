@@ -28,6 +28,7 @@ def page_restricted_view(request):
 def home(request):
     top_list = Games.objects.filter(win = True).order_by('-profit').order_by('-date')[:10]
     my_games = None
+    jackpot = Lottery.objects.filter(win = True).last()
     home = True
     if request.user.is_authenticated:
         my_games = Games.objects.filter(user = request.user).order_by('-profit').order_by('-date')[:10]
@@ -36,6 +37,7 @@ def home(request):
         'three_players':top_list[:3],
         'my_games':my_games,
         'home':home,
+        'jackpot':jackpot,
     }
     return render(request,'mainapp/index.html',context)
 def games(request):
