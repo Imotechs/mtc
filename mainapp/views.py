@@ -1,9 +1,10 @@
 from locale import currency
 from django.shortcuts import render,redirect
 import random
+import json
 from django.contrib import messages
-from users.models import  Mail, Profile
-from .models import Deposit
+from users.models import  Mail, Profile,SellTrade,BuyTrade,Bonus
+from .models import Deposit,Coin
 from django.utils import timezone
 from users.models import Account,Subscribers
 from users import functions
@@ -12,6 +13,7 @@ from games.models import AllGames, Games
 from datetime import datetime,timedelta,date
 from . import location,exchange
 from games.models import Lottery,Bid
+from django.http import JsonResponse,HttpResponse
 # Create your views here.
 
 
@@ -185,3 +187,84 @@ def lottery(request):
             }
         return render(request,'mainapp/lotterys.html',context)
 
+#met coin
+def trade_met(request):
+    if request.method =="POST":
+        account,created = Account.objects.get_or_create(user = request.user)
+        data = json.loads(request.body.decode('utf-8'))
+        met,created = Coin.objects.get_or_create(name = 'metcoin')
+        amount = float(data['amount'])
+        if data['status'] =='buy':
+            if not account.wallet:
+                msg = {'status':'MTC wallet not found for your account'}
+                return JsonResponse(msg)
+            if account.wallet and account.main >= amount and amount>0:
+                met_eq = amount/met.value
+
+                if met_eq>=5:
+                    account.main-= amount
+                    account.balance+= met_eq
+                    account.save()
+                    trade = BuyTrade.objects.create(user = request.user,
+                    usdt =amount,mtc = met_eq)
+                    trade.save()
+                    msg = {"status":'Success!'}
+                    return JsonResponse(msg)
+                msg = {"status":'Can not Trade less than 5 MTC'}
+                return JsonResponse(msg)
+            if account.wallet and account.main < amount:
+                msg = {"status":'Failed!'}
+                return JsonResponse(msg)
+            msg = {'status':'Error!,Try Agin'}
+            return JsonResponse(msg)
+
+        if data['status'] =='sale':
+            if not account.wallet:
+                msg = {'status':'MTC wallet not found for your account'}
+                return JsonResponse(msg)
+            if account.wallet and account.balance >= amount and amount>0:
+                dollar_eq = amount*met.value
+                last_trade = BuyTrade.objects.filter(user=request.user).last()
+               
+                profit = dollar_eq-last_trade.usdt
+                if not profit > 0:
+                    profit = 0.00
+                trade = SellTrade.objects.create(user = request.user,
+                usdt = dollar_eq,mtc = amount,profit =profit)
+                trade.save()
+                account.main+= dollar_eq
+                account.balance-= amount
+                account.save()
+                master_ref = None
+                if request.user.profile.referrer:
+                    ref = Profile.objects.filter(uid = request.user.profile.referrer)
+                if ref[0].referrer:
+                    master_ref = Profile.objects.filter(uid = ref[0].referrer)
+                print(ref[0],master_ref)
+                if not profit <=0:
+                    if ref:
+                        bonus_1 = functions.get_bonus(1,profit)
+                        b_obj = Bonus.objects.create(user = ref[0].user,
+                                    level = 1,from_user = request.user,
+                                    amount =bonus_1,claimed = False)
+                        b_obj.save()
+                        if master_ref:
+                            bonus_2 = functions.get_bonus(2,profit)
+                            b_obj = Bonus.objects.create(user = master_ref[0].user,
+                                    level = 2,from_user = request.user,
+                                    amount = bonus_2,claimed = False)
+                            b_obj.save()
+                msg = {"status":'Success!'}
+                return JsonResponse(msg)
+            if account.wallet and account.balance < amount:
+                msg = {"status":'Failed!'}
+                return JsonResponse(msg)
+            msg = {'status':'Error!,Try Agin'}
+            return JsonResponse(msg)
+    return render(request,'met.html')
+
+def current_met_value(request):
+    if request.method =='GET':
+        num = [0.2,0.3,0,0,0,0,0,0,0,0.35,0.4,0.2,0.3,0.45,-0.45,-0.3,]
+        met,created = Coin.objects.get_or_create(name = 'metcoin')
+        return JsonResponse({'met':met.value+random.choice(num)})

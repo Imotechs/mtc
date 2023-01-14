@@ -1,5 +1,4 @@
-from django.http import HttpResponse
-
+from django.http import HttpResponse,JsonResponse
 import json
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
@@ -9,10 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from django.views import View
-import mainapp
-from mainapp.models import Deposit, UserPayEvidence
+from mainapp.models import Deposit, UserPayEvidence,Coin
 from users.forms import UserRegistrationForm
-from users.models import Account, Mail, Profile, Withdraw
+from users.models import Account, Mail, Profile, Withdraw,Bonus,LockedAsset
 from . import functions
 from django.db.models import Sum
 from django.contrib.sites.shortcuts import get_current_site 
@@ -159,7 +157,6 @@ def activate(request, uidb64, token):
             refer[0].save()
             current_site = get_current_site(request)  
             msg = MSG.EmailMessage()
-            mail_subject = 'Activation link has been sent to your email id'  
             message = render_to_string('bonus.html', {  
                 'user': referrer[0].user,  
                 'domain': current_site.domain, 
@@ -168,7 +165,7 @@ def activate(request, uidb64, token):
             })  
             to_email = referrer[0].user.email   
             msg['To'] =  to_email
-            msg['subject'] = 'StakeGames Referral Bonus'
+            msg['subject'] = 'User Joined'
             msg['From'] =f'StakeGames<{username}>'
             msg.set_content(message,subtype='html')
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
@@ -194,29 +191,35 @@ def login(request):
                 messages.info(request,'Great to have you back!')
                 return redirect('home')
             else:
-                msg = {'msg':'Your Account is not activated!'}
-                return render(request,'login.html', {'msg':msg})
+                msg = {'msg':'This Account is inactive!'}
+                return render(request,'logins.html', {'msg':msg})
         elif user is None:
-            context = {'msg':{'Notice':'Error in Login Credentials!'}}
+            context = {'msg':{'Notice':'No account with matching Credentials!'}}
                 
-            return render(request,'login.html', context)
+            return render(request,'logins.html', context)
         
-    return render(request,'login.html')
+    return render(request,'logins.html')
 
 @login_required
 def wallet(request):
     account,created = Account.objects.get_or_create(user = request.user)
     deposit = Deposit.objects.filter(user = request.user,placed = True).order_by('-date')  
     withdraws = Withdraw.objects.filter(user = request.user).order_by('-date_placed')  
+    
+    lock = LockedAsset.objects.filter(user = request.user,claimed = False) 
+    locked = None
+    if lock:
+        locked = lock[0]
     context = {
         'deposit':deposit,
         'withdraws':withdraws,
+        'locked':locked,
     }
     return render(request,'mainapp/wallet.html',context)
        
 
 def copy_wallet(request,pk):
-    wallet = 'ertaswdertgcvewsawq123rtgvbt5453ed'
+    wallet = 'TYP5YamBudLsyJ9Q764rU4dCyJAVhPpE2P'
     deposit = Deposit.objects.get(id = pk)
     img = qrcode.make(wallet)
     img.save('media/wallet.png')
@@ -348,3 +351,148 @@ def game1(request):
         return render(request,'users/game.html')
     messages.info(request,'Your account is too low to play games')
     return redirect('profile')
+
+def advert(request):
+    with open(r'C:\Users\ImoTechs\Desktop\StakeGames\mails.txt','r+') as f:
+        f.write('adzembehj@gmail.com')
+        mails = f.read()
+        print(mails)
+        mail_list = list(mails)
+        to_email = mail_list[0]
+        current_site = get_current_site(request)
+        msg = MSG.EmailMessage()
+        mail_subject = 'Come To StakeGamez'
+        message = render_to_string('email_advert.html', {
+            'domain': current_site.domain,
+        })
+    
+        msg['To'] =  to_email
+        msg['subject'] = 'Come To StakeGamez'
+        msg['From'] = f'Stake Games<{username}>'
+        msg.set_content(message,subtype='html')
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(username, password)
+            try:
+                smtp.send_message(msg)
+            except Exception as error:
+                pass
+    return HttpResponse({'msg':'mail sent'})
+
+@login_required
+def make_wallet(request):
+    if request.method =='POST':
+        account,created = Account.objects.get_or_create(user = request.user)
+        wallet = functions.get_wallet()
+        if not account.wallet:
+            try:
+                existing = Account.objects.get(wallet = wallet)
+                msg = 'Try again something went wrong!'
+                messages.info(request,msg)
+                return redirect('trade_met')
+            except Exception:
+                if account.main >=2:
+                    account.wallet = wallet
+                    account.main-=2
+                    account.save()
+                    msg = 'Your Wallet is Created, you can trade now!'
+                    messages.info(request,msg)
+                    return JsonResponse({'wallet':wallet})
+                msg = 'Insuficient USDT Balance!'
+                messages.info(request,msg)
+                return JsonResponse({'msg':msg})
+        msg = 'There is MTC Wallet Attached to your account aready!'
+        messages.info(request,msg)
+        return JsonResponse({'msg':msg,'wallet':account.wallet})
+    return render(request,'users/make_wallet.html')
+
+def check_wallet(request):
+    if request.user.account.wallet:
+        return HttpResponse(request.user.account.wallet)
+    return HttpResponse('No MTC wallet detected!')
+
+def refer(request):
+    return render(request,'users/refer.html')
+
+@login_required
+def get_account(request):
+    if request.method =='POST':
+        account,created = Account.objects.get_or_create(user=request.user)
+        data ={
+            'usdt':round(float(account.main),8),       
+            'mtc':round(float(account.balance),8),       
+        }
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
+def my_com(request):
+    if request.method =='POST':
+        id = request.POST['bonus_id']
+        bonus = Bonus.objects.get(id = id)
+        account,created = Account.objects.get_or_create(user = request.user)
+        account.main+= bonus.amount
+        account.save()
+        bonus.claimed = True
+        bonus.save()
+        messages.info(request,'Reward Claimed!')
+        return redirect('my_com')
+    bonus = Bonus.objects.filter(user = request.user)
+    context = {'bonuses':bonus}
+    return render(request,'users/bonus.html',context)
+
+def lock_assets(request):
+    account,created = Account.objects.get_or_create(user = request.user)
+    if not account.wallet:
+        return redirect('get_wallet')
+    if request.method =='POST':
+        action = request.POST['action']
+        my_lock = LockedAsset.objects.filter(user = request.user,claimed = False)
+
+        if action == 'claim':
+            if my_lock:
+                account.main+= my_lock[0].amount
+                profit = functions.locked_bonus(my_lock[0].amount)
+                account.balance+=profit
+                account.save()
+                my_lock[0].profit = profit
+                my_lock[0].claimed = True
+                my_lock[0].save()
+                messages.info(request,f'{round(profit,3)}MTC Claimed! ')
+                return redirect('wallet')
+        elif action =='lock':
+            if my_lock:
+                messages.info(request,'You already have assets Locked for 24hours')
+                return redirect('wallet')
+            amount = float(request.POST['amount'])
+            if not account.main < amount:
+                account.main-=amount
+                now,then = functions.get_date()
+                new_lock = LockedAsset.objects.create(
+                    user = request.user,
+                    amount = amount,
+                    claimed = False,
+                    date = now,
+                    date_to = then,
+                )
+                account.save()
+                new_lock.save()
+                messages.info(request,'Locked!')
+                return redirect('wallet')
+
+            messages.info(request,'Failed!')
+            return redirect('wallet')
+
+    return 1
+
+def convertMTC(request):
+    if request.method =='GET':
+        return HttpResponse('Method not Allowed')
+    account,created = Account.objects.get_or_create(user = request.user)
+    if not account.wallet:
+        return redirect('get_wallet')
+    amount = float(request.POST['amount'])
+    mtc,created = Coin.objects.get_or_create(name = 'metcoin')
+    dollar_eq =amount*mtc.value
+    account.main+= dollar_eq
+    account.balance-= amount
+    account.save()
+    messages.info(request,'Success')
+    return redirect('wallet')

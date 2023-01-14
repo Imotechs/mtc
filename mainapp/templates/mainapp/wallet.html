@@ -6,7 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> StakeGames</title>
+	<title> Met.com</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<!-- favicon -->
     <link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
 	<!-- bootstrap -->
@@ -14,7 +16,7 @@
 	<!-- Plugin css -->
 	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/plugin.css'%}">
 	<!-- stylesheet -->
-	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/wallet/style.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/style.css'%}">
 	<!-- responsive -->
 	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/wallet/responsive.css'%}">
 
@@ -60,7 +62,7 @@
   border: none;
   padding: 10px;
   background-color: #bccbe9;
-  color: #232c3d;
+  color: #0e141e;
   font-size: 18px;
   cursor: pointer;
   transition: 0.5s;
@@ -117,100 +119,7 @@
 	<!-- Header Area Start  -->
 	<header class="header">
 		<!-- Top Header Area Start -->
-		<section class="top-header">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="content">
-							<div class="left-content">
-								<ul class="left-list">
-									<li>
-										.
-										<!-- <p>
-											<i class="fas fa-headset"><a href=""></a></i>	Support
-										</p> -->
-									</li>
-									<li>
-										<p>
-											<a href="mailto:stakegams@gmail.com"><i class="fas fa-envelope"></i></a>	
-										</p>
-									</li>
-									<li>
-										<div class="language-selector">
-											<select name="language" class="language">
-												<option value="1">English</option>
-												<option value="2">France</option>
-												<option value="3">Japan</option>
-											</select>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<div class="right-content">
-								<ul class="right-list">
-									 <li>
-										.
-										<!--<div class="cart-icon tm-dropdown">
-											<i class="fas fa-cart-arrow-down"></i> 
-											<span class="cart-count"></span>
-											<div class="tm-dropdown-menu">
-												<ul class="list">
-													<li class="list-item">
-															<div class="close">
-																	<i class="fas fa-times"></i>
-															</div>
-														 <ul class="number-list">
-															<li>24</li>
-															<li>25</li>
-															<li>26</li>
-															<li>27</li>
-															<li>28</li>
-														</ul> 
-													</li>
-													
-												</ul>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="notofication tm-dropdown">
-											<span class="count"></span>
-											<div class="tm-dropdown-menu">
-													<ul class="list">
-														<li>
-															
-														</li>
-														
-													</ul>
-												</div>
-										</div>
-									</li> -->
-									{%if request.user.is_superuser%}
-									<li>
-										
-												<a href="{%url 'dashboard'%}" class="sign-in"  >
-													<i class="fas fa-user"></i> 
-												</a>
-											
-									</li>
-									{%endif%}
-									<li> {%if request.user.is_authenticated%}
-										<a href="{%url 'logout'%}" class="sign-in"  >
-											<i class="fas fa-user"></i> Logout
-										</a>
-										{%else%}
-										<a href="{%url 'login'%}" class="sign-in" data-toggle="modal" data-target="#login">
-											<i class="fas fa-user"></i> LogIn
-										</a>
-										{%endif%}
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+		
 		<!-- Top Header Area End -->
 		
 		<!--Main-Menu Area Start-->
@@ -218,28 +127,21 @@
 	<!-- Header Area End  -->
 
 	<!-- Breadcrumb Area Start -->
-	<section class="breadcrumb-area play">
+	<section class="breadcrumb-area play" style="background:#105b54;color:white;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h4 class="title">
-						Wallet
-					</h4>
-					<ul class="breadcrumb-list">
-						<li>
-							<a href="{%url 'home'%}">
-									<i class="fas fa-Home "></i>
-									Home 
-							</a>
-						</li>
-						<li>
-							<span><i class="fas fa-chevron-right"></i> </span>
-						</li>
-						<li>
-							<a href="{%url 'wallet'%}">Wallet</a>
-						</li>
-					</ul>
+					<h6 class="">
+						
+                        <i class="fa fa-wallet title"></i>
+                        <i class="fa fas-home">My Wallet</i>
+
+					</h6>
+                    
+					
+                    
 				</div>
+                
 			</div>
 		</div>
 	</section>
@@ -287,16 +189,19 @@
                             </li>
                         
                         </ul>
-                        <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab">
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="single-winer">
                                         <div class="top-area">
                                             <div class="left">
-                                                <h4 class="name">
-                                                        Main Account 
+                                                <h4 class="name" style="color:white;">
+                                                        USD wallet 
                                                 </h4>
+                                            </div>
+                                            <div class="right">
+                                                <p class="id" id="lock" data-toggle="modal" data-target="#signin" style="background-color: brown;">Lock Now 🔓</p>
                                             </div>
                                         </div>
                                         <div class="bottom-area">
@@ -309,50 +214,160 @@
                                         </div>
                                     </div>
                                 </div>
+                                {%if request.user.account.wallet%}
                                 <div class="col-lg-4">
                                     <div class="single-winer">
                                         <div class="top-area">
                                             <div class="left">
-                                                <h4 class="name">
-                                                        Earning Wallet
+                                                <h4 class="name" style="color:white;">
+                                                        MetCoin Wallet   
+
                                                 </h4>
                                             </div>
                                         </div>
                                         <div class="bottom-area">
                                             <div class="left">
-                                                    {{request.user.account.balance|floatformat:3}} USDT
+                                                    {{request.user.account.balance|floatformat:3}} MTC
                                             </div>
                                             <div class="right">
-                                                    <img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+                                                <img src="{%static 'mainapp/assets/images/metcoin.png'%}"  width="70"height = "70" alt="">
+
                                             </div>
-                                        </div>
+                                            </div>
+                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                                            <!-- <p class="id fa-spin">♻️</p>
+                                            <button class="buttonload">
+                                                  <i class="fa fa-spinner fa-spin"></i>Loading
+
+                                                <i class="fa fa-circle-o-notch fa-spin"></i>Loading
+                                                <i class="fa fa-refresh fa-spin"></i>Loading
+
+                                              </button> -->
+
                                     </div>
                                 </div>
+                                {%else%}
                                 <div class="col-lg-4">
                                     <div class="single-winer">
                                         <div class="top-area">
                                             <div class="left">
-                                                <h4 class="name">
-                                                    {{request.user.profile.uid}}                                                    
+                                                <h4 class="name" style="color:white;">
+                                                        MetCoin Wallet   
+
                                                 </h4>
+                
+
                                             </div>
                                             <div class="right">
-                                                <p class="id">My Ref-Code</p>
+                                                <p class="id"  >Not Found</p>
+
                                             </div>
                                         </div>
                                         <div class="bottom-area">
-                                            <div class="left" style="color: #fff;">
-                                                    {{request.user.username}} 
+                                            <div class="left">
+                                                    <a class = 'mybtns'href="{%url 'get_wallet'%}">Create Wallet</a>
                                             </div>
+                                            <div class="right">
+                                                <img src="{%static 'mainapp/assets/images/metcoin.png'%}"  width="70"height = "70" alt="">
+
+                                            </div>
+                                            </div>
+                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+                                    </div>
+                                </div>
+                                {%endif%}
+                                <style>
+                                    .buttonload {
+                                  background-color: #04AA6D; /* Green background */
+                                  border: none; /* Remove borders */
+                                  color: white; /* White text */
+                                  padding: 12px 16px; /* Some padding */
+                                  font-size: 16px /* Set a font size */
+                                }
+                                
+                                                .mybtns {
+                                                font-size: 16px;
+                                                font-weight: 600;
+                                                padding: 8px 10px;
+                                                display: inline-block;
+                                                color: #fff;
+                                                border: 0px;
+                                                border-radius: 20px;
+                                                cursor: pointer;
+                                                -webkit-transition: all 0.3s ease-in;
+                                                -o-transition: all 0.3s ease-in;
+                                                transition: all 0.3s ease-in;
+                                                background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+                                                background-image: -webkit-linear-gradient(right, #065548, #2198c0);
+                                                background-image: -o-linear-gradient(right, #065548, #2198c0);
+                                                background-image: linear-gradient(to left, #065548, #2198c0);
+                                                }
+                                </style>
+                                {%if locked%}
+                                <div class="col-lg-4">
+                                    <div class="single-winer">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <h4 class="name" style="color:white;">
+                                                    Locked Assets                                                    
+                                                </h4>
+                                            </div>
+                                            
+                                            <div class="right">
+                                                <p class="id">Minting MTC</p>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                            <form action="{%url 'lock_up'%}" method="post">
+                                            <div class="left" style="color: #fff;">
+                                                <p id = "times" style="display: none;">{{locked.date_to|date:'M,d,Y H:i'}}</p>
+                                                <input hidden name = "action" value = 'claim'/>
+                                                {%csrf_token%}
+                                                <input hidden name = "amount" value = '{{locked.amount}}'/>
+                                                <p id="allCounts"><b id="days"> </b>D   <b id="hours"> </b>H  <b id="minutes"></b>M  <b id="seconds"> </b>S </p>
+                                                <p id="claim" style="display: none;"><button class="mybtns">Redeem</button></p>
+                                            </div>
+                                        </form>
                                             <div class="right">
                                                 <span>verified</span>
+                                                <img src="{%static 'mainapp/assets/images/metcoin.png'%}" class="id fa-spin" width="70"height = "70" alt="">
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+                                {%else%}
+
+                                <div class="col-lg-4">
+                                    <div class="single-winer">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <h4 class="name" style="color:white;">
+                                                    Locked Assets                                                    
+                                                </h4>
+                                            </div>
+                                            <div class="right">
+                                                <p class="id">None</p>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                           
+                                                <div class="left">
+                                                <p>Click on lock now on your USDT assets to lock your assets and make MTC in 24 Hours</p>
+                                                </div>
+
+                                            <div class="right">
+                                                <img src="{%static 'mainapp/assets/images/metcoin.png'%}"  width="70"height = "70" alt="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {%endif%}
                             </div>
-                    
                         </div>
                         <div class="tab-pane fade" id="pills-tab2" role="tabpanel" aria-labelledby="pills-tab2-tab">
                             
@@ -369,12 +384,20 @@
                                                         <div class="form-group row">
                                                             <div class="col-12">
                                                                 {%csrf_token%}
-                                                                <input class="form-control form-control-lg" name="amount" type="number" min="10" required="" placeholder="{{request.user.profile.currency}}">
+                                                                <input class="form-control form-control-lg" name="amount" type="number" min="10" required="" placeholder="USDT">
                                                             </div>
                                                         </div>
                                                         <div class="form-group text-center">
                                                             <div class="col-xs-12 p-b-20">
                                                                 <button class="btn bg-primary" style="color: #fff;"type="submit" id="deposit-btn">Proceed</a>
+                                                                    <script>
+                                                                        var btn = document.getElementById('deposit-btn')
+                                                                        btn.addEventListener('click',load)
+                                                                        function load(){
+                                                                            btn.appendChild('<i>')
+                                                                            btn.classList.add('fa fa-spinner fa-spin')
+                                                                        }
+                                                                    </script>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -392,10 +415,10 @@
                                 <div class="nav nav-lend mb-3" id="pills-tab" role="tablist" style="margin-left: 60px; display: flex">
                                     
                                     <div class="nav-item">
-                                        <a class="nav-link tabss"  data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true">Wallet </a>
+                                        <a class="nav-link tabss"  data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true">Instructions </a>
                                     </div>
                                     <div class="nav-item">
-                                        <a class="nav-link tabss" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="true">Bank Transfer </a>
+                                        <a class="nav-link tabss" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="true">Withdraw</a>
                                     </div>
                                 </div>
 
@@ -403,14 +426,39 @@
                                     <div class="tab-pane fade show active" id="pills-all-bets" role="tabpanel" aria-labelledby="pills-all-bets-tab">
                                         <div class="single-item">
                                             <div class="card card-body" style="background-color: transparent; text-align: left; color: #fff; width: 300px; margin-left:10%; margin-right:10%;">
-                                                <form action="{%url 'withdraw'%}" method="POST">
-                                                    <label for="amount">Amount to Withdraw</label>
+                                                <form action="{%url 'swap'%}" method="POST">
+                                                    <p>Your assets to withdraw must be from your USDT balance</p>
+                                                    <p>Your assets in MTC if willing to withdrow, must be converted to USDT befor Withdrawal</p>
+                                                    <p>Use the form below to Convert your MTC to USDT</p>
+                                                    <label for="amount">Amount to Convert</label>
                                                     <div class="input-group mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1"></span>
                                                         </div>
                                                         
-                                                        <input type="number" class="form-control" name="amount" min="0" value="0" step="0.01" title="Currency Only" pattern="^\d+(?:\.\d{1,2})?$" required>
+                                                        <input type="number" class="form-control" name="amount" min="0" value="0" step="0.01"min="0" value="0" step="0.01" title="Currency Only" pattern="^\d+(?:\.\d{1,2})?$" required>
+                                                    </div>
+                                                    <hr>
+                                        
+                                                    {%csrf_token%}
+                                                    <hr>
+                                                    <input type="submit" value="Swap" name="withdraw" class="btn btn-success btn-block mt-3">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-my-bets" role="tabpanel" aria-labelledby="pills-my-bets-tab">
+                                        <div class="single-item">
+                                            <div class="card card-body" style="background-color: transparent; text-align: left; color: #fff; width: 300px; margin-left:10%; margin-right:10%;">
+                                                <form action="{%url 'withdraw'%}" method="POST">
+                                                    
+                                                    <label for="amount">Withdrawal  Form</label>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1"></span>
+                                                        </div>
+                                                        
+                                                        <input type="number" class="form-control" name="amount" min="0" value="0" step="0.01"min="0" value="0" step="0.01" title="Currency Only" pattern="^\d+(?:\.\d{1,2})?$" required>
                                                     </div>
                                                     <hr>
                                                     <label for="payment method">Withdrawal Method</label>
@@ -421,40 +469,6 @@
                                                     <hr>
                                                     <label for="wallet address">Enter Wallet Address:</label>
                                                     <input type="text" name="wallet" id="" class="form-control" required>
-                                                    <hr>
-                                                    <input type="submit" value="Proceed" name="withdraw" class="btn btn-success btn-block mt-3">
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-my-bets" role="tabpanel" aria-labelledby="pills-my-bets-tab">
-                                        <div class="single-item">
-                                            <div class="card card-body" style="background-color: transparent; text-align: left; color: #fff; width: 300px; margin-left:10%; margin-right:10%;">
-                                                <form action="{%url 'withdraw'%}" method="post">
-                                                   <p>Enter Amount in (USDT), your local account will be credited with the equivalence. </p>
-                                                   <label for="amount">Amount to Withdraw</label>
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="basic-addon1"></span>
-                                                        </div>
-                                                        
-                                                        <input type="number" class="form-control" name="amount" min="0" value="0.0" step="0.01" title="Currency Only" pattern="^\d+(?:\.\d{1,2})?$" required>
-                                                    </div>
-                                                    <hr>
-                                                    <label for="payment method">Withdrawal Method</label>
-                                                    <select name="method" id="dbType" class="form-control">
-                                                        <option value="transfer">Bank Transfer</option>
-                                                    </select>
-                                                    <hr>
-                                                    <label for="acct name">Account Name:</label>
-                                                    <input type="text" name="account_name" id="" class="form-control" required>
-                                                    <hr>
-                                                    <label for="bank name">Bank Name: </label>
-                                                    <input type="text" name="bank" id="" class="form-control" required>
-                                                    <hr>
-                                                    {%csrf_token%}
-                                                    <label for="bank number">Account Number:</label>
-                                                    <input type="text" name="account_number" id="" class="form-control" required>
                                                     <hr>
                                                     <input type="submit" value="Proceed" name="withdraw" class="btn btn-success btn-block mt-3">
                                                 </form>
@@ -570,13 +584,13 @@
 		
 
 	<!-- Footer Area Start -->
-	<footer class="footer" id="footer">
-        <div class="copy-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <div class="left-area">
-                            <p>Copyright © 2022.All Rights Reserved By <a href="#">StakeGames</a>
+	<footer class="footer" id="footer" style="background: #105b54;border-radius: 15px solid white;">
+        <div class="copy-bg" style="background: #105b54;">
+            <div class="container" style="background: #105b54;">
+                <div class="row" style="background: #105b54;">
+                    <div class="col-lg-5" style="background: #105b54;">
+                        <div class="left-area" style="background: #105b54;">
+                            <p>Copyright © 2022.All Rights Reserved By <a href="#">Met</a>
                             </p>
                         </div>
                     </div>
@@ -599,6 +613,43 @@
             </div>
         </div>
 	</footer> 
+    
+    <div class="modal fade sign-in show active" id="signin" tabindex="1" role="dialog" aria-labelledby="login" aria-hidden="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+            <div class="modal-body">
+                <div class="logo-area">
+                        <img class="logo" src="" alt="">
+                </div>
+                <div class="header-area">
+                    <h4 class="title"></h4>
+                    <p class="sub-title">Enter USDT to Lock for 24 hours</p>
+                </div>
+                <div class="form-area">
+                    <form action="{%url 'lock_up'%}"  method="post">
+                        <div class="form-group">
+                                {%csrf_token%}
+                        </div>
+                        <div class="form-group">
+                                <label for="login-input-password">Amount *</label>
+                                <input type="number" step="0.001" name = 'amount' class="input-field" id="login-input-password" >
+                        </div>
+                        <div class="form-group">
+                            <input hidden name="action" value="lock">
+                        </div>
+                        <div class="form-group">
+                               <button type="submit" class="mybtn1">Lock</button>
+                        </div>
+                    </form>
+                </div>
+                
+                
+            </div>
+        </div>
+        </div>
+    </div>
+    {%include 'footer.html'%}
 	<!-- Footer Area End -->
 
 	<!-- Back to Top Start -->
@@ -695,6 +746,8 @@
 	<script src="{%static 'mainapp/assets/js/mousemoveparallax.js'%}"></script>
 	<!-- main -->
 	<script src="{%static 'mainapp/assets/js/main.js'%}"></script>
+    <script src="{%static 'mainapp/assets/js/counter.js'%}"></script>
+
 </body>
 
 </html>

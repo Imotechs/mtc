@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metric</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/dstyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
+    
+</head>
+<style>
+    .btns{
+        font-size: 12px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 12px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+      background-image: -webkit-linear-gradient(right,  #536461, #83cbe3);
+      background-image: -o-linear-gradient(right,  #536461, #83cbe3);
+      background-image: linear-gradient(to left, #536461, #84a7b3);
+      
+    }
+    .buybtns {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 2px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+      background-image: -webkit-linear-gradient(right, #065548, #2198c0);
+      background-image: -o-linear-gradient(right, #065548, #2198c0);
+      background-image: linear-gradient(to left, #065548, #2198c0);
+    }
+</style>
+<body>
+    {%for msg in messages%}
+    <script>
+        window.alert('{{msg}}')
+    </script>
+    {%endfor%}
+    <section data-v-7d9ce8f6="" class="page settings-page referrals-page">
+        <div data-v-7d9ce8f6="" class="head-banner page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                         
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h1>My Commissions</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+       {%if not bonuses%}
+        <div data-v-7d9ce8f6="" class="container" id="txt">
+            <div data-v-7d9ce8f6="" class="row">
+                <div data-v-7d9ce8f6="" class="col">
+                    <h1 data-v-7d9ce8f6="">Enjoy Commissions from your Friends as they Trade</h1>
+                    <a href="{%url 'refer'%}" class="buybtns">Refer Now!</a>
+                </div>
+            </div>
+            {%else%}
+            <div data-v-7d9ce8f6="" class="container" id="txt">
+                <div data-v-7d9ce8f6="" class="row">
+                    <div data-v-7d9ce8f6="" class="col">
+                        <h1 data-v-7d9ce8f6="">Claim your Rewards</h1>
+                        <p> Rewards are tagged 1 from your Friend and 2 from your friend friends</p>
+                    </div>
+                </div>
+            {%endif%}
+            {%for bonus in bonuses%}
+            <div data-v-7d9ce8f6="" class="row">
+                <div data-v-7d9ce8f6="" class="col">
+                    <div data-v-7d9ce8f6="" class="card my-0">
+                        <div data-v-7d9ce8f6="" class="card-body">
+                            
+                            <div data-v-7d9ce8f6="" class="form-group"><label data-v-7d9ce8f6=""
+                                    class="form-label opacity-50">From <b style="color: #0c7b73;"> &nbsp;{{bonus.from_user}}</b> <small style="margin-left: 30px;">&nbsp;{{bonus.date|date:'d,M'}}</small></label>
+                                <div data-v-7d9ce8f6=""><span data-v-7d9ce8f6="" id="referral-link"
+                                        class="fw-bold">
+                                        <h1>$ {{bonus.amount|floatformat:3}} &nbsp; <small style="font-size: xx-small;">{{bonus.level}}</small></h1>
+
+                                    </span>
+                                    {%if bonus.claimed%}
+                                    <div class="check-group">
+                                        <label for="input-terms">
+                                            <button type="button" disabled  onclick="createWallet()" id="createbtn" class="btns">Claimed</button>
+                                        </label>
+                                    </div>
+                                    {%else%}
+                                    <div class="check-group">
+                                        <form action="" method="post">
+                                            {%csrf_token%}
+                                        <label for="input-terms">
+                                            <button type="submit" value="{{bonus.id}}" name="bonus_id"  id="createbtn" class="buybtns">Claim</button>
+                                        </label>
+                                    </form>
+                                    </div>
+                                    {%endif%}
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {%endfor%}
+        </div>
+        <div id="loader" style="display: none;">
+            <div data-v-7d9ce8f6="" class="container">
+                <div data-v-7d9ce8f6="" class="row">
+                    <div data-v-7d9ce8f6="" class="col">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+                    
+                        <h1 class="" >
+                            <img src="{%static 'mainapp/assets/images/metcoin.png'%}" class="id fa-spin" width="150"height = "150" alt="">
+
+                        </h1>
+                    </div>
+                </div>
+        </div>
+       
+        <div data-v-7d9ce8f6="" class="col">
+            <div data-v-7d9ce8f6="" class="mb-5">
+              
+                <h6 data-v-7d9ce8f6=""></h6>
+                <p data-v-7d9ce8f6=""></p>
+            </div>
+        </div>
+    </section>
+{%include 'footer.html'%}
+<script>
+    var checkBox = document.getElementById('terms')
+    const createBtn = document.getElementById('createbtn')
+    const loader = document.getElementById('loader')
+    const txt = document.getElementById('txt')
+    function createWallet(){
+        txt.style.display = 'none'
+        loader.style.display = 'block'
+        setTimeout(()=>{
+            loader.innerHTML = '<h1></h1>'
+            const url = ''
+       fetch(url,{
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFtoken': csrftoken,
+                  },
+                  //body: JSON.stringify({ "amount": samount, 'status': status })
+                })
+       .then((response) =>response.json())
+       .then((data) => {
+            if(data['msg']){
+        loader.innerText = `${data['msg']} :${data['wallet']}`
+        setTimeout(()=>{
+        window.location.href = '/trading/met/'
+
+        },2000)
+            }
+            else{
+            loader.innerText = data['wallet']
+            setTimeout(()=>{
+        window.location.href = '/trading/met/'
+
+        },2000)
+            }
+        })
+        },10000)
+        
+        
+       
+
+        
+
+    }
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+function handleCheck(){
+    
+    if (checkBox.checked === true){
+        createBtn.style.display = 'block'
+    }
+    else{
+        createBtn.style.display = 'none'
+
+    }
+}
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  
+</body>
+
+</html>

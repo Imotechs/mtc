@@ -1,43 +1,106 @@
 <!DOCTYPE html>
-<html lang="en" >
-	{%load static%}
+{%load static%}
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login & Singup</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link href="{%static 'mainapp/Register/style.css'%}" rel="stylesheet">
-
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><link rel="stylesheet" href="./style.css">
-
+	<meta http-equiv="Content-Type" content="charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Melta</title>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
+	<!-- bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
+	<!-- Plugin css -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/plugin.css'%}">
+	<!-- stylesheet -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/style.css'%}">
+	<!-- responsive -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/responsive.css'%}">
 </head>
-<body>
-<!-- partial:index.partial.html -->
-<div class="box-form">
-	<div class="left">
-		<div class="overlay">
-		<h1>StakeGames</h1>
-		<br>
-		<h2>Activation link has been sent to your email </h2>
-        
-		<a href=""><p style="color:cyan">Verify to activate your account</p></a>
 
-		<hr>
-		<p >Enrich <strong style="color:cyan"> Yourself </strong> just by being smarter than our <br><strong style="color:cyan"> Robots </strong></p>
+<body>
+	<!-- preloader area start -->
+	<div class="preloader" id="preloader">
+		<div class="loader loader-1">
+			<div class="loader-outter"></div>
+			<div class="loader-inner"></div>
 		</div>
-       
 	</div>
-	
-	
+	<!-- preloader area end -->
+
+	<!-- Header Area Start  -->
+	<header class="header">
 		
-        {%for msg in messages%}
-		<script>
-			alert('{{msg}}')
+		
+		<!--Main-Menu Area Start-->
+	</header>
+	<!-- Header Area End  -->
+	<script> 
+		var audio = new Audio('/static/games/racerCar/music/racer.mp3')
+		window.addEventListener('click', check())
+		function check(){
+			audio.play()
+		}
 		</script>
-		{%endfor%}
-	
+	<!-- Hero Area Start -->
+	{%for message in messages%}
+	<script>
+		alert('{{message}}')
+	</script>
+	{%endfor%}
+
+	<!-- Breadcrumb Area Start -->
+	<!-- <section class="breadcrumb-area bc-contact">
+		<img class="bc-img" src="assets/images/breadcrumb/contact.png" alt="">
+		
+	</section> -->
+	<!-- Breadcrumb Area End -->
+
+<div class="login-modal sign-in" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+        <div class="modal-body">
+            <div class="logo-area">
+                    <img class="logo" src="" alt="">
+            </div>
+            <div class="header-area">
+            
+                <h5 class="title">EMail Verification :::<b style="color: aqua;">Melta</b>!</h5>
+                <p class="sub-title">Open your Mail Box</p>
+               
+            </div>
+            <div class="form-area">
+                
+                 <p>An Email was sent to the mail you provided, Open it to continue from there.</p>
+				 <small>You can as well check your spam mails</small> 
+                    
+            </div>
+			<form>
+			<div class="form-group">
+
+			<a href="mailto:meltacoin@gmail.com" class="mybtn1">Open Mail Box</a> 
+			</div>
+		</form>
+        </div>
+    </div>
+    </div>
 </div>
-<!-- partial -->
-  
+
+
+<script src="{%static 'mainapp/assets/js/jquery.js'%}"></script>
+<!-- popper -->
+<script src="{%static 'mainapp/assets/js/popper.min.js'%}"></script>
+<!-- bootstrap -->
+<script src="{%static 'mainapp/assets/js/bootstrap.min.js'%}"></script>
+<!-- plugin js-->
+<script src="{%static 'mainapp/assets/js/plugin.js'%}"></script>
+
+<!-- MpusemoverParallax JS-->
+<script src="{%static 'mainapp/assets/js/TweenMax.js'%}"></script>
+<script src="{%static 'mainapp/assets/js/mousemoveparallax.js'%}"></script>
+<!-- main -->
+<script src="{%static 'mainapp/assets/js/main.js'%}"></script>
 </body>
 </html>

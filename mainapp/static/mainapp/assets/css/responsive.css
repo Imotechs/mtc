@@ -8,7 +8,7 @@
   padding: 10px 29px;
 }
 .header .mainmenu-area .navbar::after {
-  border-bottom: 66px solid #070b28;
+  border-bottom: 66px solid #030513;
 }
 .header .mainmenu-area .navbar::before,
 .header .mainmenu-area .navbar::after
@@ -519,7 +519,7 @@
   padding-right: 0px;
 }
 .index2 .header .mainmenu-area {
-  background: #252f5a;
+  background: #050713;
 }
 .index2 .hero-area {
   padding: 238px 0px 341px;
@@ -1040,7 +1040,7 @@ div#main_menu .navbar-nav{
     margin-left: 70px;
   }
   .recent-winners {
-    background: #070b28;
+    background: #f2fffe;
     padding: 45px 0px 0px;
 }
 
@@ -1257,7 +1257,7 @@ div#main_menu .navbar-nav{
   padding: 164px 0px 51px;
 }
 .tournaments {
-  background: #0b122e;
+  background: #f2fffe;
   padding: 44px 0px 118px;
 }
 

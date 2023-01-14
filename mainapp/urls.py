@@ -2,7 +2,8 @@
 from django.urls import path,include,reverse_lazy
 from .views import (home,testimonial,terms,about,
                     subscribe,games,contact,
-                    lottery,tournaments
+                    lottery,tournaments,
+                    current_met_value,trade_met
 )
 import users.views as user_views
 from django.contrib.auth import views as auth_views
@@ -19,7 +20,9 @@ urlpatterns = [
     path('play/games',games,name = 'games'),
     path('lottery/',lottery,name = 'lot'),
     path('tournaments/',tournaments,name = 'turn'),
-
+    #met coin
+    path('access/met/value/',current_met_value,name = 'get_met_value'),
+    path('trading/met/',trade_met,name = 'trade_met'),
     #accounts
     path('accounts/sign_up/', user_views.register,name ='register'),
     path('accounts/sign_up/<str:ref>/', user_views.register),

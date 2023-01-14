@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Melta</title>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
+	<!-- bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
+	<!-- Plugin css -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/plugin.css'%}">
+	<!-- stylesheet -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/style.css'%}">
+	<!-- responsive -->
+	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/responsive.css'%}">
+</head>
+
+<body>
+	<!-- preloader area start -->
+	<div class="preloader" id="preloader">
+		<div class="loader loader-1">
+			<div class="loader-outter"></div>
+			<div class="loader-inner"></div>
+		</div>
+	</div>
+	<!-- preloader area end -->
+
+	<!-- Header Area Start  -->
+	<header class="header">
+		
+		
+		<!--Main-Menu Area Start-->
+	</header>
+	<!-- Header Area End  -->
+	<script> 
+		var audio = new Audio('/static/games/racerCar/music/racer.mp3')
+		window.addEventListener('click', check())
+		function check(){
+			audio.play()
+		}
+		</script>
+	<!-- Hero Area Start -->
+	{%for message in messages%}
+	<script>
+		alert('{{message}}')
+	</script>
+	{%endfor%}
+
+	<!-- Breadcrumb Area Start -->
+	<!-- <section class="breadcrumb-area bc-contact">
+		<img class="bc-img" src="assets/images/breadcrumb/contact.png" alt="">
+		
+	</section> -->
+	<!-- Breadcrumb Area End -->
+
+<div class="login-modal" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+        <div class="modal-body">
+            <div class="logo-area">
+                    <img class="logo" src="" alt="">
+            </div>
+            <div class="header-area">
+            
+                <h5 class="title">Great to have you back!</h5>
+                <p class="sub-title">Enter your details below.</p>
+                <p>{%for error,message in msg.items%}
+                    <small style="color: red;"> &nbsp;{{message}}</p>
+                    {%endfor%}</small>
+            </div>
+            <div class="form-area">
+                <form action="{%url 'login'%}"  method="post">
+                    <div class="form-group">
+                            <label for="login-input-email" >Email*</label>
+                            {%csrf_token%}
+                            <input type="text" name = 'username' class="input-field" id="login-input-email"  placeholder="Enter your Username OR Email">
+                    </div>
+                    <div class="form-group">
+                            <label for="login-input-password">Password*</label>
+                            <input type="password" name = 'password' class="input-field" id="login-input-password"  placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <div class="box">
+                            <div class="left">
+                                    <input type="checkbox" class="check-box-field" id="input-save-password" checked>
+                                <label for="input-save-password">Remember Password</label>
+                            </div>
+                            <div class="right">
+                                <a href="{%url 'password_reset'%}">
+                                    Forgot Password?
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                           <button type="submit" class="mybtn1">Log In</button>
+                    </div>
+                </form>
+            </div>
+            <div class="form-footer">
+                <p>Not a member? 
+                    <a href="{%url 'register'%}"  >Create account <i class="fas fa-angle-double-right"></i></a>
+                </p>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+</div>
+
+
+<script src="{%static 'mainapp/assets/js/jquery.js'%}"></script>
+<!-- popper -->
+<script src="{%static 'mainapp/assets/js/popper.min.js'%}"></script>
+<!-- bootstrap -->
+<script src="{%static 'mainapp/assets/js/bootstrap.min.js'%}"></script>
+<!-- plugin js-->
+<script src="{%static 'mainapp/assets/js/plugin.js'%}"></script>
+
+<!-- MpusemoverParallax JS-->
+<script src="{%static 'mainapp/assets/js/TweenMax.js'%}"></script>
+<script src="{%static 'mainapp/assets/js/mousemoveparallax.js'%}"></script>
+<!-- main -->
+<script src="{%static 'mainapp/assets/js/main.js'%}"></script>
+</body>
+</html>

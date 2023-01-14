@@ -4,6 +4,7 @@ const remMinutes = document.getElementById("minutes");
 const remSeconds = document.getElementById("seconds");
 
 const birthDays = document.getElementById('times').innerText;
+const claim = document.getElementById('times');
 
 const birthDay = new Date(birthDays).getTime()
 
@@ -14,16 +15,26 @@ const countdown = () => {
   const currentDate = new Date();
 
   const totalSeconds = (birthDayDate - currentDate) / 1000;
-
+console.log('seconds left',totalSeconds)
   const days = Math.floor(totalSeconds / 3600 / 24);
   const hours = Math.floor(totalSeconds / 3600) % 24;
   const mins = Math.floor(totalSeconds / 60) % 60;
   const seconds = Math.floor(totalSeconds) % 60;
+  if(totalSeconds<= 0 ){
+    remDays.innerHTML = 0
+    remHours.innerHTML = 0
+    remMinutes.innerHTML = 0
+    remSeconds.innerHTML = 0
+    claim.innerHTML  = '<button class="mybtns" type = "submit">Redeem</button>'
+    claim.style.display ='block'
+  }
+  else{
+    remDays.innerHTML = days;
+    remHours.innerHTML = formatTime(hours);
+    remMinutes.innerHTML = formatTime(mins);
+    remSeconds.innerHTML = formatTime(seconds);
+  }
 
-  remDays.innerHTML = days;
-  remHours.innerHTML = formatTime(hours);
-  remMinutes.innerHTML = formatTime(mins);
-  remSeconds.innerHTML = formatTime(seconds);
 };
 // initial call
 countdown();

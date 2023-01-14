@@ -1,6 +1,9 @@
 {% extends 'mainapp/base.html'%}
 {%load static%}
 {%block content%}
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0" nonce="TxsywfFv"></script>
 <div class="hero-area">
 	<div class="container">
 		<div class="row">
@@ -8,13 +11,16 @@
 				<div class="left-content">
 					<div class="content">
 						
-						<h2 class="title">
-								PLay To WIN
-						</h2>
+						<h3 class="title">
+								<i class="fa fa-home">On Met Network</i>
+						</h3>
 						<p class="text">
-							Catch fun, Play or Join the
-							Contest with high rewards at StakeGames!	
+							<i>Meta Quest Pro</i>, more social VR,Games and a look into the Future.	
 						</p>
+						 <p id = "times" hidden>times here</p>
+							<p><b id="days"> </b>D   <b id="hours"> </b>H  <b id="minutes"></b>M  <b id="seconds"> </b>S
+							<small>Untill next MTC lockup <a href=""> see more</a></small></p> 
+						
 						<div class="links">
 							<a href="{%url 'login'%}" class="mybtn1 link1">Get Started Now!</a>
 						</div>
@@ -23,28 +29,30 @@
 			</div>
 			<div class="col-lg-7">
 				<div class="hero-img2 d-block d-md-none">
-					<img src="{%static 'mainapp/assets/images/heroarea.png'%}" alt="">
+					<img src="{%static 'mainapp/assets/images/meta1.png'%}" alt="">
 				</div>
 				<div class="hero-img d-none d-md-block">
 					<img class="img-fluid full-image" src="{%static 'mainapp/assets/images/heroarea.png'%}" alt="">
-					<img class="shape phone" src="{%static 'mainapp/assets/images/h-shapes/phone.png'%}" alt="">
-					<img class="shape man" src="{%static 'mainapp/assets/images/h-shapes/man222.png'%}" alt="">
+					<img class="shape phone" src="{%static 'mainapp/assets/images/meta1.png'%}" alt="">
+					<img class="shape man" src="{%static 'mainapp/assets/images/h-shapes/man22.png'%}" alt="">
 					<img class="shape ripple" src="{%static 'mainapp/assets/images/h-shapes/ripple.png'%}" alt="">
 					<img class="shape ripple2" src="{%static 'mainapp/assets/images/h-shapes/ripple1.png'%}" alt="">
-					<img class="shape bitcoin1" src="{%static 'mainapp/assets/images/h-shapes/bitcoin1.png'%}" alt="">
+					<img class="shape bitcoin1" src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="">
 					<img class="shape bitcoin2" src="{%static 'mainapp/assets/images/h-shapes/bitcoin2.png'%}" alt="">
-					<img class="shape shape-icon" src="{%static 'mainapp/assets/images/h-shapes/shape.png'%}" alt="">
+					<img class="shape shape-icon" src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="">
 					<img class="shape award-bg" src="{%static 'mainapp/assets/images/h-shapes/award/bg.png'%}" alt="">
-					<img class="shape award" src="{%static 'mainapp/assets/images/h-shapes/award/award.png'%}" alt="">
+					<img class="shape award" src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="">
 					<img class="shape gift-bg" src="{%static 'mainapp/assets/images/h-shapes/giftbox/bg.png'%}" alt="">
-					<img class="shape gift" src="{%static 'mainapp/assets/images/h-shapes/giftbox/gift.png'%}" alt="">
+					<img class="shape gift" src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="">
 					<img class="shape shield-bg" src="{%static 'mainapp/assets/images/h-shapes/shield/bg.png'%}" alt="">
 					<img class="shape shield" src="{%static 'mainapp/assets/images/h-shapes/shield/shield.png'%}" alt="">
 				</div>
+
 			</div>
 		</div>
 	</div>
 </div>
+
 <!-- Hero Area End -->
 	<!-- Featured Game Area Start -->
 	<section class="featured-game">
@@ -55,9 +63,7 @@
 					<div class="section-heading">
 						
 
-						<h5 class="title">
-						 GAMES
-						</h5>
+						
 					</div>
 				</div>
 			</div>
@@ -65,49 +71,44 @@
 				<div class="col-lg-12">
 					<div class="game-slider">
 						<div class="item">
-							<a href="{%url 'charades'%}">
+							<a href="">
 							<div class="single-game">
-								<p>Charades</p>
-								<img src="{%static 'mainapp/gameimgs/charades.jpg'%}" alt="">
-								<a href="{%url 'charades'%}" class="mybtn2">PLay NoW !</a>
+								<img src="{%static 'mainapp/assets/images/flash.gif'%}" alt="">
+								<a href="https://www.destructoid.com" target = "_blank" class="mybtn2">PLay NoW !</a>
 							</div></a>
 						</div>
 						<div class="item">
-							<a href="{%url 'temple_runz'%}">
+							<a href="">
 							<div class="single-game">
-								<p>Temple Runz</p>
-								<img src="{%static 'mainapp/gameimgs/temple.jpg'%}" alt="">
-								<a href="{%url 'temple_runz'%}" class="mybtn2">PLay NoW !</a>
+								<img src="{%static 'mainapp/assets/images/starships.gif'%}" alt="">
+								<a href="https://store.steampowered.com/" target="_blank" class="mybtn2">PLay NoW !</a>
 							</div></a>
 						</div>
 						<div class="item">
-							<a href="{%url 'color_run'%}">
+							<a href="">
 							<div class="single-game">
-								<p>Color Runner</p>
-									<img src="{%static 'mainapp/gameimgs/ball.jpg'%}" alt="">
-									<a href="{%url 'color_run'%}" class="mybtn2">PLay NoW !</a>
+									<img src="{%static 'mainapp/assets/images/playing.gif'%}" alt="">
+									<a href="" class="mybtn2">PLay NoW !</a>
 							</div></a>
 						</div>
 						<div class="item">
-							<a href="{%url 'pre_tower'%}">
+							<a href="">
 							<div class="single-game">
-								<p>Tower Building</p>
-									<img src="{%static 'mainapp/gameimgs/tower.png'%}" alt="">
-									<a href="{%url 'pre_tower'%}" class="mybtn2">PLay NoW !</a>
+									<img src="{%static 'mainapp/assets/images/hero1.gif'%}" alt="">
+									<a href="https://www.gameinformer.com/" class="mybtn2">PLay NoW !</a>
 							</div></a>
 						</div>
 						<div class="item">
-							<a href="{%url 'slider'%}" >
+							<a href="" >
 							<div class="single-game">
-								<p>flipper</p>
-									<img src="{%static 'mainapp/gameimgs/tower1.jpg'%}" alt="">
-									<a href="{%url 'slider'%}" class="mybtn2">PLay NoW !</a>
+									<img src="{%static 'mainapp/assets/images/coins.gif'%}" alt="">
+									<a href="https://store.steampowered.com/" target="_blank" class="mybtn2">PLay NoW !</a>
 							</div></a>
 						</div>
 					</div>
 					<div class="row allgames">
 						<div class="col-lg-12 text-xl-center">
-							<a class="mybtn2" href="{%url 'games'%}">View All Games </a>
+							<a class="mybtn2" href="">See all</a>
 						</div>
 					</div>
 				</div>
@@ -185,7 +186,7 @@
 						<h5 class="subtitle">
 							The Smarter Way 
 						</h5>
-						<h2 >
+						<h2 style="color:black ;">
 							LeaderBoard
 						</h2>
 						</h2>
@@ -211,6 +212,9 @@
 							</li>
 						</ul>
 					</div>
+				<div class="row">
+				<div class="col-lg-12">
+					<div class="tab-menu-area">
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-all-bets" role="tabpanel" aria-labelledby="pills-all-bets-tab">
 							<div class="responsive-table">
@@ -240,7 +244,7 @@
 											<td>70%</td>
 											<td>{{game.game.name}}</td>
 											<td>
-												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+												<img src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="">
 												{{game.profit|floatformat:3}}
 											</td>
 											<td>{{game.date|date:'M,d,Y'}}</td>
@@ -341,6 +345,13 @@
 				</div>
 			</div>
 		</div>
+		<div class="fb-video" data-href="https://www.facebook.com/Ramee/videos/677052660822339" data-width="500" data-height="500" data-show-text="false">
+
+		</div>
+		<div class="fb-video" data-href="https://www.facebook.com/ls11kh/videos/900177561154569" data-width="500" data-height="500" data-show-text="false" >
+
+		</div>
+		
 		<!-- Fun fact Area Start -->
 		<div class="funfact">
 			<div class="container">
@@ -473,5 +484,5 @@
 			</div>
 		</section> 
 	<!-- Recent Winners Area End -->
-
+{%include 'footer.html'%}
 {%endblock content%}

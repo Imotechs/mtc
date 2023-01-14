@@ -255,6 +255,28 @@ select:focus {
     transform: translate(0px, 0px); } }
 
 /* Global style */
+.buybtn{
+
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 14px 35px;
+  display: inline-block;
+  color: #fff;
+  border: 0px;
+  border-radius: 50px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+  background-image: -webkit-linear-gradient(right,#065548,#2198c0);
+  background-image: -o-linear-gradient(right, #065548, #2198c0);
+  background-image: linear-gradient(to left, #ff344d, #d2273c);
+}
+.sellbtn{
+
+}
 .mybtn1 {
   font-size: 16px;
   text-transform: uppercase;
@@ -368,7 +390,7 @@ select:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #0b122e;
+  background-color: #c7f7ff;
   z-index: 9999999;
   -webkit-transition: all 0.3s ease-in;
   -o-transition: all 0.3s ease-in;
@@ -401,7 +423,7 @@ select:focus {
 
 .loader-1 .loader-outter {
   position: absolute;
-  border: 4px solid #f9314b;
+  border: 4px solid #105b54;
   border-left-color: transparent;
   border-bottom: 0;
   width: 100%;
@@ -720,7 +742,7 @@ select:focus {
   /* Top Header Area Start */
   /* Main Menu Area Start */ }
   .header.nav-fixed {
-    background: #252f5a;
+    background: #105b54;
     -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); }
     .header.nav-fixed .top-header {
@@ -730,7 +752,7 @@ select:focus {
     .header.nav-fixed .navbar::before {
       visibility: hidden; }
   .header .top-header {
-    background: #070b28; }
+    background: #105b54; }
     .header .top-header .content {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -784,7 +806,7 @@ select:focus {
               color: #fff;
               top: -7px;
               right: -10px;
-              background: #252f5a;
+              background:  #105b54;
               font-size: 10px;
               border-radius: 50px;
               text-align: center;
@@ -799,7 +821,7 @@ select:focus {
               color: #fff;
               top: -7px;
               right: -10px;
-              background: #252f5a;
+              background:  #105b54;
               font-size: 10px;
               border-radius: 50px;
               text-align: center;
@@ -814,7 +836,7 @@ select:focus {
               -webkit-transform: translateX(-50%);
               -ms-transform: translateX(-50%);
               transform: translateX(-50%);
-              background: #0b122e;
+              background:  #105b54;
               z-index: 9900;
               width: 170px;
               padding: 8px 15px 15px;
@@ -890,7 +912,7 @@ select:focus {
           .header .top-header .content .right-content .right-list > li .sign-in {
             color: #a1aed4; }
   .header .mainmenu-area {
-    background: #252f5a; }
+    background: #105b54; }
     .header .mainmenu-area .navbar {
       padding: 0px 0px;
       position: relative; }
@@ -901,7 +923,7 @@ select:focus {
         height: 100%;
         top: 0;
         right: 100%;
-        background: #070b28; }
+        background:  #105b54; }
       .header .mainmenu-area .navbar::after {
         position: absolute;
         content: "";
@@ -978,7 +1000,7 @@ select:focus {
         position: absolute;
         z-index: 99;
         margin-top: 0px !important;
-        background: #0b122e;
+        background:  #105b54;
         border-radius: 0px;
         border: 0px;
         padding-bottom: 0px;
@@ -1004,7 +1026,7 @@ select:focus {
             margin-right: 5px;
             font-size: 12px; }
           .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
-            background: #070b28; }
+            background: #105b54; }
           .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item .dropdown-menu .dropdown-item:focus {
             background: none; }
       .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
@@ -1015,7 +1037,7 @@ select:focus {
   padding-top: 120px;
   overflow: hidden;
   position: relative;
-  background-color: #070b28;
+  background-color: #105b54;
   background-image: url(../images/footerbg.jpg);
   background-repeat: no-repeat;
   background-position: center 140px;
@@ -1051,7 +1073,7 @@ select:focus {
     margin-top: 110px;
     padding: 10px 15px 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    background: #0b122e; }
+    background: #105b54; }
     .footer .copy-bg .left-area p {
       font-size: 16px;
       line-height: 26px;
@@ -1174,7 +1196,7 @@ select:focus {
   position: relative;
   padding: 212px 0px 109px;
   position: relative;
-  background: #070b28;
+  background: #f2fffe #105b54;
   overflow: hidden; }
   .hero-area .left-content {
     position: inherit;
@@ -1183,7 +1205,7 @@ select:focus {
       font-size: 70px;
       font-weight: 700;
       line-height: 70px;
-      color: #FFF;
+      color: rgb(51, 30, 30);
       text-transform: uppercase;
       margin-bottom: 13px;
       letter-spacing: -1px; }
@@ -1295,7 +1317,7 @@ select:focus {
     -webkit-transition: all 0.3s ease-in;
     -o-transition: all 0.3s ease-in;
     transition: all 0.3s ease-in;
-    background: #252f5a;
+    background: #105b54;
     border-radius: 10px; }
     .features .single-feature .icon {
       width: 125px;
@@ -1310,7 +1332,7 @@ select:focus {
         left: 0;
         width: 100%;
         height: 100%;
-        border: 10px solid #1c2748;
+        border: 10px solid #105b54;
         border-radius: 50%; }
       .features .single-feature .icon::before {
         position: absolute;
@@ -1423,7 +1445,7 @@ select:focus {
         box-shadow: 0px 0px 0px 15px rgba(110, 252, 195, 0.2), 0px 0px 0px 30px rgba(110, 252, 195, 0.2); }
   .features.about-page {
     padding: 112px 0px 90px;
-    background: #070b28; }
+    background: #105b54; }
     .features.about-page .section-heading {
       margin-bottom: 59px; }
     .features.about-page .feature-box {
@@ -1457,7 +1479,7 @@ select:focus {
       .featured-game .game-slider .owl-controls .owl-nav .owl-next {
         width: 40px;
         height: 40px;
-        border: 1px solid #273b71;
+        border: 1px solid #105b54;
         border-radius: 50%;
         line-height: 40px;
         text-align: center;
@@ -1576,7 +1598,7 @@ select:focus {
     height: 100%;
     top: 0;
     left: 0;
-    background: #070b28;
+    background: #f2fffe ;
     z-index: -99; }
   .activities .section-heading {
     margin-bottom: 58px; }
@@ -1601,8 +1623,8 @@ select:focus {
           font-size: 18px;
           font-weight: 600;
           text-transform: uppercase;
-          color: #FFF;
-          background: #252f5a;
+          color: black;
+          background: #f2fffe ;
           margin: 0px 5px; }
           .activities .tab-menu-area .nav-lend .nav-item .nav-link.active {
             background: #f9314b;
@@ -1625,8 +1647,8 @@ select:focus {
         border-top: 0px;
         border-bottom: 0px;
         padding: 20px 15px;
-        background: #0b122e;
-        color: #fff; }
+        background: #f2fffe ;
+        color: black; }
       .activities .table tr td {
         vertical-align: middle;
         padding: 20px 15px;
@@ -1643,7 +1665,7 @@ select:focus {
         .activities .table tr td:nth-child(1) img, .activities .table tr td:nth-child(3) img, .activities .table tr td:nth-child(6) img {
           margin-right: 5px; }
         .activities .table tr td:nth-child(1) {
-          color: #fff; }
+          color: black; }
         .activities .table tr td:nth-child(3) {
           color: #045cf0; }
         .activities .table tr td:nth-child(5), .activities .table tr td:nth-child(6) {
@@ -1651,7 +1673,8 @@ select:focus {
         .activities .table tr td:last-child {
           color: #f0ad4e; }
       .activities .table tr:hover {
-        background: #192246; }
+        background: #105b54;
+      color:whitesmoke }
 
 /* activities Area Start */
 /* Fun fact Area Start */
@@ -1667,7 +1690,7 @@ select:focus {
       line-height: 80px;
       font-weight: 500;
       font-family: "Ubuntu", sans-serif;
-      color: #fff; }
+      color: black; }
     .funfact .single-fun p {
       font-size: 24px;
       line-height: 34px;
@@ -1680,7 +1703,7 @@ select:focus {
 /* Get Start Area Start */
 .get-start {
   padding: 120px 0px 120px;
-  background: #0b122e; }
+  background:  #105b54; }
   .get-start .left-area .section-heading {
     text-align: left;
     margin-bottom: 0px; }
@@ -1694,7 +1717,7 @@ select:focus {
 /* Get Start Area End */
 /*  Recent Winners Area Start */
 .recent-winners {
-  background: #070b28;
+  background: #105b54;
   padding: 112px 0px 0px; }
   .recent-winners .section-heading {
     margin-bottom: 58px; }
@@ -1723,7 +1746,7 @@ select:focus {
     .single-winer .top-area .left .name {
       font-size: 24px;
       line-height: 34px;
-      color: #fff;
+      color: black;
       font-weight: 600;
       margin-bottom: 3px; }
     .single-winer .top-area .left .date {
@@ -1770,7 +1793,7 @@ select:focus {
 
 .index2 .header .mainmenu-area .navbar #main_menu .navbar-nav .nav-item .nav-link .mr-hover-effect {
   display: none; }
-
+  
 .index2 .hero-area {
   background: url(../images/herobg2.jpg);
   padding: 372px 0px 424px; }
@@ -1779,7 +1802,7 @@ select:focus {
   text-align: center; }
 
 .index2 .features {
-  background: #070b28;
+  background: #f2fffe;
   padding: 277px 0px 90px; }
 
 .index2 .features .section-heading {
@@ -1797,7 +1820,7 @@ select:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border: 1px solid #273b71;
+  border: 1px solid #223567;
   border-radius: 10px;
   padding: 45px 30px 45px 45px;
   background: none;
@@ -1810,7 +1833,7 @@ select:focus {
   .single-feature.landscape .icon {
     margin-right: 45px;
     margin-bottom: 0px;
-    background: #242e5a; }
+    background: #105b54; }
   .single-feature.landscape .content {
     -webkit-box-flex: 1;
     -ms-flex: 1;
@@ -1823,7 +1846,7 @@ select:focus {
 /*	Index 2 Css End */
 /* About Area Start */
 .about-section {
-  background: #070b28;
+  background: #f2fffe;
   margin-top: -164px;
   overflow: hidden; }
   .about-section .about-box {
@@ -1848,7 +1871,7 @@ select:focus {
 /*	About Area  End */
 /* About page section Area Start */
 .about-page-section {
-  background: #0b122e;
+  background:  #105b54 #f2fffe;
   padding: 112px 0px 120px;
   position: relative; }
   .about-page-section .section-heading {
@@ -1921,7 +1944,7 @@ select:focus {
       line-height: 34px;
       font-weight: 600;
       text-transform: uppercase;
-      color: #FFF;
+      color: black;
       margin-bottom: 15px; }
     .our-vision .single-vision .content .link {
       font-size: 16px;
@@ -2100,7 +2123,7 @@ select:focus {
   .play-games .gaming-activities {
     margin-top: -120px; }
     .play-games .gaming-activities .gaming-activities-inner .single-activities {
-      background: #252f5a;
+      background: #f2fffe;
       padding: 0px 30px 20px; 
       margin-bottom: 23px;}
       .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area {
@@ -2127,7 +2150,7 @@ select:focus {
             border-radius: 5px;
             top: -10px;
             position: relative;
-            background: #252f5a;
+            background:  #f2fffe;
             color: #fff; }
             .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area .left .icon span i {
               font-size: 12px;
@@ -2561,7 +2584,7 @@ select:focus {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    background: #182455;
+    background: #f2fffe;
     margin-top: 40px;
     padding: 30px 30px 30px; }
     .cart-area .message-two .left {
@@ -2584,7 +2607,7 @@ select:focus {
       font-size: 14px;
       line-height: 24px;
       text-transform: uppercase;
-      border: 1px solid #242570;
+      border: 1px solid #1d1e59;
       padding: 6px 20px;
       display: inline-block;
       border-radius: 50px;
@@ -2595,9 +2618,9 @@ select:focus {
       .cart-area .message-two .right a i {
         margin-right: 4px; }
       .cart-area .message-two .right a:hover {
-        background: #242570;
-        color: #fff;
-        border-color: #242570; }
+        background:  #f2fffe;
+        color: black;
+        border-color: #121239; }
   .cart-area .cart-table-area .table {
     -webkit-box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.4);
     box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.4);
@@ -2878,8 +2901,8 @@ select:focus {
                 font-size: 18px;
                 font-weight: 600;
                 text-transform: uppercase;
-                color: #FFF;
-                background: #252f5a;
+                color: black;
+                background: #f2fffe;
                 margin: 0px 5px; }
                 .tournaments .info-table .main-box .inner-table-content .header-area ul .nav-item .nav-link.active {
                   background: #f9314b;
@@ -4074,7 +4097,7 @@ select:focus {
 /* faq-section css end */
 /* login modal Area Start */
 .login-modal .modal-dialog .modal-content {
-  background: #252f5a;
+  background: #105b54;
   border-radius: 10px; }
   .login-modal .modal-dialog .modal-content .modal-body {
     padding: 0px; }
@@ -4088,7 +4111,7 @@ select:focus {
         width: 135px;
         height: 135px;
         border-radius: 50%;
-        background: #252f5a;
+        background: #105b54;
         top: -65px;
         left: 050%;
         -webkit-transform: translateX(-50%);
@@ -4173,7 +4196,7 @@ select:focus {
         height: 50px;
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 50px;
-        background: #273261;
+        background: #105b54 ;
         padding: 0px 30px;
         color: #fff;
         text-transform: uppercase; }

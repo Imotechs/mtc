@@ -1,6 +1,6 @@
 import datetime
 import random
-
+import json
 def get_date():
     now = datetime.datetime.now()
     nday = datetime.timedelta(days = 1)
@@ -29,7 +29,6 @@ def get_game_time():
     now = datetime.datetime.now()
     nday = datetime.timedelta(minutes= 1)
     due_time = now + nday
-    print(due_time)
 
     return due_time
     
@@ -64,3 +63,22 @@ def  get_payment_id(item):
     my_id = f'{item}-{year}-{str(month_day)}'
   
     return my_id
+
+   
+def get_wallet():
+    wallet =''
+    alpha = ['T','X','y','B','c','b','k','L','P','z','F','f','h','H','O','o','N','R','s','V','0','1','2','3','4','5','6','7','8','9']
+    while len(wallet)<27:
+         wallet+= random.choice(alpha)
+    wallet = 'MTC'+wallet
+    return wallet
+
+def get_bonus(type,profit):
+    if type ==1:
+        return 0.035*profit
+    elif type ==2:
+        return 0.017*profit
+
+def locked_bonus(amount):
+    bonus = [0.05,0.06,0.07,0.08,0.09,0.10]
+    return amount*random.choice(bonus)

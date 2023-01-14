@@ -6,11 +6,9 @@ from django.urls import reverse
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete= models.CASCADE)
     uid = models.CharField(max_length=12, default= '',blank = True)
-    country = models.CharField(max_length=30,null=True, default= '',blank = True)
-    currency = models.CharField(max_length=30, null=True,blank = True)
-    #flag = models.URLField(blank=True, null=True)
     phone = models.CharField(max_length=30, null=True,default= '',blank = True)
     referrer = models.CharField(max_length=60, null=True, default= '',blank = True)
+    referrals = models.ManyToManyField(User,related_name='ref')
     referred = models.BooleanField(default= False)
     profited = models.BooleanField(default= False)
     def __str__(self):
@@ -21,9 +19,9 @@ class Account(models.Model):
     user =  models.OneToOneField(User,on_delete= models.CASCADE)
     main = models.FloatField(blank=True, default= 0)
     balance =  models.FloatField(blank=True, default= 0)
-
+    wallet = models.CharField(max_length=35,null=True,blank=True,unique=True)
     def __str__(self):
-        return f"{self.user}'s"
+        return f"{self.user}'s account"
         
 class Mail(models.Model):
     name = models.CharField(max_length=30, blank = True)
@@ -58,3 +56,40 @@ class Subscribers(models.Model):
     
     def __str__(self):
         return f'{self.email}'
+
+class BuyTrade(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    usdt = models.FloatField()
+    mtc = models.FloatField()
+    buy_time = models.DateTimeField(auto_now=True)
+    def __str__(self) :
+        return self.user.username
+
+class SellTrade(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    usdt = models.FloatField()
+    mtc = models.FloatField()
+    profit = models.FloatField(null=True,blank=True)
+    sell_time = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.user.username
+
+class Bonus(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    from_user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='from_user')
+    amount = models.FloatField()
+    level = models.IntegerField()
+    claimed = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.user.username
+
+class LockedAsset(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    amount = models.FloatField()
+    profit = models.FloatField(default=0.0)
+    claimed = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now=True)
+    date_to = models.DateTimeField()
+    def __str__(self):
+        return self.user.username

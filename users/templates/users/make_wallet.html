@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metric</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/dstyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
+    
+</head>
+<style>
+    .buybtns {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 2px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+      background-image: -webkit-linear-gradient(right, #065548, #2198c0);
+      background-image: -o-linear-gradient(right, #065548, #2198c0);
+      background-image: linear-gradient(to left, #065548, #2198c0);
+    }
+</style>
+<body>
+    <section data-v-7d9ce8f6="" class="page settings-page referrals-page">
+        <div data-v-7d9ce8f6="" class="head-banner page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                         
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h1>You need MTC wallet to Earn &amp; Trade</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div data-v-7d9ce8f6="" class="container" id="txt">
+            <div data-v-7d9ce8f6="" class="row">
+                <div data-v-7d9ce8f6="" class="col">
+                    <h1 data-v-7d9ce8f6="">How it works</h1>
+                </div>
+            </div>
+            <div data-v-7d9ce8f6="" class="row">
+                <div data-v-7d9ce8f6="" class="col">
+                    <div data-v-7d9ce8f6="" class="card my-0">
+                        <div data-v-7d9ce8f6="" class="card-body">
+                            
+                            <div data-v-7d9ce8f6="" class="form-group"><label data-v-7d9ce8f6=""
+                                    class="form-label opacity-50">MTC wallet</label>
+                                <div data-v-7d9ce8f6=""><span data-v-7d9ce8f6="" id="referral-link"
+                                        class="fw-bold">
+                                        <p>MTC wallets are the <b>Only</b> wallets used for trading <b>MTC/USDT</b></p>
+
+                                    </span>
+                                    <div class="check-group">
+                                        <input type="checkbox" class="check-box-field" id="terms" onclick="handleCheck()" >
+                                        <label for="input-terms">
+                                                I agree with <a href="{%url 'terms'%}" style="color: aqua;">terms and Conditions</a> and  <a href="{%url 'terms'%}"  style="color: aqua;">privacy policy</a>
+                                        </label>
+                                    </div>
+                                    <button type="button" style="display: none;"  onclick="createWallet()" id="createbtn" class="buybtns">Create wallet</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div id="loader" style="display: none;">
+            <div data-v-7d9ce8f6="" class="container">
+                <div data-v-7d9ce8f6="" class="row">
+                    <div data-v-7d9ce8f6="" class="col">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+                    
+                        <h1 class="" >
+                            <img src="{%static 'mainapp/assets/images/metcoin.png'%}" class="id fa-spin" width="150"height = "150" alt="">
+
+                        </h1>
+                    </div>
+                </div>
+        </div>
+       
+        <div data-v-7d9ce8f6="" class="col">
+            <div data-v-7d9ce8f6="" class="mb-5">
+              
+                <h6 data-v-7d9ce8f6=""></h6>
+                <p data-v-7d9ce8f6=""></p>
+            </div>
+        </div>
+    </section>
+{%include 'footer.html'%}
+<script>
+    var checkBox = document.getElementById('terms')
+    const createBtn = document.getElementById('createbtn')
+    const loader = document.getElementById('loader')
+    const txt = document.getElementById('txt')
+    function createWallet(){
+        txt.style.display = 'none'
+        loader.style.display = 'block'
+        setTimeout(()=>{
+            loader.innerHTML = '<h1></h1>'
+            const url = ''
+       fetch(url,{
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFtoken': csrftoken,
+                  },
+                  //body: JSON.stringify({ "amount": samount, 'status': status })
+                })
+       .then((response) =>response.json())
+       .then((data) => {
+            if(data['msg']){
+        loader.innerText = `${data['msg']} :${data['wallet']}`
+        setTimeout(()=>{
+        window.location.href = '/trading/met/'
+
+        },2000)
+            }
+            else{
+            loader.innerText = data['wallet']
+            setTimeout(()=>{
+        window.location.href = '/trading/met/'
+
+        },2000)
+            }
+        })
+        },10000)
+        
+        
+       
+
+        
+
+    }
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+function handleCheck(){
+    
+    if (checkBox.checked === true){
+        createBtn.style.display = 'block'
+    }
+    else{
+        createBtn.style.display = 'none'
+
+    }
+}
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  
+</body>
+
+</html>
