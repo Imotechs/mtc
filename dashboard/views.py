@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,ListView,CreateView,DetailView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
-from mainapp.models import  UserPayEvidence,Deposit
+from mainapp.models import  UserPayEvidence,Deposit,Coin
 from users.models import Profile,Withdraw,Mail,Account
 from django.db.models import Sum
 from django.contrib import messages
@@ -10,6 +10,7 @@ from users import functions
 from django.utils import timezone
 from email.message import EmailMessage
 import smtplib
+import json
 from django.conf import settings
 from games.models import Games, Lottery
 from users.models import Account
@@ -17,6 +18,7 @@ import matplotlib.pyplot as plt
 from django.http import HttpResponse
 from django.template.loader import render_to_string  
 from django.contrib.sites.shortcuts import get_current_site 
+from django.http import JsonResponse
 from django.conf import settings
 username = settings.EMAIL_HOST_USER
 password = settings.EMAIL_HOST_PASSWORD
@@ -28,6 +30,7 @@ class Dashboard(LoginRequiredMixin,UserPassesTestMixin,TemplateView):
 
   def get_context_data(self, *args, **kwargs):
     context =super(Dashboard,self).get_context_data( *args, **kwargs)
+    met,created = Coin.objects.get_or_create(name = 'metcoin')
     users =  User.objects.all().order_by('-date_joined')
     Tdeposits = Deposit.objects.filter(approved =True).aggregate(sum = Sum('amount'))
     deposits = Deposit.objects.filter(approved =True).order_by('-date_approved')
@@ -44,7 +47,7 @@ class Dashboard(LoginRequiredMixin,UserPassesTestMixin,TemplateView):
     'withdraws':withdraws,'deposits':deposits, 'mails':mails,
     'staffs':staffs, 'admins':admins,'win_games_profit':win_games_profit,
     'account_main':account_main,'account_balance':account_balance,
-    'win_games':win_games,'lost_games':lost_games})
+    'win_games':win_games,'lost_games':lost_games,'met':met})
     return context
   def test_func(self):
     if self.request.user.is_superuser or self.request.user.is_staff:
@@ -80,7 +83,7 @@ class AllDeposit(UserPassesTestMixin,ListView ):
     paginate_by = 5
     def get_context_data(self, *args,**kwargs: any):
         context = super(AllDeposit,self).get_context_data(*args,**kwargs)
-        deposits = Deposit.objects.filter(approved= False, cancel = False)
+        deposits = Deposit.objects.filter(approved= False, cancel = False).order_by('-date')
         context.update({ 'deposits':deposits})
         return context
     def post(self,request,*args, **kwargs):
@@ -105,8 +108,8 @@ class AllDeposit(UserPassesTestMixin,ListView ):
                 })  
                 to_email = deposit.user.email   
                 msg['To'] =  to_email
-                msg['subject'] = 'StakeGames Deposit Approved'
-                msg['From'] =f'StakeGames<{username}>'
+                msg['subject'] = 'Deposit Approved'
+                msg['From'] =f'MET<{username}>'
                 msg.set_content(message,subtype='html')
                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                     smtp.login(username, password)
@@ -161,8 +164,8 @@ class AllWithdraws(UserPassesTestMixin,ListView ):
                 })  
                 to_email = withdraw.user.email   
                 msg['To'] =  to_email
-                msg['subject'] = 'StakeGames Withdrawal Approved'
-                msg['From'] =f'StakeGames<{username}>'
+                msg['subject'] = 'Withdrawal Approved'
+                msg['From'] =f'MET<{username}>'
                 msg.set_content(message,subtype='html')
                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                     smtp.login(username, password)
@@ -284,7 +287,7 @@ class WinGames(UserPassesTestMixin,ListView):
 def ploting(request):
     x = Games.objects.filter(win = True)
     y =Games.objects.filter(win = False)
-    values =[x.count(),y.count()]
+    values =[sum([v.profit for v in x]),y.count()]
     users = [f'winners[${sum([v.profit for v in x])}]',f'losers[${sum([v.stake for v in y])}]']
     plt.pie(values, labels = users)
     plt.show()
@@ -317,3 +320,29 @@ class LotteryView(LoginRequiredMixin,UserPassesTestMixin,ListView):
         if self.request.user.is_superuser:
             return True
         return False
+
+    
+
+def change_met(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        met,created = Coin.objects.get_or_create(name = 'metcoin')
+        if request.method=='POST':
+            data = json.loads(request.body.decode('utf-8'))
+            amount = float(data['amount'])
+            met.value+= amount
+            met.save()
+            return JsonResponse({'met':round(met.value,3)})
+
+        inc_ = [0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.00]
+        dec_ = [-0.1,-0.2,-0.3,-0.4,-0.5,-0.6,-0.7,-0.8,-0.9,-1.0]
+
+        context = {
+            'current':met.value,
+            'ups':inc_,
+            'downs':dec_
+        }
+        return render(request,'signal.html',context)    
+    return redirect('home')
+
+
+

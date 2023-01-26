@@ -10,17 +10,17 @@
 
 </head>
 <body>
-    <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
-        <div class="row">
-            <div class="col selected">
+    <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none" >
+        <div class="row" style="background-color: #105b54;">
+            <div class="col " style="color: white;">
                 <a href="{%url 'home'%}" class="text-danger small font-weight-bold text-decoration-none">
                     <p class="h4 m-0"><i class="feather-home text-danger"></i></p>
                     Home
                 </a>
             </div>
             <div class="col">
-                <a href="{%url 'lot'%}" class="text-dark small font-weight-bold text-decoration-none">
-                    <p class="h4 m-0"><i class="feather-map-pin"></i></p>
+                <a href="{%url 'lot'%}" class="text-danger small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-map-pin text-danger"></i></p>
                     Met Lottery
                 </a>
             </div>
@@ -32,17 +32,26 @@
                 </div>
             </div>
             <div class="col">
-                <a href="{%url 'my_com'%}" class="text-dark small font-weight-bold text-decoration-none">
-                    <p class="h4 m-0"><i class="feather-heart"></i></p>
+                <a href="{%url 'my_com'%}" class="text-danger small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-heart text-danger"></i></p>
                     My Com.
                 </a>
             </div>
+            {%if request.user.is_superuser%}
             <div class="col">
-                <a href="" class="text-dark small font-weight-bold text-decoration-none">
-                    <p class="h4 m-0"><i class="feather-user"></i></p>
-                    Profile
+                <a href="{%url 'dashboard'%}" class="text-danger small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-user text-danger"></i></p>
+                    Admin
                 </a>
             </div>
+            {%else%}
+            <div class="col">
+                <a href="{%url 'refer'%}" class="text-danger small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-user text-danger"></i></p>
+                    Team
+                </a>
+            </div>
+            {%endif%}
         </div>
       </div>
 </body>

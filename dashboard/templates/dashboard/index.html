@@ -36,7 +36,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <!-- <div class="col-lg-3">
                         <div class="card">
                             <div class="stat-widget-two">
                                 <div class="stat-content">
@@ -61,11 +61,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /# card -->
+                         /# card 
                     </div>
-                    <!-- /# column -->
+                     /# column
                 </div>
-                <!-- /# row -->
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="card">
@@ -80,7 +79,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-lg-3">
                         <div class="card">
                             <div class="stat-widget-two">
@@ -98,7 +97,7 @@
                         <div class="card">
                             <div class="stat-widget-two">
                                 <div class="stat-content">
-                                    <div class="stat-text">Users Account Locked</div>
+                                    <div class="stat-text">All Users USDT Account </div>
                                     <div class="stat-digit color-warning"> <i class="fa fa-usd"></i> {{account_main.sum|floatformat:2}}</div>
                                 </div>
                                 <div class="progress">
@@ -111,7 +110,7 @@
                         <div class="card">
                             <div class="stat-widget-two">
                                 <div class="stat-content">
-                                    <div class="stat-text">User Withdrawable balance</div>
+                                    <div class="stat-text">User MTC balance</div>
                                     <div class="stat-digit color-danger"> <i class="fa fa-usd"></i>{{account_balance.sum|floatformat:2}}</div>
                                 </div>
                                 <div class="progress">
@@ -119,6 +118,19 @@
                                 </div>
                             </div>
                         </div>
+                        
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="stat-widget-two">
+                                <div class="stat-content">
+                                    <div class="stat-text"> MTC Value</div>
+                                    <div class="stat-digit color-primary"> <i class="fa fa-usd"></i>{{met.value|floatformat:2}}</div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger w-65" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                    </div>
                         <!-- /# card -->
                     </div>
                     <div class="col-12">
@@ -132,7 +144,6 @@
                                             <tr>
                                                 <th>User</th>
                                                 <th>Method</th>
-                                                <th>USD</th>
                                                 <th>Date</th>
                                                 <th>Amount</th>
                                                 
@@ -144,7 +155,6 @@
 
                                                 <td>{{deposit.user}}</td>
                                                 <td class="success">{{deposit.method}}</td>
-                                                <td>{{deposit.usd}}</td>
                                                 <td>{{deposit.date|date:'M,d,Y'}}</td>
                                                 <td>$ {{deposit.amount}}</td>
                                                 
@@ -158,5 +168,6 @@
                     </div>
                 </div>  
                 </div>
+                {%include 'footer.html'%}
 
         {%endblock content%}

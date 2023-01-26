@@ -37,7 +37,7 @@ def register(request,*args,**kwargs):
                 'msg':{"Email":" Email already registered!"},
                 'ref':kwargs.get('ref')
             }
-            return render(request,'mainapp/signup.html',context)
+            return render(request,'signup.html',context)
         else:
             form = UserRegistrationForm(request.POST)
                                 
@@ -52,8 +52,6 @@ def register(request,*args,**kwargs):
                         obj = Profile(
                         user = User.objects.get(id = user_obj.id), 
                         uid = functions.get_user_id(),
-                        country = request.POST.get('currency'),
-                        currency = request.POST.get('currency'),
                         referrer = ref_user.uid,
                         referred = True,
                         )
@@ -61,7 +59,7 @@ def register(request,*args,**kwargs):
                             
                         current_site = get_current_site(request)  
                         msg = MSG.EmailMessage()
-                        mail_subject = 'Activation link has been sent to your email id'  
+                        mail_subject = 'Verification Stage'  
                         message = render_to_string('acc_active_email.html', {  
                             'user': user_obj,  
                             'domain': current_site.domain,  
@@ -73,18 +71,17 @@ def register(request,*args,**kwargs):
                                     mail_subject, message, to=[to_email]  
                         )  
                         msg['To'] =  to_email
-                        msg['subject'] = 'StakeGames Email Verification'
-                        msg['From'] =f'Stake Games<{username}>'
+                        msg['subject'] = 'Verify Account'
+                        msg['From'] =f'Met Network<{username}>'
                         msg.set_content(message,subtype='html')
                         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                             smtp.login(username, password)
                             try:
                                 smtp.send_message(msg)
                             except Exception as error:
-                                print('error :',error)                  
+                                pass                  
                             return render(request,'email_sent.html') 
                     except Exception as err:
-                        print('error:',err)
                         context = {
                             'msg':{'Referral':'Invalid Referral Code!'},
                             'ref':kwargs.get('ref')
@@ -98,7 +95,6 @@ def register(request,*args,**kwargs):
                     obj = Profile(
                     user = User.objects.get(id = user_obj.id), 
                     uid = functions.get_user_id(),
-                    currency = request.POST.get('currency'),
                     )
                     obj.save()
 
@@ -113,15 +109,15 @@ def register(request,*args,**kwargs):
                     })  
                     to_email = form.cleaned_data.get('email')    
                     msg['To'] =  to_email
-                    msg['subject'] = 'StakeGames Email Verification'
-                    msg['From'] =f'Stake Games<{username}>'
+                    msg['subject'] = 'Verify Account'
+                    msg['From'] =f'Met Network<{username}>'
                     msg.set_content(message,subtype='html')
                     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                         smtp.login(username, password)
                         try:
                             smtp.send_message(msg)
                         except Exception as error:
-                            print('error :',error)                  
+                            pass
                         return render(request,'email_sent.html')            
 
             context = {
@@ -150,14 +146,11 @@ def activate(request, uidb64, token):
         refer = Profile.objects.filter(user = user,referred = True,profited = False)
         if refer:
             referrer = Profile.objects.filter(uid = refer[0].referrer)
-            referrer_account,created = Account.objects.get_or_create(user = referrer[0].user)
-            referrer_account.balance += 1
-            referrer_account.save() 
             refer[0].profited = True
             refer[0].save()
             current_site = get_current_site(request)  
             msg = MSG.EmailMessage()
-            message = render_to_string('bonus.html', {  
+            message = render_to_string('ref_joined.html', {  
                 'user': referrer[0].user,  
                 'domain': current_site.domain, 
                 'ref':user,
@@ -166,7 +159,7 @@ def activate(request, uidb64, token):
             to_email = referrer[0].user.email   
             msg['To'] =  to_email
             msg['subject'] = 'User Joined'
-            msg['From'] =f'StakeGames<{username}>'
+            msg['From'] =f'Met Network<{username}>'
             msg.set_content(message,subtype='html')
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                 smtp.login(username, password)
@@ -174,8 +167,8 @@ def activate(request, uidb64, token):
                     smtp.send_message(msg)
                 except Exception as error:
                     pass
-                return redirect('login') 
-        return redirect('login') 
+                return render(request,'confirm.html') 
+        return render(request,'confirm.html')
 
     else:  
         return HttpResponse ('Activation link is invalid!', content_type="text/plain")  
@@ -434,7 +427,7 @@ def my_com(request):
         bonus.save()
         messages.info(request,'Reward Claimed!')
         return redirect('my_com')
-    bonus = Bonus.objects.filter(user = request.user)
+    bonus = Bonus.objects.filter(user = request.user).order_by('-date')
     context = {'bonuses':bonus}
     return render(request,'users/bonus.html',context)
 
@@ -448,6 +441,11 @@ def lock_assets(request):
 
         if action == 'claim':
             if my_lock:
+                master_ref = None
+                if request.user.profile.referrer:
+                    ref = Profile.objects.filter(uid = request.user.profile.referrer)
+                if ref[0].referrer:
+                    master_ref = Profile.objects.filter(uid = ref[0].referrer)
                 account.main+= my_lock[0].amount
                 profit = functions.locked_bonus(my_lock[0].amount)
                 account.balance+=profit
@@ -455,6 +453,23 @@ def lock_assets(request):
                 my_lock[0].profit = profit
                 my_lock[0].claimed = True
                 my_lock[0].save()
+                if not profit <=0:
+                    if ref:
+                        bonus_1 = functions.get_bonus(1,profit)
+                        b_obj = Bonus.objects.create(user = ref[0].user,
+                                    level = 1,from_user = request.user,
+                                    amount =bonus_1,claimed = False,
+                                    action = 'lockUp')
+                        b_obj.save()
+                        if request.user not in ref[0].referrals.all():
+                            ref[0].referrals.add(request.user)
+                            ref[0].save()
+                        if master_ref:
+                            bonus_2 = functions.get_bonus(2,profit)
+                            b_obj = Bonus.objects.create(user = master_ref[0].user,
+                                    level = 2,from_user = request.user,
+                                    amount = bonus_2,claimed = False,action = 'lockUp')
+                            b_obj.save()
                 messages.info(request,f'{round(profit,3)}MTC Claimed! ')
                 return redirect('wallet')
         elif action =='lock':

@@ -3,7 +3,7 @@ from django.urls import path,include,reverse_lazy
 from .views import (home,testimonial,terms,about,
                     subscribe,games,contact,
                     lottery,tournaments,
-                    current_met_value,trade_met
+                    current_met_value,trade_met,policy
 )
 import users.views as user_views
 from django.contrib.auth import views as auth_views
@@ -15,6 +15,7 @@ urlpatterns = [
     path('subscrbe/our/mails/',subscribe,name = 'sub'),
     path('our/privacy/policies/', terms, name = 'terms'),
     path('about/us/',about, name = 'about'),
+    path('privacy/policy/',policy, name = 'policy'),
     path('contact/us/',contact, name = 'contact'),
     path('testimonials/',testimonial, name = 'testimonials'),
     path('play/games',games,name = 'games'),

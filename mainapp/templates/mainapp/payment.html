@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> StakeGames</title>
+	<title> Met.com</title>
 	<!-- favicon -->
 	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
 	<!-- bootstrap -->
@@ -34,106 +34,7 @@
 	<!-- preloader area end -->
 
 	<!-- Header Area Start  -->
-	<header class="header">
-		<!-- Top Header Area Start -->
-		<section class="top-header">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="content">
-							<div class="left-content">
-								<ul class="left-list">
-									<li>
-										.
-										<!-- <p>
-											<i class="fas fa-headset"><a href=""></a></i>	Support
-										</p> -->
-									</li>
-									<li>
-										<p>
-											<a href="mailto:stakegams@gmail.com"><i class="fas fa-envelope"></i></a>	
-										</p>
-									</li>
-									<li>
-										<div class="language-selector">
-											<select name="language" class="language">
-												<option value="1">English</option>
-												<option value="2">France</option>
-												<option value="3">Japan</option>
-											</select>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<div class="right-content">
-								<ul class="right-list">
-									 <li>
-										.
-										<!--<div class="cart-icon tm-dropdown">
-											<i class="fas fa-cart-arrow-down"></i> 
-											<span class="cart-count"></span>
-											<div class="tm-dropdown-menu">
-												<ul class="list">
-													<li class="list-item">
-															<div class="close">
-																	<i class="fas fa-times"></i>
-															</div>
-														 <ul class="number-list">
-															<li>24</li>
-															<li>25</li>
-															<li>26</li>
-															<li>27</li>
-															<li>28</li>
-														</ul> 
-													</li>
-													
-												</ul>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="notofication tm-dropdown">
-											<span class="count"></span>
-											<div class="tm-dropdown-menu">
-													<ul class="list">
-														<li>
-															
-														</li>
-														
-													</ul>
-												</div>
-										</div>
-									</li> -->
-									{%if request.user.is_superuser%}
-									<li>
-										
-												<a href="{%url 'dashboard'%}" class="sign-in"  >
-													<i class="fas fa-user"></i> 
-												</a>
-											
-									</li>
-									{%endif%}
-									<li> {%if request.user.is_authenticated%}
-										<a href="{%url 'logout'%}" class="sign-in"  >
-											<i class="fas fa-user"></i> Logout
-										</a>
-										{%else%}
-										<a href="{%url 'login'%}" class="sign-in" data-toggle="modal" data-target="#login">
-											<i class="fas fa-user"></i> LogIn
-										</a>
-										{%endif%}
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Top Header Area End -->
-		
-		<!--Main-Menu Area Start-->
-	</header>
+	
 	<!-- Header Area End  -->
     {%for message in messages%}
 	<script>
@@ -159,7 +60,7 @@
 							<span><i class="fas fa-chevron-right"></i> </span>
 						</li>
 						<li>
-							<a href="payment.html">Payments</a>
+							<a href="">Payments</a>
 						</li>
 					</ul>
 				</div>
@@ -177,14 +78,14 @@
                     <div class="col-lg-12 text-center">
                         <div class="wrapper">
                             <div class="abf-list-item">
-                                <div class="abf-value">USDT: <span style = "font-size:18px;">{{payment.usd}} </span> </div>
-                                <div class="abf-value">{{request.user.profile.currency}}: <span>{{payment.amount}}</span></div>
+                                <div class="abf-value">USDT:  </div>
+                                <div class="abf-value"><span>{{payment.amount}}</span></div>
                             </div>
                             <div class="buttonWrapper">
                                
-                              <button class="tab-button activebtn" style="border-top-left-radius: 10px;" data-id="home">USDT</button>
-                              <button class="tab-button" data-id="css">Card Payment</button>
-                              <button class="tab-button" style="border-top-right-radius: 10px;" data-id="script">Bank Transfer</button>
+                              <button class="tab-button activebtn" style="border-top-left-radius: 10px; background-color: blue;" data-id="home" class="bg-success">Wallet</button>
+                              <button class="tab-button" data-id="css" style="background-color: cyan;">PayPal</button>
+                              <button class="tab-button" style="border-top-right-radius: 10px;" data-id="script"></button>
                             </div>
                             <div class="contentWrapper">
                               <div class="content active" id="home">
@@ -193,8 +94,8 @@
                                   </div>
                                   <div class="abf-form">
                                     <div class="abf-ash1"> Please send <strong><span class="abf-totalbtc">the above</span></strong> USDT
-                                      to address: </div>
-                                    <div class="abf-address abf-topline abf-ash2 abf-input-address"><span id="p1">{{wallet_str}} </span>  <i class="fa fa-copy" onclick="copyToClipboard('#p1')"></i><span id="copied">Copied</span></div>
+                                      To address: </div>
+                                    <div class="abf-address abf-topline abf-ash2 abf-input-address"><span id="p1" style="color: white;">{{wallet_str}} </span>  <i class="fa fa-copy" style="color: white; " onclick="copyToClipboard('#p1')"></i><span id="copied">Copied</span></div>
                                     <div class="abf-data abf-topline">
                                       <div class="abf-list">
                                         <div class="abf-list-item">
@@ -231,7 +132,7 @@
                               </div>
                               <div class="content" id="css">
                                 <div class="item">
-                                    Pay with Card
+                                    Pay with Paypal
 
 									<form id="paymentForm">
 										<div class="form-group">
@@ -245,9 +146,9 @@
 										</div>
 										<button type="submit" onclick="payWithPaystack()" class="single-method">
                                         <div class="icon">
-                                            <img src="{%static 'mainapp/assets/images/payment/dabit-card.png'%}" alt="">
+                                            <img src="data:image/png;base64,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" alt="">
                                         </div>
-                                        <span>Dabit Card</span>
+                                        <span></span>
                                     </button>
                                 </div>
 							</form>
@@ -282,7 +183,7 @@ function payWithPaystack(e) {
 </body>
                               </div>
                               <div class="content" id="script">
-                                <div class="item">
+                                <!-- <div class="item">
                                     Make Bank Transfer 
                                     <div class="abf-list-item">
                                         <div class="abf-label">Bank: </div>
@@ -299,7 +200,7 @@ function payWithPaystack(e) {
 									<a href="{%url 'completed' 'Bank Transfer' payment.id%}">
 										<i class="fas fa-angle-double-right" style="font-size: 14px;"> <span style="padding: 3px; font-size: 14px; color: #232c3d; background-color: #fff;">I have completed payment</span></i>
 									</a>
-                                </div>
+                                </div> -->
                               </div>
                             </div>
                         </div>
@@ -318,7 +219,7 @@ function payWithPaystack(e) {
 			<div class="row">
 				<div class="col-lg-5">
 					<div class="left-area">
-						<p>Copyright © 2022.All Rights Reserved By <a href="#">StakeGames</a>
+						<p>Copyright © 2022.All Rights Reserved By <a href="#">Met</a>
 						</p>
 					</div>
 				</div>
@@ -340,6 +241,7 @@ function payWithPaystack(e) {
 			</div>
 		</div>
 	</div>
+	{%include 'footer.html'%}
 </footer> 
 	<!-- Back to Top Start -->
 	<div class="bottomtotop">

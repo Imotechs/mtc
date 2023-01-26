@@ -26,32 +26,13 @@ def completed(request,*args,**kwargs):
 def payment_checkout(request):
     txn_id = functions.get_payment_id(f'{request.user.username[:3]}')
     if request.method =='POST':
-        currency = request.user.profile.currency
-        if currency is not None and currency != 'USD':
-            usd = exchange.convert_currency(currency,request.POST['amount'])
-            if usd is not None:
-                obj = Deposit(user = request.user,
+        obj = Deposit(user = request.user,
                         transaction_id = txn_id,
                         approved = False, 
                         amount = request.POST['amount'],
-                        usd = usd,
                         )
-                obj.save()
-                return redirect('payment',int(obj.id))
-            messages.info(request,'Failed to convert local currency')
-            return redirect('wallet')
-          
-        elif currency == 'USD':
-            obj = Deposit(user = request.user,
-                        transaction_id = txn_id,
-                        approved = False, 
-                        amount = request.POST['amount'],
-                        usd = request.POST['amount'],
-                        )
-            obj.save()
-            return redirect('payment',int(obj.id))
-        messages.info(request,"Failed to identify User's local currency")
-        return redirect('wallet')
+        obj.save()
+        return redirect('payment',int(obj.id))
 
 class PaymentView(TemplateView):
     template_name = 'mainapp/payment.html'
@@ -60,8 +41,6 @@ class PaymentView(TemplateView):
       payment_id =self.kwargs['pk']
       user = self.request.user
       wallet = 'ertaswdertgcvewsawq123rtgvbt5453ed'
-      img = qrcode.make(wallet)
-      img.save('media/wallet.png')
       current_site = get_current_site(self.request)  
       payment = Deposit.objects.filter(id = payment_id)
       context = super(PaymentView,self).get_context_data(**kwargs)

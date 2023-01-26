@@ -32,60 +32,7 @@
 	
 	<!-- Lottery Staticstics Area Start -->
 	<section class="lottery-area">
-		<div class="lottery-staticstics">
-			<div class="container">
-				<div class="row">
-					<!-- <div class="col-lg-4">
-						<div class="single-staticstics">
-							<div class="left">
-								<div class="icon">
-									<img src="{%static 'mainapp/assets/images/lottery/st1.png'%}" alt="">
-								</div>
-							</div>
-							<div class="right">
-								<h4 class="title">Lottery Jackpot</h4>
-								<div class="count">
-									<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
-									<span>0.416250</span>
-								</div>
-							</div>
-						</div>
-					</div> -->
-					<div class="col-lg-4">
-						<div class="single-staticstics">
-							<div class="left">
-								<div class="icon">
-									<img src="{%static 'mainapp/assets/images/lottery/st2.png'%}" alt="">
-								</div>
-							</div>
-							<div class="right">
-								<h4 class="title">Today Bids</h4>
-								<div class="count">
-									<img src="{%static 'mainapp/assets/images/tikit-icon.png'%}" alt="">
-									<span>{{current_lot.bid_set.all.count}}</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="single-staticstics">
-							<div class="left">
-								<div class="icon">
-									<img src="{%static 'mainapp/assets/images/lottery/st2.png'%}" alt="">
-								</div>
-							</div>
-							<div class="right">
-								<h4 class="title">My Bids Today</h4>
-								<div class="count">
-									<img src="{%static 'mainapp/assets/images/tikit-icon.png'%}" alt="">
-									<span>{{my_bids_today.count}}</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<div class="daily-lottery">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -109,7 +56,7 @@
 							<h5 class="subtitle">
 								Lottery Draw Ends In:
 							</h5>
-							<div class="draw-counter">
+							<div class="draw-counter" style="color: azure;">
 								<p id = "times" hidden>{{current_lot.due_date|date:'M,d,Y H:i'}}</p>
 								<b id="days"> </b>D   <b id="hours"> </b>H  <b id="minutes"></b>M  <b id="seconds"> </b>S
 							</div>
@@ -120,6 +67,45 @@
 					</div>
 				</div>
 				
+			</div>
+		</div>
+		<div class="lottery-staticstics">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-lg-4">
+						<div class="single-staticstics">
+							<div class="left">
+								<div class="icon">
+									<img src="{%static 'mainapp/assets/images/lottery/st2.png'%}" alt="">
+								</div>
+							</div>
+							<div class="right">
+								<h4 class="title">My Bids count</h4>
+								<div class="count">
+									<img src="{%static 'mainapp/assets/images/tikit-icon.png'%}" alt="">
+									<span>{{my_bids.count}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="single-staticstics">
+							<div class="left">
+								<div class="icon">
+									<img src="{%static 'mainapp/assets/images/lottery/st2.png'%}" alt="">
+								</div>
+							</div>
+							<div class="right">
+								<h4 class="title">My Bids Today</h4>
+								<div class="count">
+									<img src="{%static 'mainapp/assets/images/tikit-icon.png'%}" alt="">
+									<span>{{my_bids_today.count}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="buy-tickets">
@@ -151,7 +137,7 @@
 												}
 												</script>
 											</div>
-											<input class="output" type="number" name="amount" required  style="color: #fff; height: 3px; width: 90%; border: none; outline: none;margin-top:10px;" placeholder="Bid Amount"/>
+											<input class="output" type="number" step ='0.001'min="5.0" max="10000000"name="amount" required  style="color: #fff; height: 3px; width: 90%; border: none; outline: none;margin-top:10px;" placeholder="Bid Amount"/>
 											{%csrf_token%}
 											<div class="main-content">
 												<div class="number-list">
@@ -235,7 +221,7 @@
 	<!-- Lottery Staticstics  Area End -->
 		
 	<!-- Latest Activities Area Start -->
-	<section class="activities">
+	<section class="activities" style="margin-bottom: 0px;padding-bottom: 0px;">
 		<img class="shape shape1" src="{%static 'mainapp/assets/images/people/shape1.png'%}" alt="">
 		<img class="shape shape2" src="{%static 'mainapp/assets/images/people/shape2.png'%}" alt="">
 		<img class="shape shape3" src="{%static 'mainapp/assets/images/people/shape3.png'%}" alt="">
@@ -246,7 +232,7 @@
 						<h5 class="subtitle">
 							Daily Lottery
 						</h5>
-						<h2 class="title">
+						<h2 class="title" style="color:black">
 							Latest Activites
 						</h2>
 						<p class="text">
@@ -264,7 +250,7 @@
 								<a class="nav-link active" id="pills-all-bets-tab" data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true">Last Lottery Result</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" id="pills-my-bets-tab" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="false">My Bids</a>
+								<a class="nav-link" id="pills-my-bets-tab" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="false">My Bids Today</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" id="pills-history-tab" data-toggle="pill" href="#pills-history" role="tab" aria-controls="pills-history" aria-selected="false">History</a>
@@ -313,7 +299,7 @@
 										</td>
 										{%else%}
 										<td class="bg-warning" style="color: black;">
-											Lost
+											...
 										</td>
 										{%endif%}
 									</tr>
@@ -387,7 +373,7 @@
 			</div>
 		</div>
 		<!-- How it Work Area Start -->
-		<div class="how-it-work">
+		<div class="how-it-work" style="margin-bottom: 0%;padding-bottom: 0%;">
 			<img class="bg-shape" src="{%static 'mainapp/assets/images/howitwork/bg-shape.png'%}" alt="">
 			<div class="container">
 			<div class="row justify-content-center">
@@ -396,7 +382,7 @@
 							<h5 class="subtitle">
 									Want to see how 
 							</h5>
-							<h2 class="title">
+							<h2 class="title" style="color:black">
 									How it works? 
 							</h2>
 							<p class="text">
@@ -448,20 +434,6 @@
 	</section> 
 	<!-- Latest Activities Area End -->
 
-	<!-- lottery video Area Start -->
-	<section class="lottery-video">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-10">
-					<div class="video-box">
-						<a href="#" class="video-play-btn video-icon mfp-iframe">
-							<img src="{%static 'mainapp/assets/images/play-icon-red.png'%}" alt="">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 	<!-- lottery video Area End -->
 
 	<!-- Questions Area Start -->
@@ -549,14 +521,18 @@
 					</div>
 				</div>
 		</div>
+		{%include 'footer.html'%}
+
 	</section> 
 	<!-- Recent Winners Area End -->
 
 	<!-- Footer Area End -->
+
 	<div class='customAlert'>
 		<p class='message'></p>
 		<input type='button' class='confirmButton' value='Ok'>
 	</div>
+
 	<style>
 		
 .number-list {

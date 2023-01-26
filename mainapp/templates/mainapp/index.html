@@ -17,12 +17,16 @@
 						<p class="text">
 							<i>Meta Quest Pro</i>, more social VR,Games and a look into the Future.	
 						</p>
-						 <p id = "times" hidden>times here</p>
-							<p><b id="days"> </b>D   <b id="hours"> </b>H  <b id="minutes"></b>M  <b id="seconds"> </b>S
-							<small>Untill next MTC lockup <a href=""> see more</a></small></p> 
 						
 						<div class="links">
+							{%if request.user.is_authenticated%}
+							<p id = "times" hidden>{{trade_time.date_to|date:'M,d,Y H:i'}}</p>
+							<p> <c class="mybtn2"><b id="days" > </b>D   <b id="hours"> </b>H  <b id="minutes"></b>M  <b id="seconds"> </b>S</c>
+							<small>Untill next MTC lockup <a href=""> see more</a></small></p> 
+						
+							{%else%}
 							<a href="{%url 'login'%}" class="mybtn1 link1">Get Started Now!</a>
+						{%endif%}
 						</div>
 					</div>
 				</div>
@@ -187,11 +191,11 @@
 							The Smarter Way 
 						</h5>
 						<h2 style="color:black ;">
-							LeaderBoard
+							Met Lottery
 						</h2>
 						</h2>
 						<p class="text">
-							Outstanding players takes home cash Prizes!
+							Join MTC lottery &amp; take home cash Prizes!
 
 						</p>
 					</div>
@@ -202,10 +206,10 @@
 					<div class="tab-menu-area">
 						<ul class="nav nav-lend mb-3" id="pills-tab" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link active" id="pills-all-bets-tab" data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true">Top Gamers </a>
+								<a class="nav-link active" id="pills-all-bets-tab" data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true">Top Winners </a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" id="pills-my-bets-tab" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="false">My Games</a>
+								<a class="nav-link" id="pills-my-bets-tab" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="false">MySelf</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" id="pills-my-jackpots-tab" data-toggle="pill" href="#pills-my-jackpots" role="tab" aria-controls="pills-my-jackpots" aria-selected="false">jackpots</a>
@@ -224,30 +228,30 @@
 											<th scope="col">USER</th>
 											<th scope="col">GameID</th>
 										<th scope="col">CHANCE</th>
-										<th scope="col">GAME</th>
-										<th scope="col">PROFIT</th>
+										<th scope="col">NUMBER</th>
+										<th scope="col">EARN</th>
 										<th scope="col">DATE</th>
 										</tr>
 									</thead>
 									<tbody>
-										{%for game in top_players%}
+										{%for bid in top_bid%}
 
 										<tr>
 										
 											<td>
-												{{game.user.username}}
+												{{bid.user.username}}
 											</td>
 											<td>
-												b799b8724 {{game.id}}b
+												b799b8724{{bid.id}}b
 											</td>
 				
-											<td>70%</td>
-											<td>{{game.game.name}}</td>
+											<td>50%</td>
+											 <td>{{bid.number}}</td>
 											<td>
 												<img src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="">
-												{{game.profit|floatformat:3}}
+												{{bid.profit|floatformat:2}}
 											</td>
-											<td>{{game.date|date:'M,d,Y'}}</td>
+											<td>{{bid.date|date:'M,d,Y'}}</td>
 
 										</tr>
 										{%endfor%}
@@ -260,45 +264,45 @@
 							<div class="responsive-table">
 								<table class="table">
 									<thead>
-										{%if my_games is not none%}
+										{%if my_bids is not none%}
 
 										<tr>
 											<th scope="col">USER</th>
-											<th scope="col">GameID</th>
+											<th scope="col">LOTTERYID</th>
 										<th scope="col">CHANCE</th>
-										<th scope="col">GAME</th>
+										<th scope="col">Number</th>
 										<th scope="col">STAKE</th>
-										<th scope="col">PROFIT</th>
+										<th scope="col">EARN</th>
 										<th scope="col">DATE</th>
 										</tr>
 									</thead>
 									<tbody>
-										{%for game in my_games%}
+										{%for bid in my_bids%}
 										<tr>
 										
 											<td>
-												{{game.user.username}}
+												{{bid.user.username}}
 											</td>
 											<td>
-												b799b8724 {{game.id}}b
+												b799b8724{{bid.id}}b
 											</td>
 				
-											<td>70%</td>
-											<td>{{game.game.name}}</td>
+											<td>50%</td>
+											 <td>{{bid.number}}</td> 
 											<td>
 												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
-												{{game.stake|floatformat:3}}
+												{{bid.stake|floatformat:2}}
 											</td>
 											<td>
-												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
-												{{game.profit|floatformat:3}}
+												<img src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="" >
+												{{bid.profit|floatformat:2}}
 											</td>
-											<td>{{game.date|date:'M,d,Y'}}</td>
+											<td>{{bid.date|date:'M,d,Y'}}</td>
 
 										</tr>
 										{%endfor%}
 										{%else%}
-									<tr><td>Your Played Games are shown here</td></tr>
+									<tr><td>Your Bids will be shown here</td></tr>
 									{%endif%}
 									</tbody>
 								</table>
@@ -329,8 +333,8 @@
 											</td>
 											<td>Lottery</td>
 											<td>
-												<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
-												{{user.profit}}
+												<img src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="">
+												{{user.profit|floatformat:2}}
 											</td>
 											<td>{{user.date|date:'m,d,y'}}</td>
 											
@@ -345,15 +349,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="fb-video" data-href="https://www.facebook.com/Ramee/videos/677052660822339" data-width="500" data-height="500" data-show-text="false">
+		<!-- <div class="fb-video" data-href="https://www.facebook.com/ls11kh/videos/1882397735473994/" data-width="500" data-height="500" data-show-text="false">
 
-		</div>
+		</div> -->
 		<div class="fb-video" data-href="https://www.facebook.com/ls11kh/videos/900177561154569" data-width="500" data-height="500" data-show-text="false" >
 
 		</div>
+		<!-- <div class="fb-video" data-href="https://www.facebook.com/ls11kh/videos/1882397735473994/" data-width="500" data-height="500" data-show-text="false">
+
+		</div> -->
 		
 		<!-- Fun fact Area Start -->
-		<div class="funfact">
+		<!-- <div class="funfact">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-4">
@@ -391,7 +398,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Fun fact Area End -->
 	</section> 
 	<!-- Latest Activities Area End -->
@@ -405,14 +412,14 @@
 					<div class="left-area">
 						<div class="section-heading">
 							<h5 class="subtitle">
-								every day lots of  wins
+								Every day lots of  wins
 							</h5>
 							<h2 class="title ">
-									be one of them
+									Be one of Us
 							</h2>
-							<p class="text">
-									Get started in less than 5 min - no credit card 
-									required.Gain early access to StakeGames and  Earn  like never before. 
+							<p class="text" style="color: white;">
+									Get started in less than 5 min
+									Gain early access to MTC . 
 							</p>
 							<a href="{%url 'register'%}" class="mybtn1">Join  Now!</a>
 						</div>
@@ -435,10 +442,10 @@
 						<div class="col-lg-8 col-md-10">
 							<div class="section-heading">
 								<h5 class="subtitle">
-									Try to Check out our
+									Check out our
 								</h5>
 								<h2 class="title">
-										Recent Winners
+										Recent Top 3 Winners
 								</h2>
 								<p class="text">
 									We update our site regularly; more and more winners are added every day! To locate the most recent winner's information
@@ -447,28 +454,29 @@
 						</div>
 					</div>
 					<div class="row">
-						{%for game in three_players%}
+						{%for bid in top_three_bids%}
 						<div class="col-lg-4">
 							<div class="single-winer">
 								<div class="top-area">
 									<div class="left">
-										<h4 class="name">
-												{{game.user.username}}
+										<h4 class="name" style="color: white;">
+												{{bid.user.username}}
 										</h4>
-										<p class="date">
-												{{game.date|date:'M,d'}}
+										<p class="date" style="color: white;" >
+											{{bid.number}}
 										</p>
 									</div>
 									<div class="right">
-										<p class="id">{{game.game.name}}}</p>
+										<p class="id" style="color: white;">
+											{{bid.date|date:'d/m'}}</p>
 									</div>
 								</div>
 								<div class="bottom-area">
 									<div class="left">
-											{{game.profit}} USDT
+											{{bid.profit|floatformat:2}} MTC
 									</div>
 									<div class="right">
-											<img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+											<img src="{%static 'mainapp/assets/images/metcoin.png'%}" alt="" height="70" width="70">
 									</div>
 								</div>
 							</div>
@@ -478,11 +486,13 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-12 text-xl-center">
-							<a class="mybtn2" href="#">View All </a>
+							<a class="mybtn2" href="">Top </a>
 						</div>
 					</div>
 			</div>
 		</section> 
 	<!-- Recent Winners Area End -->
+	<script src="{%static 'mainapp/assets/js/counter.js'%}"></script>
+
 {%include 'footer.html'%}
 {%endblock content%}

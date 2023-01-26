@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('stakes/12/23/41_admin/', admin.site.urls),
     path('',include('mainapp.urls')),
-    path('stakegames/admin/',include('dashboard.urls')),
+    path('met/admin/',include('dashboard.urls')),
     path('users/',include('users.urls')),
     path('games/',include('games.urls')),
     path('logout/',auth_views.LogoutView.as_view(),name = 'logout'),
@@ -34,4 +34,3 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -1,8 +1,8 @@
 from django.urls import path
 from django.views import View
 from .views import (Dashboard,AllUsers,AllDeposit,AllWithdraws,
-MakeMail,Emails,ViewEmails,AdminUploadView,WinGames,ploting,ploting_bar,
-LotteryView
+MakeMail,Emails,change_met,AdminUploadView,ViewEmails,WinGames,
+ploting,ploting_bar,LotteryView
 
 )
 urlpatterns = [
@@ -20,5 +20,6 @@ urlpatterns = [
     path('ploting/',ploting,name = 'pie_plot'),
     path('bar/plot/',ploting_bar),
     path('lottery/bids/',LotteryView.as_view(),name = 'bids'),
+    path('met/ch/val/', change_met,name = 'change_met'),
 
 ]

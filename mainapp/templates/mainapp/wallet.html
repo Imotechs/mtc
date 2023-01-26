@@ -105,11 +105,11 @@
 <body>
 	<!-- preloader area start -->
 	<div class="preloader" id="preloader">
-		<div class="loader loader-1">
-			<div class="loader-outter"></div>
-			<div class="loader-inner"></div>
-		</div>
-	</div>
+		<div class="loader lds-ripple ">
+			<div class="lds-pos"></div>
+				<div class="lds-pos"></div>
+            </div>
+        </div>
 	<!-- preloader area end -->
     {%for message in messages%}
 	<script>
@@ -415,10 +415,10 @@
                                 <div class="nav nav-lend mb-3" id="pills-tab" role="tablist" style="margin-left: 60px; display: flex">
                                     
                                     <div class="nav-item">
-                                        <a class="nav-link tabss"  data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true">Instructions </a>
+                                        <a class="nav-link tabss"  data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true" >Instructions </a>
                                     </div>
                                     <div class="nav-item">
-                                        <a class="nav-link tabss" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="true">Withdraw</a>
+                                        <a class="nav-link tabss" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="true" style="background-color: rgb(39, 140, 132);">Withdraw</a>
                                     </div>
                                 </div>
 
@@ -501,7 +501,7 @@
 												{{item.date|date:'M,d'}}
 											</td>
 											<td>
-												{{item.usd}} USDT
+												{{item.amount}} USDT
 											</td>
                                             <td>
 												{{item.transaction_id}} 

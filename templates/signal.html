@@ -1,0 +1,462 @@
+<html>
+{%load static%}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}">
+
+
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/style.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/responsive.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script>
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    window.onload = function () {
+      console.log("LOADED");
+
+      //Configuration variables
+      var updateInterval = 500 //in ms
+      var numberElements = 200;
+
+      //Globals
+      var updateCount = 0;
+
+      //Chart Objects
+
+      var yawChart = $("#metChart");
+      //chart instances & configuration
+      const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+      // const chartbg = document.getElementById('met')
+      // chartbg.style.background = '#'+randomColor
+      // chartbg.style.opacity= 0.8
+      var commonOptions = {
+        scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              displayFormats: {
+                millisecond: 'mm:ss:SSS'
+              }
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+        legend: { display: false },
+        tooltips: {
+          enabled: false
+        }
+      };
+
+
+
+
+      var yawChartInstance = new Chart(yawChart, {
+        type: 'line',
+        data: {
+          datasets: [{
+            label: "MTC/USDT",
+            data: 0,
+            fill: false,
+            borderColor: "#" + randomColor,
+            borderWidth: 1
+          }]
+        },
+        options: Object.assign({}, commonOptions, {
+          title: {
+            display: true,
+            text: "MTC/USDT",
+            fontSize: 18
+          }
+        })
+      });
+
+      function addData(data) {
+        if (data) {
+
+          yawChartInstance.data.labels.push(new Date());
+          yawChartInstance.data.datasets.forEach((dataset) => { dataset.data.push(data['met']) });
+          if (updateCount > numberElements) {
+            yawChartInstance.data.labels.shift();
+            yawChartInstance.data.datasets[0].data.shift();
+          }
+          else updateCount++;
+
+          yawChartInstance.update();
+        }
+      };
+
+      function updateData() {
+        console.log("Update Data");
+        const headerz = {
+          'X-CSRFtoken': csrftoken,
+        }
+        $.getJSON("/access/met/value/", headerz, addData);
+        setTimeout(updateData, updateInterval);
+      }
+
+      updateData();
+    }
+  </script>
+  <style>
+    html {
+      font-family: "Open Sans", sans-serif;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      font-size: 18px;
+      margin: 0;
+      padding: 0;
+      color: #a1aed4;
+      overflow-x: hidden;
+    }
+
+    .buybtns {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 2px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+      background-image: -webkit-linear-gradient(right, #065548, #2198c0);
+      background-image: -o-linear-gradient(right, #065548, #2198c0);
+      background-image: linear-gradient(to left, #065548, #2198c0);
+    }
+    .salebtn {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 2px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#ff344d), to(#d2273c));
+  background-image: -webkit-linear-gradient(right, #ff344d, #d2273c);
+  background-image: -o-linear-gradient(right, #ff344d, #d2273c);
+  background-image: linear-gradient(to left, #ff344d, #d2273c); 
+    }
+
+    .container {
+      display: flex;
+
+    }
+
+    .label {
+      flex: 1;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .x {
+      flex: 3;
+      text-align: center;
+      background-color: rgba(235, 113, 101, 0.73);
+      margin: 10px;
+    }
+
+    .y {
+      flex: 3;
+      text-align: center;
+      background-color: rgba(70, 163, 71, 0.64);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .z {
+      flex: 3;
+      text-align: center;
+      background-color: rgba(70, 140, 215, 0.74);
+      margin: 10px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .error {
+      background-color: rgb(138, 9, 9);
+      color: antiquewhite;
+      font-size: x-large;
+    }
+    .input-field {
+        width: 20%;
+        border: 0px;
+        height: 40px;
+        color: #a1aed4;
+        border-bottom: 2px solid rgba(248, 110, 110, 0.2);
+        border-radius: 5px;
+        margin-bottom: 0px; }
+  </style>
+
+</head>
+
+<body>
+
+  <section class="activities">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="" role="tabpanel" aria-labelledby="">
+        <div class="responsive-table">
+          <div class="table">
+            <div id="orientationContainer" class="container">
+
+              <div id="met" class="z">
+                <canvas id="metChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="tab-menu-area">
+   
+          <div class="tab-content" id="pills-tabContent">                
+            
+            <h1 id = 'sbloader' style="display: none;">
+              <i class="fa fa-circle-o-notch fa-spin"></i>
+              
+                        </h1>
+            <h3 class="y fade" id="Str">
+
+            </h3>
+            
+            <div class="tab-pane fade " id="all-bets" role="tabpanel" aria-labelledby="pills-all-bets-tab">
+              <div class="responsive-table">
+                <form method="post" id='buyform'>
+                  <div class="form-group">
+                    <input type="number" step="0.00000005" name='amount' required class="input-field" id="buy_amount"
+                      placeholder="Amount* "> <small id = "account_usdt"> </small> USD
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="buybtns" onclick="hidForm('buy')"><small>Buy Met</small></button>
+                  </div>
+                </form>
+
+              </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="my-bets" role="tabpanel" aria-labelledby="pills-my-bets-tab">
+              <div class="responsive-table">
+
+                <form id="saleform" method="post">
+                  <div class="form-group">
+                    <input type="number" step="0.000000005" name='amount' required class="input-field" id="sale_amount"
+                      placeholder="Amount* "><small id="account_mtc"></small> MTC
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="salebtn" onclick="hidForm('sale')"><small>Sell Met</small></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- <ul class="nav nav-lend mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="" data-toggle="pill" href="" role="tab" aria-controls=""
+                  aria-selected="false">Tokenomics </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link buy" id="buy_met" data-toggle="pill" href="#pills-all-bets" role="tab"
+                  aria-controls="pills-all-bets" aria-selected="false">Buy Met</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="sell_met" data-toggle="pill" href="#pills-my-bets" role="tab"
+                  aria-controls="pills-my-bets" aria-selected="false">Sell Met</a>
+              </li>
+
+            </ul> -->
+            <ul class="nav nav-lend mb-3" id="pills-tab" role="tablist">
+                <div class="row">
+                    <div class="col">
+                {%for up in ups%}
+                <button class="salebtn" onclick="handleChange('{{up}}')">{{up|floatformat:3}}</button>
+                {%endfor%}
+                <br>
+                {%for down in downs%}
+                <button class="buybtns" onclick="handleChange('{{down}}')">{{down|floatformat:2}}</button>
+                {%endfor%}
+                <div class="col">
+                    <button class="buybtn" id = "met_val">{{current|floatformat:3}}</button>
+
+                </div>
+                </div>
+            </div>
+                </ul>
+
+            <script>
+              const sbloader = document.getElementById('sbloader')
+              const buyStr = document.getElementById('Str')
+            const met_val = document.getElementById('met_val')
+            
+              buybtn.addEventListener('click', showform)
+              sellbtn.addEventListener('click', showform)
+              function showform(e) {
+                e.preventDefault();
+
+                if (e.target.classList.contains('buy')) {
+                  sellform.classList.remove('show', 'active')
+                  buyforms.classList.add('show', 'active')
+                  buyAmount.value = usdt.innerText-0.00001
+
+                }
+                else {
+                  buyforms.classList.remove('show', 'active')
+                  sellform.classList.add('show', 'active')
+                  console.log('sell btn click')
+                  saleAmount.value = mtc.innerText
+
+                }
+
+              }
+            function hidForm(arr){
+              if (arr=='buy'){
+              setTimeout(()=>{
+
+              buyforms.classList.remove('show', 'active')
+              },500)
+              }
+              if (arr=='sale'){
+                setTimeout(()=>{
+                sellform.classList.remove('show', 'active')
+                },500)
+              
+              }
+
+              }
+              
+              buyform.addEventListener('submit', handleSubmit)
+              saleform.addEventListener('submit', handleSubmits)
+              const url = ''
+
+              function handleChange(arr) {
+                const amount = arr
+                console.log(arr)
+                const status = 'buy'
+                sbloader.style.display ='block'
+                fetch('/met/admin/met/ch/val/', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFtoken': csrftoken,
+                  },
+                  body: JSON.stringify({ "amount": amount,})
+                }).then((response) => response.json())
+                  .then((data) =>{
+                        sbloader.style.display ='none'
+                        met_val.innerText = data['met']
+            
+                      }
+                  
+                  )                    ;
+                    
+              }
+
+            
+              window.addEventListener('load',()=>{
+                fetch('/users/get/account/', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFtoken': csrftoken,
+                  },
+                }).then((response) => response.json())
+                  .then((data) =>{
+                    mtc.innerHTML = data['mtc']
+                    usdt.innerHTML = data['usdt']
+              }
+              )})
+            </script>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+  <footer class="footer"  id="footer">
+    <div class="" >
+      <div class="container" >
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="footer">
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="copy-bg" style="height: 400px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="left-area">
+              <p>Copyright © 2022.All Rights Reserved By <a href="">Melt</a>
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <ul class="copright-area-links">
+              <li>
+                <a href="{%url 'terms'%}">Terms Of Use</a>
+              </li>
+              <li>
+                <a href="{%url 'testimonials'%}">Testimonials</a>
+              </li>
+              <li>
+                <a href="{%url 'contact'%}">Help Center</a>
+              </li>
+              <li>
+                <a href="{%url 'about'%}">About Us </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  {%include 'footer.html'%}
+</body>
+
+</html>

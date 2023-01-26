@@ -15,7 +15,6 @@ const countdown = () => {
   const currentDate = new Date();
 
   const totalSeconds = (birthDayDate - currentDate) / 1000;
-console.log('seconds left',totalSeconds)
   const days = Math.floor(totalSeconds / 3600 / 24);
   const hours = Math.floor(totalSeconds / 3600) % 24;
   const mins = Math.floor(totalSeconds / 60) % 60;

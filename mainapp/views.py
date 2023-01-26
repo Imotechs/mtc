@@ -4,7 +4,7 @@ import random
 import json
 from django.contrib import messages
 from users.models import  Mail, Profile,SellTrade,BuyTrade,Bonus
-from .models import Deposit,Coin
+from .models import Deposit,Coin,TradeTime
 from django.utils import timezone
 from users.models import Account,Subscribers
 from users import functions
@@ -28,16 +28,32 @@ def page_restricted_view(request):
 
     
 def home(request):
-    top_list = Games.objects.filter(win = True).order_by('-profit').order_by('-date')[:10]
-    my_games = None
+    
+    
+    trade = TradeTime.objects.last()
+    today = timezone.now()
+    if today >= trade.date_to:
+        if today>=trade.interval:
+            now,then = functions.get_date()
+            interval = functions.get_interval()
+            obj = {'id':trade.id, 'date_to':then,'interval':interval}
+            TradeTime.objects.update(**obj)
+            
+            return redirect('home')
+   
+    top_biders = Bid.objects.filter(win = True).order_by('-profit').order_by('-date')[:10]
+    my_bids = None
+    top_bid_winners = Bid.objects.filter(win = True).order_by('?').order_by('-date')[:10]
+
     jackpot = Lottery.objects.filter(win = True).last()
     home = True
     if request.user.is_authenticated:
-        my_games = Games.objects.filter(user = request.user).order_by('-profit').order_by('-date')[:10]
+        my_bids = Bid.objects.filter(user = request.user).order_by('-profit').order_by('-date')
     context = {
-        'top_players':top_list,
-        'three_players':top_list[:3],
-        'my_games':my_games,
+        'trade_time':trade,
+        'top_bid':top_biders[:10],
+        'top_three_bids':top_bid_winners[:3],
+        'my_bids':my_bids,
         'home':home,
         'jackpot':jackpot,
     }
@@ -72,6 +88,10 @@ def subscribe(request):
 def about(request):
     return render(request,'mainapp/about.html')
 
+
+def policy(request):
+    return render(request,'mainapp/policy.html')
+
 def contact(request):
     if request.method =='POST':
         obj, created = Mail.objects.get_or_create(
@@ -103,25 +123,22 @@ def tournaments(request):
     return render(request,'mainapp/tournaments.html',context)
 
 def lottery(request):
+    now,due = functions.get_date()
     current_lot = Lottery.objects.filter(win = False).last()
-    last_won_lot = Lottery.objects.filter(win = True).last()
-    won_bids = Bid.objects.filter(win = True).order_by('-profit')
-    all_lot = Lottery.objects.all()
-    last_winners = Bid.objects.filter(win = True,lottery = last_won_lot).order_by('-profit')
+    last_won_lot = Lottery.objects.filter(win = True).order_by('id').last()
+    won_bids = Bid.objects.filter(win = True).order_by('-date').order_by('-profit')
+    all_lot = Lottery.objects.all().order_by('-date')
+    last_winners = Bid.objects.filter(win = True,lottery = last_won_lot).order_by('-date').order_by('-profit')
     today = timezone.now()
     nums = [ch for ch in range(1,51)]
-
     if today > current_lot.due_date:
         for bid in current_lot.bid_set.all():
             bid_numbers = [ int(ch) for ch in current_lot.numbers.replace("[","").replace("]","").split(',')]
-            print(bid_numbers)
             if int(bid.number) in bid_numbers :
-                print(bid.number)
                 bid.verify_bid()
                 
-        now,due = functions.get_date()
         new_lot = Lottery.objects.create(
-            name = f'stake lottery{current_lot.id+1}',
+            name = f'MTC lottery {current_lot.id+1}',
             numbers = random.choices(nums,k = 5),
             due_date = due,
                 )
@@ -132,19 +149,7 @@ def lottery(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
             account,created = Account.objects.get_or_create(user = request.user)
-            if account.main >= float(request.POST['amount']):
-                user_bid = Bid.objects.create(
-                    user = request.user,
-                    lottery = Lottery.objects.last(),
-                    stake = request.POST['amount'],
-                    number = request.POST['number'],
-                )
-                user_bid.save()
-                account.main -= float(request.POST['amount'])
-                account.save()
-                messages.info(request,'Bid purchased with main wallet')
-                return redirect('lot')
-            elif account.balance >= float(request.POST['amount']):
+            if account.balance >= abs(float(request.POST['amount'])):
                 user_bid = Bid.objects.create(
                     user = request.user,
                     lottery = Lottery.objects.last(),
@@ -154,36 +159,41 @@ def lottery(request):
                 user_bid.save()
                 account.balance -= float(request.POST['amount'])
                 account.save()
-                messages.info(request,'Bid purchased from Earning wallet')
+                messages.info(request,'Bid purchased!')
                 return redirect('lot')
             else:
-                messages.info(request,' insufficient balance to bid!')
+                messages.info(request,' insufficient MTC balance to bid!')
                 return redirect('wallet')
         return redirect('login')
+    last_won = None
+    if last_won_lot:
+        last_won = [ ch for ch in last_won_lot.numbers.replace("[","").replace("]","").split(',')]
+        
     if request.user.is_authenticated:
+        my_bids = Bid.objects.filter(user=request.user).order_by('-date').order_by('-profit')
         context = {
             'lot':True,
             'all_lot':all_lot,
             'current_lot':current_lot,
             'my_bids_today':Bid.objects.filter(user = request.user,lottery =current_lot),
             'last_won_lot':last_won_lot,
-            'last_numbers':[ ch for ch in last_won_lot.numbers.replace("[","").replace("]","").split(',')],
+            'last_numbers':last_won,
             'won_bids':won_bids,
+            'my_bids':my_bids,
             'last_winners':last_winners,
             'all_my_bids':Bid.objects.filter(user = request.user).order_by('-date'),
             }
         return render(request,'mainapp/lotterys.html',context)
     else:
+        
         context = {
             'lot':True,
             'all_lot':all_lot,
             'current_lot':current_lot,
-            #'my_bids_today':Bid.objects.filter(user = request.user,lottery =current_lot),
             'last_won_lot':last_won_lot,
-            'last_numbers':[ ch for ch in last_won_lot.numbers.replace("[","").replace("]","").split(',')],
+            'last_numbers':last_won,
             'won_bids':won_bids,
             'last_winners':last_winners,
-            #'all_my_bids':Bid.objects.filter(user = request.user).order_by('-date'),
             }
         return render(request,'mainapp/lotterys.html',context)
 
@@ -240,19 +250,23 @@ def trade_met(request):
                     ref = Profile.objects.filter(uid = request.user.profile.referrer)
                 if ref[0].referrer:
                     master_ref = Profile.objects.filter(uid = ref[0].referrer)
-                print(ref[0],master_ref)
                 if not profit <=0:
                     if ref:
                         bonus_1 = functions.get_bonus(1,profit)
                         b_obj = Bonus.objects.create(user = ref[0].user,
                                     level = 1,from_user = request.user,
-                                    amount =bonus_1,claimed = False)
+                                    amount =bonus_1,claimed = False,
+                                    action = 'Trading')
                         b_obj.save()
+                        if request.user not in ref[0].referrals.all():
+                            ref[0].referrals.add(request.user)
+                            ref[0].save()
                         if master_ref:
                             bonus_2 = functions.get_bonus(2,profit)
                             b_obj = Bonus.objects.create(user = master_ref[0].user,
                                     level = 2,from_user = request.user,
-                                    amount = bonus_2,claimed = False)
+                                    amount = bonus_2,claimed = False,
+                                    action = 'Trading')
                             b_obj.save()
                 msg = {"status":'Success!'}
                 return JsonResponse(msg)
@@ -268,3 +282,4 @@ def current_met_value(request):
         num = [0.2,0.3,0,0,0,0,0,0,0,0.35,0.4,0.2,0.3,0.45,-0.45,-0.3,]
         met,created = Coin.objects.get_or_create(name = 'metcoin')
         return JsonResponse({'met':met.value+random.choice(num)})
+

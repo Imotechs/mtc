@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> Melta</title>
+	<title> Met.com</title>
 	<!-- favicon -->
 	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
 	<!-- bootstrap -->
@@ -22,9 +22,11 @@
 <body>
 	<!-- preloader area start -->
 	<div class="preloader" id="preloader">
-		<div class="loader loader-1">
-			<div class="loader-outter"></div>
-			<div class="loader-inner"></div>
+		<div class="loader lds-ripple ">
+			<div class="lds-pos"></div>
+				<div class="lds-pos"></div>
+
+		
 		</div>
 	</div>
 	<!-- preloader area end -->
@@ -36,13 +38,7 @@
 		<!--Main-Menu Area Start-->
 	</header>
 	<!-- Header Area End  -->
-	<script> 
-		var audio = new Audio('/static/games/racerCar/music/racer.mp3')
-		window.addEventListener('click', check())
-		function check(){
-			//audio.play()
-		}
-		</script>
+	
 	<!-- Hero Area Start -->
 	{%for message in messages%}
 	<script>
@@ -67,8 +63,8 @@
             </div>
             <div class="header-area">
             
-                <h5 class="title">Great to have you on <b style="color: aqua;">Melta</b>!</h5>
-                <p class="sub-title">Create your MELTA wallet.</p>
+                <h5 class="title">Great to have you on <b style="color: aqua;">Met</b>!</h5>
+                <p class="sub-title">User Registration</p>
                 <p>{%for error,message in msg.items%}
                     <small style="color: red;">{{error}} &nbsp;</small>
                     <small>{{message}}</small>
@@ -113,7 +109,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                           <button type="submit" class="mybtn1"><small>Create Wallet</small></button>
+                           <button type="submit" class="mybtn1"><small>Submit</small></button>
                     </div>
                 </form>
             </div>

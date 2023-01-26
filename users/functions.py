@@ -1,11 +1,19 @@
 import datetime
 import random
 import json
+import pytz
+str_date = pytz.timezone('Africa/Lagos')
 def get_date():
     now = datetime.datetime.now()
     nday = datetime.timedelta(days = 1)
     due_time = now + nday
-    return now, due_time
+    return str_date.localize(now), str_date.localize(due_time)
+
+def get_interval():
+    now = datetime.datetime.now()
+    nday = datetime.timedelta(hours = 1)
+    due_time = now + nday
+    return str_date.localize(due_time)
 
 
 def get_percentage(amount,percent):

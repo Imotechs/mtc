@@ -22,9 +22,11 @@
 <body>
 	<!-- preloader area start -->
 	<div class="preloader" id="preloader">
-		<div class="loader loader-1">
-			<div class="loader-outter"></div>
-			<div class="loader-inner"></div>
+		<div class="loader lds-ripple ">
+			<div class="lds-pos"></div>
+				<div class="lds-pos"></div>
+
+		
 		</div>
 	</div>
 	<!-- preloader area end -->
@@ -36,13 +38,7 @@
 		<!--Main-Menu Area Start-->
 	</header>
 	<!-- Header Area End  -->
-	<script> 
-		var audio = new Audio('/static/games/racerCar/music/racer.mp3')
-		window.addEventListener('click', check())
-		function check(){
-			audio.play()
-		}
-		</script>
+	
 	<!-- Hero Area Start -->
 	{%for message in messages%}
 	<script>

@@ -79,6 +79,7 @@ class Bonus(models.Model):
     from_user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='from_user')
     amount = models.FloatField()
     level = models.IntegerField()
+    action = models.CharField( max_length = 15,null=True,blank = True)
     claimed = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now=True)
     def __str__(self):

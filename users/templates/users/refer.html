@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metric</title>
+    <title>Met</title>
     <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/dstyle.css'%}">
     <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
     
@@ -56,9 +56,46 @@
                             <div data-v-7d9ce8f6="" class="form-group"><label data-v-7d9ce8f6=""
                                     class="form-label opacity-50">Referral link</label>
                                 <div data-v-7d9ce8f6=""><span data-v-7d9ce8f6="" id="referral-link"
-                                        class="fw-bold">https://met.com//user/create/12</span> <a
-                                        data-v-7d9ce8f6="" href="javascript:;" data-toggle="copy"
-                                        data-target="#referral-link" class="link-hover">Copy</a></div>
+                                        class="fw-bold"> 
+                                        <p  style="margin-top:0px; margin-bottom:0px;"><b id="p1"></b> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16" style="margin-left: 5px; 
+                                        cursor: pointer;" 
+                                        onclick="copyToClipboard('#p1')" >
+                                            <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+                                            
+                                        </svg> <b id="copied" style="display: none; margin-left: 5px;">Copied!</b>
+                                    </p>
+                                         </span> 
+                                       
+                                    <br>
+                                    <br>
+                                        <span id = "date1">This link is for your account @ <b>{{request.user.username}}</b></span>
+                                        
+                                        
+                                    </div>
+                                   
+                                    
+
+                                <script>
+                                    var ref = document.domain +'/users/accounts/sign_up/'+'{{request.user.profile.uid}}/'
+                                    var refbtn = document.getElementById('p1')
+                                    refbtn.innerText =ref
+
+                                    function copyToClipboard(element) {
+                                    var $temp = $("<input>");
+                                    $("body").append($temp);
+                                    $temp.val($(element).text()).select();
+                                    document.execCommand("copy");
+                                    $temp.remove();
+
+                                    var copy = document.getElementById('copied')
+                                    copy.style.display = "inline";
+                                    }
+                                </script>
+                                    
+                                </div>
+                            </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -224,6 +261,7 @@
         </div>
     </section>
 {%include 'footer.html'%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 </body>
 
