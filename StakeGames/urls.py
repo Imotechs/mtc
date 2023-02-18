@@ -10,7 +10,7 @@ urlpatterns = [
     path('',include('mainapp.urls')),
     path('met/admin/',include('dashboard.urls')),
     path('users/',include('users.urls')),
-    path('games/',include('games.urls')),
+    # path('games/',include('games.urls')),
     path('logout/',auth_views.LogoutView.as_view(),name = 'logout'),
     path('password-reset/', 
         auth_views.PasswordResetView.as_view(

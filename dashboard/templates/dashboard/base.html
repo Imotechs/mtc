@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="#" type="image/png" sizes="16x16" href="#">
-    <title>Stakle Games|Admin</title>
+    <title>Met.net.rev|Admin</title>
     <!-- Custom CSS -->
           <link href="{%static 'dashboard/css/style.css'%}" rel="stylesheet">
 </head>
@@ -67,7 +67,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <!-- Comment -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
+                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="{%url 'met_info'%}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
 								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
 							</a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated slideInRight">
@@ -78,10 +78,10 @@
                                     <li>
                                         <div class="header-notify">
                                             <!-- Message -->
-                                            <a href="#">
+                                            <a href="{%url 'met_info'%}">
                                                 <i class="cc BTC m-r-10 f-s-40" title="BTC"></i>
                                                 <div class="notification-contnet">
-                                                    <h5>All Transaction </h5> <span class="mail-desc">Just see the my new admin!</span> 
+                                                    <h5>All Messages </h5> <span class="mail-desc">Just see the Met News!</span> 
                                                 </div>
                                             </a>
                                             <!-- Message -->
@@ -205,19 +205,24 @@
                                 <li><a href="{%url 'mails'%}">Inbox</a></li>
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">Games</span></a>
+                        <li> <a class="has-arrow  "  aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">Adverts</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 
-                                <li><a href="{%url 'win_games'%}">Win Games</a></li>
-                                <li><a href="{%url 'lost_games'%}">Lost Games</a></li>
+                                <li><a href="{%url 'message'%}">View Advert</a></li>
+                                <li><a href="{%url 'make_message'%}">Add New Advert</a></li>
                             </ul>
                         </li>
                       
-                        <li><a href="{%url 'logout'%}">Logout</a></li>
-                        <li><a href="{%url 'change_met'%}" style="color: orange;">Signals</a></li>
+                        <li><a href="{%url 'logout'%}" class="blink_me">Logout</a></li>
+                        <li><a href="{%url 'change_met'%}" style="color: orange;" >Signals</a></li>
                         <li><a href="{%url 'bids'%}" style="color: orange;">Lottery Bids</a></li>
                     </ul>
                 </nav>
+                <style>
+                             .blink_me {
+  animation: blinker 1.5s linear infinite;
+}
+                </style>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -256,7 +261,7 @@
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2022 HFTM All Right Reserved.</footer>
+            <footer class="footer"> © 2022 MET All Right Reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

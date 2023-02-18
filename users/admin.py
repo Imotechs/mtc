@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (Account,Profile,Mail,Withdraw,
-Subscribers,BuyTrade,SellTrade,Bonus,LockedAsset)
+Subscribers,BuyTrade,SellTrade,Bonus,LockedAsset,Message)
 # Register your models here.
 
 admin.site.register(Account)
@@ -12,3 +12,4 @@ admin.site.register(BuyTrade)
 admin.site.register(SellTrade)
 admin.site.register(Bonus)
 admin.site.register(LockedAsset)
+admin.site.register(Message)

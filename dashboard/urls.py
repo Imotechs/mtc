@@ -2,7 +2,7 @@ from django.urls import path
 from django.views import View
 from .views import (Dashboard,AllUsers,AllDeposit,AllWithdraws,
 MakeMail,Emails,change_met,AdminUploadView,ViewEmails,WinGames,
-ploting,ploting_bar,LotteryView
+LotteryView,MessageView,MessageCompose
 
 )
 urlpatterns = [
@@ -17,9 +17,10 @@ urlpatterns = [
     path('uploads/views/', AdminUploadView.as_view(), name = 'evidenceview'),
     path('win/games/',WinGames.as_view(),name = 'win_games'),
     path('lost/games/',WinGames.as_view(template_name = 'dashboard/lost.html'),name = 'lost_games'),
-    path('ploting/',ploting,name = 'pie_plot'),
-    path('bar/plot/',ploting_bar),
+    
     path('lottery/bids/',LotteryView.as_view(),name = 'bids'),
     path('met/ch/val/', change_met,name = 'change_met'),
+    path('see/msg/',MessageView.as_view(), name = 'message'),
+    path('compose/msg/',MessageCompose.as_view(), name = 'make_message'),
 
 ]

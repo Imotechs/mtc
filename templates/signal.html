@@ -107,13 +107,18 @@
           yawChartInstance.update();
         }
       };
-
+      function addMet(data){
+       const cap = document.getElementById('cap_rate') 
+        cap.innerHTML =data['cap'];
+        }
       function updateData() {
         console.log("Update Data");
         const headerz = {
           'X-CSRFtoken': csrftoken,
         }
         $.getJSON("/access/met/value/", headerz, addData);
+        $.getJSON("/checking/", headerz, addMet);
+
         setTimeout(updateData, updateInterval);
       }
 
@@ -323,6 +328,11 @@
                 </div>
                 </div>
             </div>
+            <p>Cap Rate <small id = 'cap_rate'></small>%</p>
+            {%for caprate in cap%}
+            <button class="salebtn" onclick="handleCap('{{caprate}}')">{{caprate|floatformat:1}}</button>
+            {%endfor%}
+            <br>
                 </ul>
 
             <script>
@@ -372,8 +382,7 @@
 
               function handleChange(arr) {
                 const amount = arr
-                console.log(arr)
-                const status = 'buy'
+                let status = 'buy'
                 sbloader.style.display ='block'
                 fetch('/met/admin/met/ch/val/', {
                   method: 'POST',
@@ -381,7 +390,7 @@
                     'Content-Type': 'application/json',
                     'X-CSRFtoken': csrftoken,
                   },
-                  body: JSON.stringify({ "amount": amount,})
+                  body: JSON.stringify({ "amount": amount,'status':status})
                 }).then((response) => response.json())
                   .then((data) =>{
                         sbloader.style.display ='none'
@@ -393,7 +402,28 @@
                     
               }
 
+              function handleCap(arr) {
+                const cap = arr
+                const amount = 'none'
+                let status = 'cap'
+                sbloader.style.display ='block'
+                fetch('/met/admin/met/ch/val/', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFtoken': csrftoken,
+                  },
+                  body: JSON.stringify({ "cap": cap, 'status':status})
+                }).then((response) => response.json())
+                  .then((data) =>{
+                        sbloader.style.display ='none'
+                        met_val.innerText = data['met']
             
+                      }
+                  
+                  )                    ;
+                    
+              }
               window.addEventListener('load',()=>{
                 fetch('/users/get/account/', {
                   method: 'POST',

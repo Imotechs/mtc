@@ -2,6 +2,9 @@
 {%load static%}
 
 <head>
+  <title>Met.net.rev.com</title>
+  <link rel="shortcut icon" href="{%static 'mainapp/assets/images/metcoin.png'%}" type="image/x-icon">
+
   <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}">
 
 
@@ -169,7 +172,7 @@
       background-image: -webkit-gradient(linear, right top, left top, from(#ff344d), to(#d2273c));
   background-image: -webkit-linear-gradient(right, #ff344d, #d2273c);
   background-image: -o-linear-gradient(right, #ff344d, #d2273c);
-  background-image: linear-gradient(to left, #ff344d, #d2273c); 
+  background-image: linear-gradient(to left, #ff344d, #d2273c);
     }
 
     .container {
@@ -248,17 +251,17 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="tab-menu-area">
-   
-          <div class="tab-content" id="pills-tabContent">                
-            
+
+          <div class="tab-content" id="pills-tabContent">
+
             <h1 id = 'sbloader' style="display: none;">
-              <i class="fa fa-circle-o-notch fa-spin"></i>
-              
+              <i class="fa fa-circle-o-notch fa-spin" style = "color:black"></i>
+
                         </h1>
             <h3 class="y fade" id="Str">
 
             </h3>
-            
+
             <div class="tab-pane fade " id="all-bets" role="tabpanel" aria-labelledby="pills-all-bets-tab">
               <div class="responsive-table">
                 <form method="post" id='buyform'>
@@ -352,11 +355,11 @@
                 setTimeout(()=>{
                 sellform.classList.remove('show', 'active')
                 },500)
-              
+
               }
 
               }
-              
+
               buyform.addEventListener('submit', handleSubmit)
               saleform.addEventListener('submit', handleSubmits)
               const url = '/trading/met/'
@@ -376,7 +379,7 @@
                 }).then((response) => response.json())
                   .then((data) =>{
                     setTimeout(() => {
-                  
+
                       if (data['status'] == 'Success!') {
                         sbloader.style.display ='none'
                         buyStr.classList.add('show', 'active')
@@ -396,7 +399,7 @@
                               mtc.innerHTML = data['mtc']
                               usdt.innerHTML = data['usdt'] })
                         },1500)
-                      
+
 
                       }
                       else if (data['status'] == 'Failed!') {
@@ -407,8 +410,8 @@
                       setTimeout(()=>{
                       buyStr.classList.remove('show', 'active','error')
                       buyStr.classList.add('fade')
-                      
-                        },1500)
+
+                        },5000)
                       }
                       else if(data['status'] =='Can not Trade less than 5 MTC'){
                         sbloader.style.display ='none'
@@ -418,8 +421,8 @@
                       setTimeout(()=>{
                       buyStr.classList.remove('show', 'active','error')
                       buyStr.classList.add('fade')
-                      
-                        },1500)
+
+                        },5000)
                       }
                       else {
                         sbloader.style.display ='none'
@@ -434,15 +437,15 @@
 
                         },1000)
                         },3000)
-                       
+
                       }
-                   
- 
+
+
                     }, 1000);
                   }
-                  
+
                   )                    ;
-                    
+
               }
               function handleSubmits(e) {
                 e.preventDefault();
@@ -460,13 +463,13 @@
                 }).then((response) => response.json())
                   .then((data) =>{
                     setTimeout(() => {
-                  
+
                       if (data['status'] == 'Success!') {
                         sbloader.style.display ='none'
                         buyStr.classList.add('show', 'active')
                         buyStr.classList.remove('fade')
-                        buyStr.innerHTML = data['status']             
-                  
+                        buyStr.innerHTML = data['status']
+
                         setTimeout(()=>{
                           buyStr.classList.remove('show', 'active')
                           buyStr.classList.add('fade')
@@ -507,12 +510,12 @@
                         },1000)
                         },3000)
                       }
-                   
- 
+
+
                     }, 1000);
                   }
-                  
-                  ) 
+
+                  )
               }
               window.addEventListener('load',()=>{
                 fetch('/users/get/account/', {
@@ -540,7 +543,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="footer">
-             
+
             </div>
           </div>
         </div>

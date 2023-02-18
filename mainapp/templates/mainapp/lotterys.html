@@ -14,7 +14,7 @@
 						<li>
 							<a href="{%url 'home'%}">
 									<i class="fas fa-Home "></i>
-									Home 
+									Home
 							</a>
 						</li>
 						<li>
@@ -29,10 +29,10 @@
 		</div>
 	</section>
 	<!-- Breadcrumb Area End -->
-	
+
 	<!-- Lottery Staticstics Area Start -->
 	<section class="lottery-area">
-		
+
 		<div class="daily-lottery">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -66,13 +66,13 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 		<div class="lottery-staticstics">
 			<div class="container">
 				<div class="row">
-					
+
 					<div class="col-lg-4">
 						<div class="single-staticstics">
 							<div class="left">
@@ -117,7 +117,7 @@
 								<h4 class="title">
 									Buy Lottery Number
 								</h4>
-								
+
 							</div>
 							<div class="content">
 								<form method="POST">
@@ -126,18 +126,18 @@
 										LOTTERY NUMBERS
 									</h4>
 									<div class="number-box">
-										
+
 										<div class="manual-number">
 											<div class="top-content">
 												<input class="output" name = 'number' id="message" type="number" min="1" max="50" maxlength="2" readonly style="color: #fff; height: 4px; width: 90%; border: none; outline: none;"/><br><br>
 
 												<script>
-												function f(val) {      
+												function f(val) {
 												document.getElementById("message").value = val;
 												}
 												</script>
 											</div>
-											<input class="output" type="number" step ='0.001'min="5.0" max="10000000"name="amount" required  style="color: #fff; height: 3px; width: 90%; border: none; outline: none;margin-top:10px;" placeholder="Bid Amount"/>
+											<input class="output" type="number" step ='0.001'min="1" max="10000000"name="amount" required  style="color: #fff; height: 3px; width: 90%; border: none; outline: none;margin-top:10px;" placeholder="Bid Amount"/>
 											{%csrf_token%}
 											<div class="main-content">
 												<div class="number-list">
@@ -202,24 +202,24 @@
 									</div>
 								</form>
 								</div>
-								
-							
+
+
 							</div>
-							
-			
+
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<script>
-			function f(val) {      
+			function f(val) {
 			document.getElementById("message").value = val;
 			}
 		  </script>
 	</section>
 	<!-- Lottery Staticstics  Area End -->
-		
+
 	<!-- Latest Activities Area Start -->
 	<section class="activities" style="margin-bottom: 0px;padding-bottom: 0px;">
 		<img class="shape shape1" src="{%static 'mainapp/assets/images/people/shape1.png'%}" alt="">
@@ -236,7 +236,7 @@
 							Latest Activites
 						</h2>
 						<p class="text">
-							The world’s first truly fair and global lottery. Each player has 
+							The world’s first truly fair and global lottery. Each player has
 							the highest chances to win the JACKPOT
 						</p>
 					</div>
@@ -264,7 +264,7 @@
 								<td><tr class="number-list">
 									{%for i in last_numbers%}
 									<td><button>{{i}}</button></td>
-								
+
 									{%endfor%}
 								</tr>
 								</td>
@@ -278,7 +278,7 @@
 									</tr>
 								</thead>
 								<tbody>
-							
+
 									{%for winner in last_won_lot.bid_set.all%}
 									<tr>
 										<td>
@@ -287,7 +287,7 @@
 										<td>
 											<div class="number-list">
 												<button  >{{winner.number}}</button>
-										
+
 											</div>
 										</td>
 										<td>
@@ -380,10 +380,10 @@
 					<div class="col-lg-8 col-md-10">
 						<div class="section-heading">
 							<h5 class="subtitle">
-									Want to see how 
+									Want to see how
 							</h5>
 							<h2 class="title" style="color:black">
-									How it works? 
+									How it works?
 							</h2>
 							<p class="text">
 								We update our site regularly; more and more winners are added every day! To locate the most recent winner's information
@@ -399,7 +399,7 @@
 								Choose
 							</h4>
 							<p>
-								Select your lucky number or numbers, 
+								Select your lucky number or numbers,
 								as you may love to put your eggs in many basket.
 							</p>
 						</div>
@@ -431,7 +431,7 @@
 			</div>
 		</div>
 		<!-- How it Work Area Start -->
-	</section> 
+	</section>
 	<!-- Latest Activities Area End -->
 
 	<!-- lottery video Area End -->
@@ -445,34 +445,26 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="section-heading">
-						<h5 class="subtitle">
-								If you have any
-						</h5>
-						<h2 class="title">
-								questions
-						</h2>
+
+
 						<p class="text">
-								Our top priorities are to protect your privacy, 
-								provide secure transactions, and safeguard your data. 
+								Join us now, lets make money funfully!
 						</p>
-						<p class="text">
-								When you're ready to play, registering an 
-								account is required so we know you're of legal age and so no one else can use your account.We answer the most commonly asked lotto 
-								questions..
-						</p>
-						<a href="{%url 'contact'%}" class="mybtn1">Ask</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+				<div class="bottomtotop">
+		<i class="fas fa-chevron-right"></i>
+	</div>
 	<!-- Questions Area End -->
 
 	<!-- Recent Winners Area Start -->
 	<section class="recent-winners">
 		<div class="container">
 				<div class="row justify-content-center">
-					<div class="col-lg-8 col-md-10">
+					<!--<div class="col-lg-8 col-md-10">
 						<div class="section-heading">
 							<h5 class="subtitle">
 								Try to Check out our
@@ -485,7 +477,7 @@
 							</p>
 						</div>
 					</div>
-				</div>
+				</div>-->
 				<div class="row">
 					{%for winner in last_winners%}
 					<div class="col-lg-4">
@@ -493,7 +485,7 @@
 							<div class="top-area">
 								<div class="left">
 									<h4 class="name">
-											{{winner.user.username}} 
+											{{winner.user.username}}
 									</h4>
 									<p class="date">
 											{{winner.stake}}
@@ -517,13 +509,14 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12 text-xl-center">
-						<a class="mybtn2" href="#">View All </a>
 					</div>
 				</div>
-		</div>
+
+		</div
+
 		{%include 'footer.html'%}
 
-	</section> 
+	</section>
 	<!-- Recent Winners Area End -->
 
 	<!-- Footer Area End -->
@@ -534,7 +527,7 @@
 	</div>
 
 	<style>
-		
+
 .number-list {
   margin: 0 -3px; }
   .number-list button {
@@ -585,7 +578,7 @@
 			min-height: 20%;
 			height: 355px;
 			left: 50%;
-			top: 50%;
+			top: 30%;
 			padding: 10px;
 			box-sizing: border-box;
 			margin-left: -12.5%;
@@ -670,9 +663,7 @@
 	</style>
 
 	<!-- Back to Top Start -->
-	<div class="bottomtotop">
-		<i class="fas fa-chevron-right"></i>
-	</div>
+
 	<!-- Back to Top End -->
 	<script src="{%static 'mainapp/assets/js/counter.js'%}"></script>
 

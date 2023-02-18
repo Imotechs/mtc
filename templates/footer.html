@@ -12,31 +12,77 @@
 <body>
     <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none" >
         <div class="row" style="background-color: #105b54;">
+            {%if home%}
             <div class="col " style="color: white;">
+                <div class ="bg-danger rounded-circle mt-n0 shadow">
+                <a href="{%url 'home'%}" class="text-white small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-home text-white"></i></p>
+                    Home
+                </a>
+            </div>
+            </div>
+            {%else%}
+            <div class="col" style="color: white;">
                 <a href="{%url 'home'%}" class="text-danger small font-weight-bold text-decoration-none">
                     <p class="h4 m-0"><i class="feather-home text-danger"></i></p>
                     Home
                 </a>
             </div>
+            {%endif%}
+            {%if lot%}
+            <div class="col">
+                <div class ="bg-danger rounded-circle mt-n0 shadow">
+
+                <a href="{%url 'lot'%}" class="text-white small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-map-pin text-white"></i></p>
+                    Lot.
+                </a>
+                </div>
+            </div>
+            {%else%}
             <div class="col">
                 <a href="{%url 'lot'%}" class="text-danger small font-weight-bold text-decoration-none">
                     <p class="h4 m-0"><i class="feather-map-pin text-danger"></i></p>
-                    Met Lottery
+                    Lot.
                 </a>
             </div>
+            {%endif%}
+            {%if wallet%}
             <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
-                <div class="bg-danger rounded-circle mt-n0 shadow">
+                <div class="bg-danger rounded-circle mt-n1 shadow">
                     <a href="{%url 'wallet'%}" class="text-white small font-weight-bold text-decoration-none">
                         <i class="feather-dollar-sign"></i>
                     </a>
                 </div>
             </div>
+            {%else%}
+            <div class="col">
+                <div >
+                    <a href="{%url 'wallet'%}" class="text-danger small font-weight-bold text-decoration-none">
+                        <p class="h4 m-0"> <i class="feather-dollar-sign text-danger "></i></p>
+                        Wallet
+                    </a>
+                </div>
+            </div>
+            {%endif%}
+            {%if com%}
+            <div class="col">
+                <div class ="bg-danger rounded-circle mt-n0 shadow">
+                <a href="{%url 'my_com'%}" class="text-white small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-heart text-white"></i></p>
+                    My Com.
+                </a>
+                </div>
+            </div>
+            {%else%}
             <div class="col">
                 <a href="{%url 'my_com'%}" class="text-danger small font-weight-bold text-decoration-none">
                     <p class="h4 m-0"><i class="feather-heart text-danger"></i></p>
                     My Com.
                 </a>
             </div>
+            {%endif%}
+           
             {%if request.user.is_superuser%}
             <div class="col">
                 <a href="{%url 'dashboard'%}" class="text-danger small font-weight-bold text-decoration-none">

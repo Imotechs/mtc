@@ -12,13 +12,12 @@ from email.message import EmailMessage
 import smtplib
 import json
 from django.conf import settings
-from games.models import Games, Lottery
-from users.models import Account
-import matplotlib.pyplot as plt
+from users.models import Account,Message
 from django.http import HttpResponse
-from django.template.loader import render_to_string  
-from django.contrib.sites.shortcuts import get_current_site 
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
 from django.http import JsonResponse
+from mainapp.models import Lottery,Bid
 from django.conf import settings
 username = settings.EMAIL_HOST_USER
 password = settings.EMAIL_HOST_PASSWORD
@@ -38,16 +37,13 @@ class Dashboard(LoginRequiredMixin,UserPassesTestMixin,TemplateView):
     admins =  User.objects.filter(is_superuser = True).order_by('-date_joined')
     staffs =  User.objects.filter(is_staff = True).order_by('-date_joined')
     mails = Mail.objects.filter(seen= False)
-    win_games = Games.objects.filter(win =True).aggregate(sum = Sum('stake'))
-    win_games_profit = Games.objects.filter(win =True).aggregate(sum = Sum('profit'))
-    lost_games = Games.objects.filter(win =False).aggregate(sum = Sum('stake'))
     account_main = Account.objects.all().aggregate(sum = Sum('main'))
     account_balance = Account.objects.all().aggregate(sum = Sum('balance'))
     context.update({'Tdeposits':Tdeposits,'users':users,
     'withdraws':withdraws,'deposits':deposits, 'mails':mails,
-    'staffs':staffs, 'admins':admins,'win_games_profit':win_games_profit,
+    'staffs':staffs, 'admins':admins,
     'account_main':account_main,'account_balance':account_balance,
-    'win_games':win_games,'lost_games':lost_games,'met':met})
+    'met':met})
     return context
   def test_func(self):
     if self.request.user.is_superuser or self.request.user.is_staff:
@@ -80,11 +76,12 @@ class AllUsers(UserPassesTestMixin,ListView ):
 class AllDeposit(UserPassesTestMixin,ListView ):
     model = Deposit
     template_name = 'dashboard/deposits.html'
-    paginate_by = 5
+    paginate_by = 10
     def get_context_data(self, *args,**kwargs: any):
         context = super(AllDeposit,self).get_context_data(*args,**kwargs)
-        deposits = Deposit.objects.filter(approved= False, cancel = False).order_by('-date')
-        context.update({ 'deposits':deposits})
+        deposits = Deposit.objects.filter(approved= False, cancel = False,placed = False).order_by('-date')
+        pdeposits = Deposit.objects.filter(approved= False, cancel = False,placed = True).order_by('-date')
+        context.update({ 'deposits':deposits,'pdeposits':pdeposits})
         return context
     def post(self,request,*args, **kwargs):
         if request.method =='POST':
@@ -93,20 +90,20 @@ class AllDeposit(UserPassesTestMixin,ListView ):
                 id = request.POST['approve']
                 deposit = Deposit.objects.get(id = int(id))
                 obj,created = Account.objects.get_or_create(user = deposit.user)
-                obj.main +=  deposit.usd
+                obj.main +=  deposit.amount
                 obj.save()
                 deposit.approved = True
                 deposit.date_approved = timezone.now()
                 deposit.save()
-                current_site = get_current_site(request)  
+                current_site = get_current_site(request)
                 msg = EmailMessage()
-                message = render_to_string('deposit_mail.html', {  
-                    'user': deposit.user,  
-                    'domain': current_site.domain, 
+                message = render_to_string('deposit_mail.html', {
+                    'user': deposit.user,
+                    'domain': current_site.domain,
                     'deposit':deposit,
-                
-                })  
-                to_email = deposit.user.email   
+
+                })
+                to_email = deposit.user.email
                 msg['To'] =  to_email
                 msg['subject'] = 'Deposit Approved'
                 msg['From'] =f'MET<{username}>'
@@ -133,6 +130,43 @@ class AllDeposit(UserPassesTestMixin,ListView ):
         if self.request.user.is_superuser:
             return True
         return False
+    
+class MessageView(UserPassesTestMixin,ListView):
+    model = Message
+    template_name = 'dashboard/messagez.html'
+    paginate_by = 10
+    def get_context_data(self, *args,**kwargs: any):
+        context = super(MessageView,self).get_context_data(*args,**kwargs)
+        messages = Message.objects.filter(read= False).order_by('-date')
+        context.update({ 'messages':messages,})
+        return context
+    def post(self,request,*args, **kwargs):
+        if request.method =='POST':
+            id = request.POST['approve']
+            msg = Message.objects.get(id = int(id))
+            msg.read = True
+            msg.save()
+            return redirect('message')
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
+    
+class MessageCompose(UserPassesTestMixin,ListView):
+    model = Message
+    template_name = 'dashboard/message_compose.html'
+    def post(self,request,*args, **kwargs):
+        if request.method =='POST':
+            subject = request.POST['subject']
+            url = request.POST['url']
+            body = request.POST['body']
+            msg = Message.objects.create(subject = subject,body = body, url = url)
+            msg.save()
+            return redirect('message')
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
 
 class AllWithdraws(UserPassesTestMixin,ListView ):
     model = Deposit
@@ -154,15 +188,15 @@ class AllWithdraws(UserPassesTestMixin,ListView ):
                 withdraw.approved = True
                 withdraw.date_approved = timezone.now()
                 withdraw.save()
-                current_site = get_current_site(request)  
+                current_site = get_current_site(request)
                 msg = EmailMessage()
-                message = render_to_string('withdraw_mail.html', {  
-                    'user': withdraw.user,  
-                    'domain': current_site.domain, 
+                message = render_to_string('withdraw_mail.html', {
+                    'user': withdraw.user,
+                    'domain': current_site.domain,
                     'withdraw':withdraw,
-                
-                })  
-                to_email = withdraw.user.email   
+
+                })
+                to_email = withdraw.user.email
                 msg['To'] =  to_email
                 msg['subject'] = 'Withdrawal Approved'
                 msg['From'] =f'MET<{username}>'
@@ -274,7 +308,6 @@ class AdminUploadView(UserPassesTestMixin,ListView):
         return False
 
 class WinGames(UserPassesTestMixin,ListView):
-    model = Games
     context_object_name = 'win_games'
     ordering = ['-date']
     paginate_by = 5
@@ -284,28 +317,8 @@ class WinGames(UserPassesTestMixin,ListView):
             return True
         return False
 
-def ploting(request):
-    x = Games.objects.filter(win = True)
-    y =Games.objects.filter(win = False)
-    values =[sum([v.profit for v in x]),y.count()]
-    users = [f'winners[${sum([v.profit for v in x])}]',f'losers[${sum([v.stake for v in y])}]']
-    plt.pie(values, labels = users)
-    plt.show()
-    return redirect('dashboard')
 
-def ploting_bar(request):
-    x = Games.objects.filter(win = True)
-    y =Games.objects.filter(win = False)
-    from datetime import timedelta,datetime
 
-    time = timezone.now()
-    # timedel = (datetime.date(timedelta(days = 30)))
-    # print(timedel)
-    users =[i.user.username for i in x]
-    profit = [j.profit for j in x]
-    plt.bar( users,profit)
-    plt.show()
-    return HttpResponse('ploting...')
 
 #lottery system
 class LotteryView(LoginRequiredMixin,UserPassesTestMixin,ListView):
@@ -321,13 +334,18 @@ class LotteryView(LoginRequiredMixin,UserPassesTestMixin,ListView):
             return True
         return False
 
-    
+
 
 def change_met(request):
     if request.user.is_authenticated and request.user.is_superuser:
         met,created = Coin.objects.get_or_create(name = 'metcoin')
         if request.method=='POST':
             data = json.loads(request.body.decode('utf-8'))
+            if data['status'] =='cap':
+                met.cap_rate = float(data['cap'])
+                met.save()
+                return JsonResponse({'met':round(met.value,3)})
+
             amount = float(data['amount'])
             met.value+= amount
             met.save()
@@ -335,13 +353,14 @@ def change_met(request):
 
         inc_ = [0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.00]
         dec_ = [-0.1,-0.2,-0.3,-0.4,-0.5,-0.6,-0.7,-0.8,-0.9,-1.0]
-
+        cap = [5,6,7,8,9,10]
         context = {
             'current':met.value,
             'ups':inc_,
-            'downs':dec_
+            'downs':dec_,
+            'cap':cap,
         }
-        return render(request,'signal.html',context)    
+        return render(request,'signal.html',context)
     return redirect('home')
 
 

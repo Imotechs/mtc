@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {%load static%}
-<head>
+<head style="background-color: black;">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,9 +29,10 @@
       background-image: linear-gradient(to left, #065548, #2198c0);
     }
 </style>
-<body>
-    <section data-v-7d9ce8f6="" class="page settings-page referrals-page">
-        <div data-v-7d9ce8f6="" class="head-banner page-header">
+<body id = 'body'>
+    
+    <section id = 'section'data-v-7d9ce8f6="" class="page settings-page referrals-page">
+        <div data-v-7d9ce8f6="" class="head-banner page-header" id="top">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -41,8 +42,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <h1>Become a METner</h1>
+                    <div class="col" >
+                        <h1>First, Become a METner</h1>
                         <h4 style="color: black;">You need MTC wallet </h4>
                     </div>
                 </div>
@@ -64,13 +65,15 @@
                                     class="form-label opacity-50">MTC wallet</label>
                                 <div data-v-7d9ce8f6=""><span data-v-7d9ce8f6="" id="referral-link"
                                         class="fw-bold">
-                                        <p>MTC wallets are the <b>Only</b> wallets used for trading <b>MTC/USDT</b></p>
-
+                                        <p>MTC wallets are the <b>Only</b> wallets used for trading &amp;Minting<b>MTC/USDT</b> on MET network</p>
+                                        <p>MTC wallet secure your metcoin and store your private keys, keeping your crypto safe and accessible. They also allow you to send, receive and helps you to easily convert them into  your acceptable local money and other cryptocurrencies like USDT, BTC, ETH, LTC among others.</p>
+                                        <p>On MET Network, creation of MTC wallet is only possible through a one time charge of <b>$2</b> only from the USDT account of a METner</p>
+                                        <p>Please;</p>
                                     </span>
                                     <div class="check-group">
                                         <input type="checkbox" class="check-box-field" id="allterms" onclick="handleterms()" >
                                         <label for="input-terms">
-                                             <a href="{%url 'terms'%}" style="color: rgb(9, 39, 228);"> See terms of Use</a>
+                                             <a href="{%url 'terms'%}" style="color: rgb(0, 0, 0);"> Read Our terms of Use</a>
                                         </label>
                                     </div>
                                     <p style="display: none;letter-spacing: 0.05em;" id="termsdetail">
@@ -113,20 +116,7 @@ We really want to assure you that all been said is just to enable effective serv
             
         </div>
         <hr>
-        <div id="loader" style="display: none;">
-            <div data-v-7d9ce8f6="" class="container">
-                <div data-v-7d9ce8f6="" class="row">
-                    <div data-v-7d9ce8f6="" class="col">
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-                    
-                        <h1 class="" >
-                            <img src="{%static 'mainapp/assets/images/metcoin.png'%}" class="id fa-spin" width="150"height = "150" alt="">
-
-                        </h1>
-                    </div>
-                </div>
-        </div>
+       
        
         <div data-v-7d9ce8f6="" class="col">
             <div data-v-7d9ce8f6="" class="mb-5">
@@ -135,18 +125,38 @@ We really want to assure you that all been said is just to enable effective serv
                 <p data-v-7d9ce8f6=""></p>
             </div>
         </div>
+        
     </section>
+    <div id="loader" style="display: none;">
+        <div data-v-7d9ce8f6="" class="container">
+            <div data-v-7d9ce8f6="" class="row">
+                <div data-v-7d9ce8f6="" class="col">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+                
+                    <h1 class="" >
+                        <img src="{%static 'mainapp/assets/images/metcoin.png'%}" class="id fa-spin" width="150"height = "150" alt="">
+    
+                    </h1>
+                </div>
+            </div>
 {%include 'footer.html'%}
 <script>
     var checkBox = document.getElementById('terms')
     const termsBTN = document.getElementById('allterms')
     const termsTxt = document.getElementById('termsdetail')
     const createBtn = document.getElementById('createbtn')
-    const loader = document.getElementById('loader')
+    const toph = document.getElementById('top')
+    const body = document.getElementById('body')
     const txt = document.getElementById('txt')
+    const section = document.getElementById('section')
     function createWallet(){
         txt.style.display = 'none'
         loader.style.display = 'block'
+        body.style.background = 'black'
+        toph.style.display = 'none'
+        loader.style.background = 'black'
+        section.style.display = 'none'
         setTimeout(()=>{
             loader.innerHTML = '<h1></h1>'
             const url = ''
@@ -161,18 +171,18 @@ We really want to assure you that all been said is just to enable effective serv
        .then((response) =>response.json())
        .then((data) => {
             if(data['msg']){
-        loader.innerText = `${data['msg']} :${data['wallet']}`
+            loader.innerHTML = `<h1 style = "color:red;">${data['msg']} :${data['wallet']} </h1>`
         setTimeout(()=>{
-        window.location.href = '/trading/met/'
+        window.location.href = '/users/me/'
 
         },2000)
             }
             else{
-            loader.innerText = data['wallet']
+            loader.innerHTML = `<h1 style = "color:red;">${data['wallet']} </h1>`
             setTimeout(()=>{
-        window.location.href = '/trading/met/'
+        window.location.href = '/users/me/'
 
-        },2000)
+        },2000)                                       
             }
         })
         },10000)
@@ -223,7 +233,7 @@ function handleterms(){
 </script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-  
+
 </body>
 
 </html>

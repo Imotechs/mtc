@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  {%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>met.net.rev.com</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/style.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/responsive.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input[type='text'] {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #065548;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #065548;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #065548;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 35px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+body {
+  background: #065548; /* fallback for old browsers */
+  background: #065548;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight:lighter;
+  line-height: 0.5;
+  display: block;
+  grid-template-columns: 5em auto;
+  gap: 0.01em;
+}
+input[type=radio]:checked ~ .check {
+  border: 5px solid #0DFF92;
+}
+
+input[type=radio]:checked ~ .check::before{
+  background: #0DFF92;
+}
+
+input[type=radio]:checked ~ label{
+  color: #0DFF92;
+}
+
+.signature {
+	margin: 10px auto;
+	padding: 10px 0;
+	width: 100%;
+}
+
+.signature p{
+	text-align: center;
+	font-family: Helvetica, Arial, Sans-Serif;
+	font-size: 0.85em;
+	color: #AAAAAA;
+}
+
+.signature .much-heart{
+	display: inline-block;
+	position: relative;
+	margin: 0 4px;
+	height: 10px;
+	width: 10px;
+	background: #AC1D3F;
+	border-radius: 4px;
+	-ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.signature .much-heart::before, 
+.signature .much-heart::after {
+	  display: block;
+  content: '';
+  position: absolute;
+  margin: auto;
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background: #AC1D3F;
+  top: -4px;
+}
+
+.signature .much-heart::after {
+	bottom: 0;
+	top: auto;
+	left: -4px;
+}
+
+.signature a {
+	color: #AAAAAA;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+
+.alert {
+	box-sizing: border-box;
+	background-color: #BDFFE1;
+	width: 100%;
+	position: relative; 
+	top: 0;
+	left: 0;
+	z-index: 300;
+	padding: 20px 40px;
+	color: #333;
+}
+
+.alert h2 {
+	font-size: 22px;
+	color: #232323;
+	margin-top: 0;
+}
+
+.alert p {
+	line-height: 1.6em;
+	font-size:18px;
+}
+
+.alert a {
+	color: #232323;
+	font-weight: bold;
+} 
+label { display: inline-block }
+q { font-style: italic }
+
+[type="checkbox"]
+{
+    vertical-align:middle;
+}
+input[type='select']{
+  width: 30px;
+  border: none;
+}
+.form-check ul li{
+  display: block;
+  margin-top: 50px;
+}
+.cont ul li{
+  display: flex;
+  margin-left: 10px;
+  text-indent: 5px;
+  
+}
+</style>
+
+<body>
+  {%for message in messages%}
+<scrip>
+  window.alert('{{message}}')
+</scrip>
+{%endfor%}
+    <div class="login-page nav-lend">
+        <div class="form">
+          <form class="register-form" method = "post"action="{%url 'register'%}">
+            <p class="form-input" style="font-size: smaller;display: flex;">
+             <b>What are the Top 3 reasons you're joining MET?</b> 
+      <div class="form-check">
+       
+             <p class="message radio-inline" > 
+            
+          <ul>
+
+            <li>
+              <label>
+
+                <label> <input type="checkbox" name="iq" id="1"class="form-check-input" /><span><q>Earn through Team </q> </span></label> 
+
+              </label>
+                
+            </li>
+            <li>
+              <label> <input type="checkbox" name="iq" id="1"class="form-check-input" /><span><q>Protect Wealth from Inflation </q> </span></label> 
+
+            </li>
+         <li>
+          <label> <input type="checkbox" name="iq" id="1" class="form-check-input" /><span><q>Lucrative Returns</q> </span>  </label>
+
+         </li>
+         <li>
+          <label> <input type="checkbox" name="iq" id="1" class="form-check-input" /><span><q>Earn from Trading</q> </span>  </label>
+
+         </li>
+         <li>
+          <label> <input type="checkbox" name="iq" id="1" class="form-check-input" /><span><q>Earn from Trading</q> </span>  </label>
+
+         </li>
+         <li>
+          <label><input type="checkbox" name="iq" id="1" class="form-check-input" /><span><q>Build team for Wealth creation</q> </span> </label> 
+
+         </li>
+         <li>
+          <label> <input type="checkbox" name="iq" id="1" class="form-check-input" /><span><q>Have Total Control Over Your Investment </q> </span> </label>
+
+         </li>
+         <li>
+          <label> <input type="checkbox" name="iq" id="1" class="form-check-input" /><span><q>Earn from Lockup</q> </span>  </label>
+
+         </li>
+        </ul>
+        </p>   
+        </p>
+      </div>
+                   
+        
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <p class="message">Activate and Login 
+              <button id="btn" type="button" class="mybtn1" onclick="finish()">Finish</button>
+              <button type = "button"class="mybtn1" id="loader" style="display:none" ><i  class="fa fa-circle-o-notch fa-spin " style = "color:white;font-size: xx-large;"></i>            </p>
+              </button>
+              <script>
+              const btn = document.getElementById('btn')
+              const loader = document.getElementById('loader')
+              function finish(){
+                loader.style.display = 'block'
+                btn.style.display = 'none'
+                setTimeout(()=>{
+                loader.style.display = 'none'
+                btn.style.display = 'none'
+                setTimeout(()=>{
+                  window.location.href = '/accounts/login/'
+                },500)
+                },5000)
+              }
+            </script>
+
+        </form>
+          <form class="login-form container cont" action="{%url 'login'%}" method="post">
+            <b style="margin: 0px;padding: 0px; font-family: Helvetica;" >Hello METner!, we ll love to know few more things about you.</p>
+            </b>
+            <p >
+             
+           
+            What Gender suit your Identity*
+            <ul class="">
+              <li>
+                <input type="radio" name="gender" id="0" >Male 
+
+              </li>
+              <li>
+                <input type="radio" name="gender" id="1" >Female 
+
+              </li>
+              <li>
+                <input type="radio" name="gender" id="2" >Trans 
+
+              </li>
+              <li>
+                <input type="radio" name="gender" id="3" >Non-Conforming
+
+              </li>
+              <li>
+                <input type="radio" name="gender" id="4" >Other
+
+              </li>
+            </ul>
+            <hr>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Select your Age*</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                  {%for i in age %}
+                  <option>{{i}}</option>
+                  {%endfor%}
+              </select>
+            </div>
+            
+            <hr>
+          
+          
+            
+            <input type="text" name = 'first_name'placeholder="First Name"/>
+            <input type="text" name = 'Last_name'placeholder="Last Name"/>
+            
+         
+            {%csrf_token%}            
+            <p class="message">Proceed to activate <a href="#"><button type="button" class="mybtn1">Proceed</button></a></p>
+          </form>
+        </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+     <script>
+        $('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+        </script>
+</body>
+</html>

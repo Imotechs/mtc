@@ -6,11 +6,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> Met.com</title>
+	<title> Met.net.rev.com</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
 
 	<!-- favicon -->
-    <link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
+	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/metcoin.png'%}" type="image/x-icon">
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
 	<!-- Plugin css -->
@@ -101,6 +102,10 @@
     }
       
   }
+  sup {
+  vertical-align: super;
+  font-size: smaller;
+}
   </style>
 <body>
 	<!-- preloader area start -->
@@ -112,9 +117,17 @@
         </div>
 	<!-- preloader area end -->
     {%for message in messages%}
-	<script>
-		alert('{{message}}')
+
+	
+    
+    <script>
+        const audio = new Audio(src='/static/mainapp/assets/alerts/beep_short_off.wav')
+		audio.play()
+        window.alert('{{message}}')
+        
 	</script>
+	
+
 	{%endfor%}
 	<!-- Header Area Start  -->
 	<header class="header">
@@ -137,13 +150,39 @@
                         <i class="fa fas-home">My Wallet</i>
 
 					</h6>
+                    <div class="right " style="float: right;">
+                        {%if msg.count > 0%}
+                        <a href="/met/info/" style="color: #dedede;"><i class="fa-solid fa-bell fa-shake " style="font-size: xx-large;"><sup style="font-size:small;padding-bottom: 10px; color:red;" class="blink_me ">{{msg.count}}</sup></i></a>
+
+                        {%else%}
+
+                        {%endif%}
+                    </div>
+                    
+					<style>
+                        .blink_me {
+  animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+                    </style>
+                    
+				</div>
+
+              
                     
 					
                     
 				</div>
-                
+            
 			</div>
-		</div>
+        
+                    
+                    
 	</section>
 	<!-- Breadcrumb Area End -->
 
@@ -192,37 +231,23 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab">
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="single-winer">
-                                        <div class="top-area">
-                                            <div class="left">
-                                                <h4 class="name" style="color:white;">
-                                                        USD wallet 
-                                                </h4>
-                                            </div>
-                                            <div class="right">
-                                                <p class="id" id="lock" data-toggle="modal" data-target="#signin" style="background-color: brown;">Lock Now 🔓</p>
-                                            </div>
-                                        </div>
-                                        <div class="bottom-area">
-                                            <div class="left">
-                                                   {{request.user.account.main|floatformat:3}} USDT
-                                            </div>
-                                            <div class="right">
-                                                    <img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 {%if request.user.account.wallet%}
                                 <div class="col-lg-4">
                                     <div class="single-winer">
                                         <div class="top-area">
                                             <div class="left">
                                                 <h4 class="name" style="color:white;">
-                                                        MetCoin Wallet   
+                                                        METCoin   
 
                                                 </h4>
+                                            </div>
+                                            <div class="right">
+                                                {%if request.user.account.balance > 0.5%}
+                                                <p class="id" id="lock" data-toggle="modal" data-target="#signin1" style="background-color: brown; color: white;">Swap MTC</p>
+                                                {%else%}
+                                                <p class="id" id="lock" data-toggle="modal" data-target="#none" style="background-color: brown;">Swap MTC 🔓</p>
+
+                                                {%endif%}
                                             </div>
                                         </div>
                                         <div class="bottom-area">
@@ -233,9 +258,19 @@
                                                 <img src="{%static 'mainapp/assets/images/metcoin.png'%}"  width="70"height = "70" alt="">
 
                                             </div>
+        
                                             </div>
                                             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                                            <div class="top-area">
+                                                {%if request.user.account.balance >= 5%}
+                                                <p class="id" id="lock" data-toggle="modal" data-target="#signin2" style="background-color: rgb(42, 142, 165);border-radius: 15px;font-size: larger;padding: 5px;">Lock MTC</p>
 
+                                                {%else%}
+                                                <p class="id" id="lock" data-toggle="modal" data-target="#none" style="background-color: brown;border-radius: 15px;font-size: larger;padding: 5px; ">Lock MTC 🔓</p>
+
+                                                {%endif%}
+        
+                                            </div>
                                             <!-- <p class="id fa-spin">♻️</p>
                                             <button class="buttonload">
                                                   <i class="fa fa-spinner fa-spin"></i>Loading
@@ -246,6 +281,7 @@
                                               </button> -->
 
                                     </div>
+                                  
                                 </div>
                                 {%else%}
                                 <div class="col-lg-4">
@@ -253,14 +289,13 @@
                                         <div class="top-area">
                                             <div class="left">
                                                 <h4 class="name" style="color:white;">
-                                                        MetCoin Wallet   
+                                                        METCoin    
 
                                                 </h4>
                 
 
                                             </div>
                                             <div class="right">
-                                                <p class="id"  >Not Found</p>
 
                                             </div>
                                         </div>
@@ -279,6 +314,34 @@
                                     </div>
                                 </div>
                                 {%endif%}
+                                <div class="col-lg-4">
+                                    <div class="single-winer">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <h4 class="name" style="color:white;">
+                                                        USD wallet 
+                                                </h4>
+                                            </div>
+                                            <div class="right">
+                                                {%if request.user.account.main > 0.5%}
+                                                <p class="id" id="lock" data-toggle="modal" data-target="#signin" style="background-color: brown;">Swap MTC</p>
+                                                {%else%}
+                                                <p class="id" id="lock" data-toggle="modal" data-target="#none" style="background-color: brown;">Swap MTC 🔓</p>
+
+                                                {%endif%}
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                            <div class="left">
+                                                   {{request.user.account.main|floatformat:3}} USDT
+                                            </div>
+                                            <div class="right">
+                                                    <img src="{%static 'mainapp/assets/images/icons6.png'%}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
                                 <style>
                                     .buttonload {
                                   background-color: #04AA6D; /* Green background */
@@ -358,6 +421,8 @@
                                                 <div class="left">
                                                 <p>Click on lock now on your USDT assets to lock your assets and make MTC in 24 Hours</p>
                                                 </div>
+                                                <p id = "times" style="display: none;"></p>
+                                                <p id="allCounts" style="display: none;"><b id="days"> </b>   <b id="hours"> </b>  <b id="minutes"></b> <b id="seconds"> </b> </p>
 
                                             <div class="right">
                                                 <img src="{%static 'mainapp/assets/images/metcoin.png'%}"  width="70"height = "70" alt="">
@@ -379,8 +444,8 @@
                                         </div>
                                         <!-- Form -->
                                             <div class="row">
-                                                <div class="col-12">
-                                                    <form class="form-horizontal m-t-20" action="{%url 'checkout'%}" method="post">
+                                                <div class="col-12 sign-in show active">
+                                                    <form class="form-horizontal m-t-20 deco" action="{%url 'checkout'%}" method="post">
                                                         <div class="form-group row">
                                                             <div class="col-12">
                                                                 {%csrf_token%}
@@ -414,17 +479,16 @@
 
                                 <div class="nav nav-lend mb-3" id="pills-tab" role="tablist" style="margin-left: 60px; display: flex">
                                     
-                                    <div class="nav-item">
+                                    <!-- <div class="nav-item">
                                         <a class="nav-link tabss"  data-toggle="pill" href="#pills-all-bets" role="tab" aria-controls="pills-all-bets" aria-selected="true" >Instructions </a>
-                                    </div>
+                                    </div> -->
                                     <div class="nav-item">
-                                        <a class="nav-link tabss" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="true" style="background-color: rgb(39, 140, 132);">Withdraw</a>
+                                        <a class="nav-link tabss" data-toggle="pill" href="#pills-my-bets" role="tab" aria-controls="pills-my-bets" aria-selected="true" style="background-color: rgb(39, 140, 132);">Withdrawal Form</a>
                                     </div>
                                 </div>
 
                                 <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-all-bets" role="tabpanel" aria-labelledby="pills-all-bets-tab">
-                                        <div class="single-item">
+                                        <!-- <div class="single-item">
                                             <div class="card card-body" style="background-color: transparent; text-align: left; color: #fff; width: 300px; margin-left:10%; margin-right:10%;">
                                                 <form action="{%url 'swap'%}" method="POST">
                                                     <p>Your assets to withdraw must be from your USDT balance</p>
@@ -445,20 +509,21 @@
                                                     <input type="submit" value="Swap" name="withdraw" class="btn btn-success btn-block mt-3">
                                                 </form>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-my-bets" role="tabpanel" aria-labelledby="pills-my-bets-tab">
+                                        </div> -->
+                                    <div class="tab-pane fade show active" id="pills-my-bets" role="tabpanel" aria-labelledby="pills-my-bets-tab">
                                         <div class="single-item">
                                             <div class="card card-body" style="background-color: transparent; text-align: left; color: #fff; width: 300px; margin-left:10%; margin-right:10%;">
-                                                <form action="{%url 'withdraw'%}" method="POST">
+                                                
+                                                <form  action="{%url 'withdraw'%}" method="POST">
                                                     
-                                                    <label for="amount">Withdrawal  Form</label>
+                                                    <label for="amount">Withdrawal  Amount</label>
                                                     <div class="input-group mb-3">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="basic-addon1"></span>
+                                                            <span class="input-group-text" id="basic-addon1">USD</span>
                                                         </div>
                                                         
                                                         <input type="number" class="form-control" name="amount" min="0" value="0" step="0.01"min="0" value="0" step="0.01" title="Currency Only" pattern="^\d+(?:\.\d{1,2})?$" required>
+                                                    
                                                     </div>
                                                     <hr>
                                                     <label for="payment method">Withdrawal Method</label>
@@ -467,10 +532,13 @@
                                                     </select>
                                                     {%csrf_token%}
                                                     <hr>
-                                                    <label for="wallet address">Enter Wallet Address:</label>
-                                                    <input type="text" name="wallet" id="" class="form-control" required>
-                                                    <hr>
-                                                    <input type="submit" value="Proceed" name="withdraw" class="btn btn-success btn-block mt-3">
+                                                    <div style="display:block">
+                                                        <label for="wallet address">Enter Wallet Address:</label>
+                                                        <input type="text" name="wallet" id="" class="form-control" required>
+                                                        <hr>
+                                                        <input type="submit" value="Proceed" name="withdraw" class="btn btn-success btn-block mt-3">
+                                                   
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
@@ -590,7 +658,7 @@
                 <div class="row" style="background: #105b54;">
                     <div class="col-lg-5" style="background: #105b54;">
                         <div class="left-area" style="background: #105b54;">
-                            <p>Copyright © 2022.All Rights Reserved By <a href="#">Met</a>
+                            <p>Copyright © 2021...<a href="#">Met</a>
                             </p>
                         </div>
                     </div>
@@ -621,25 +689,94 @@
             <div class="modal-body">
                 <div class="logo-area">
                         <img class="logo" src="" alt="">
-                </div>
+                        <p style="display: block; font-size: smaller;" >1 MTC ~ <b id ="mainvalue"></b>USD</p>
+
+                    </div>
+               
+                    <div class="header-area">
+                        <h4 class="title"></h4>
+                        <p class="sub-title" style="padding-left: 80px;">USDT <i class="fas fa-angle-double-right"> </i>
+                            
+                            MTC <i style="font-size: 13px;"> <span style="padding: 3px; font-size: 14px; color: #f9f9fa; margin-left:30px" class="mybtns">Total Bal: {{request.user.account.main|floatformat:3}} USD</span></i></p>
+                        </div>
+                    <div class="form-area">
+                        <form class="deco" action="{%url 'swap'%}"  method="post">
+                            <div class="form-group">
+                                    {%csrf_token%}
+                            </div>
+                            <div class="form-group">
+                                    <label for="login-input-password"></label>
+                                    <input type="number" step="0.001" name = 'amount' placeholder="USD"  required class="input-field" id="usdV" >
+                            </div>
+                            <div class="form-group">
+                                <input hidden name="action" value="usdt">
+                            </div>
+                            <div class="form-group">
+                                   <button type="submit" class="mybtn1">Swap</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+                
+                
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <style>
+        .deco{
+
+            border-radius: 15px;
+            border-style:dotted;
+            align-content: center;
+        } 
+        .deco input:focus{
+            border: 2px solid #0483aa;
+            border-left: #04AA6D 8px solid;
+        }
+        .deco input{
+            border: 2px solid #0483aa;
+            height: 50px;
+            border-left: #04AA6D 8px solid;
+        }
+        .deco button,input{
+            margin-left: 10%;
+            width: 80%;
+        }
+    </style>
+    <!-- convert to MTC -->
+    <div class="modal fade sign-in show active" id="signin1" tabindex="1" role="dialog" aria-labelledby="login" aria-hidden="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content deco">
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button> -->
+            <div class="modal-body">
+                <div class="logo-area">
+                        <img class="logo" src="" alt="">
+                        <p style="display: block; font-size: smaller;" >1 MTC <b>~</b> <b id ="mainV"></b>USD</p>
+
+                    </div>
                 <div class="header-area">
                     <h4 class="title"></h4>
-                    <p class="sub-title">Enter USDT to Lock for 24 hours</p>
+                    <p class="sub-title" style="padding-left: 80px;">MTC <i class="fas fa-angle-double-right"> </i>
+                        
+                        USDT <i style="font-size: 13px;"> <span style="padding: 3px; font-size: 14px; color: #f9f9fa; margin-left:30px" class="mybtns">Total Bal: {{request.user.account.balance|floatformat:3}} MTC</span></i></p>
                 </div>
                 <div class="form-area">
-                    <form action="{%url 'lock_up'%}"  method="post">
+                    <form class="deco" action="{%url 'swap'%}"  method="post">
                         <div class="form-group">
                                 {%csrf_token%}
                         </div>
                         <div class="form-group">
-                                <label for="login-input-password">Amount *</label>
-                                <input type="number" step="0.001" name = 'amount' class="input-field" id="login-input-password" >
+                                <label for="login-input-password"></label>
+                                <input type="number" step="0.001" name = 'amount' placeholder="MTC"  required class="input-field" id="login-input-password" >
                         </div>
                         <div class="form-group">
-                            <input hidden name="action" value="lock">
+                            <input hidden name="action" value="mtc">
                         </div>
                         <div class="form-group">
-                               <button type="submit" class="mybtn1">Lock</button>
+                               <button type="submit" class="mybtn1">Swap</button>
                         </div>
                     </form>
                 </div>
@@ -649,6 +786,59 @@
         </div>
         </div>
     </div>
+
+    <!-- convert to mtc ends here -->
+
+    <!-- lock up is from here  -->
+    
+    <div class="modal fade sign-in show active" id="signin2" tabindex="1" role="dialog" aria-labelledby="login" aria-hidden="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+            <div class="modal-body">
+                <div class="logo-area">
+                        <img class="logo" src="" alt="">
+                </div>
+               
+                    <div class="header-area">
+                        <h4 class="title"></h4>
+                        <p class="sub-title" style="padding-left: 80px;">MTC <i class="fas fa-angle-double-right"> </i>
+                        
+                            Lock Up <i style="font-size: 13px;"> <span style="padding: 3px; font-size: 14px; color: #f9f9fa; margin-left:30px" class="mybtns">Total Bal: {{request.user.account.balance|floatformat:3}} MTC</span></i></p>
+                    <p style="font-size: x-small;"> Locking up your METcoin  for 1.7% - 4.5% daily ...<a href="{%url 'about'%}">Read here</a>
+                        <br>
+                        {%if locked%}
+                        <br><b style="color:brown;">You  already have Locked assets, <br>This action will be added and your daily return would increase accordingly</b>
+                        {%endif%}
+                    </p>
+                    </div>
+                       
+                    <div class="form-area">
+                        <form class="deco" action="{%url 'lock_up'%}"  method="post">
+                            <div class="form-group">
+                                    {%csrf_token%}
+                            </div>
+                            <div class="form-group">
+                                    <label for="login-input-password"></label>
+                                    <input type="number" step="0.001" name = 'amount' placeholder="MTC"  required class="input-field" id="usdVal" >
+                            </div>
+                            <div class="form-group">
+                                <input hidden name="action" value="lock">
+                            </div>
+                            <div class="form-group">
+                                   <button type="submit" class="mybtn1">Lock</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+                
+                
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- lock up ends here -->
     {%include 'footer.html'%}
 	<!-- Footer Area End -->
 
@@ -712,6 +902,7 @@
 		
 
         <script>
+   
             const tabs = document.querySelector(".wrapper");
             const tabButton = document.querySelectorAll(".tab-button");
             const contents = document.querySelectorAll(".content");
@@ -729,7 +920,44 @@
                 element.classList.add("active");
               }
           }
+
+  
+
           </script>
+          
+          <script>
+            function getCookie(name) {
+let cookieValue = null;
+if (document.cookie && document.cookie !== '') {
+const cookies = document.cookie.split(';');
+for (let i = 0; i < cookies.length; i++) {
+const cookie = cookies[i].trim();
+// Does this cookie string begin with the name we want?
+if (cookie.substring(0, name.length + 1) === (name + '=')) {
+cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+break;
+}
+}
+}
+return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+const headerz = {
+   'X-CSRFtoken': csrftoken,
+   }
+const usdVal = document.querySelectorAll('usdV')
+const mainvalue = document.getElementById('mainvalue')
+const mainVal = document.getElementById('mainV')
+          $.getJSON("/access/met/value/", headerz, addData);
+
+            function addData(data){
+
+               mainvalue.innerHTML = data['met'];
+               mainVal.innerHTML = data['met'];
+            }
+         
+      </script> 
 	<!-- jquery -->
 	<!-- popper -->
 	

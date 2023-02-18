@@ -1,0 +1,613 @@
+<html>
+{%load static%}
+
+<head>
+  <title>Met.net.rev.com</title>
+  <link rel="shortcut icon" href="{%static 'mainapp/assets/images/metcoin.png'%}" type="image/x-icon">
+
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}">
+
+
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/style.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/responsive.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script>
+ 
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    window.onload = function () {
+      console.log("LOADED");
+      buy_link.style.display = 'block'
+      sell_link.style.display = 'none'
+      //Configuration variables
+      var updateInterval = 500 //in ms
+      var numberElements = 200;
+      var counts = document.getElementById('counts')
+      //Globals
+      var updateCount = 0;
+
+      //Chart Objects
+
+      var yawChart = $("#metChart");
+      //chart instances & configuration
+      const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+      // const chartbg = document.getElementById('met')
+      // chartbg.style.background = '#'+randomColor
+      // chartbg.style.opacity= 0.8
+      var commonOptions = {
+        scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              displayFormats: {
+                millisecond: 'mm:ss:SSS'
+              }
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+        legend: { display: false },
+        tooltips: {
+          enabled: false
+        }
+      };
+
+
+
+
+      var yawChartInstance = new Chart(yawChart, {
+        type: 'line',
+        data: {
+          datasets: [{
+            label: "MTC/USDT",
+            data: 0,
+            fill: false,
+            borderColor: "#" + randomColor,
+            borderWidth: 1
+          }]
+        },
+        options: Object.assign({}, commonOptions, {
+          title: {
+            display: true,
+            text: "MTC/USDT",
+            fontSize: 18
+          }
+        })
+      });
+
+      function addData(data) {
+        if (data) {
+
+          yawChartInstance.data.labels.push(new Date());
+          yawChartInstance.data.datasets.forEach((dataset) => { dataset.data.push(data['met']) });
+          if (updateCount > numberElements) {
+            yawChartInstance.data.labels.shift();
+            yawChartInstance.data.datasets[0].data.shift();
+          }
+          else updateCount++;
+
+          yawChartInstance.update();
+        }
+      };
+      function addMet(data){
+        const buy_link = document.getElementById('buy_link')
+        const sell_link = document.getElementById('sell_link')
+        const cap = document.getElementById('cap_rate')
+        const Sm = document.getElementById('selling_amount')
+        if(data['amount']!='none'){
+          cap.innerHTML =data['cap'];
+          Sm.value = data['trade_amount']
+          buy_link.style.display = 'none'
+          sell_link.style.display = 'block'
+          sellbtn.innerHTML = "View"
+          counts.innerHTML = data['amount']
+        } else{
+
+          cap.innerHTML =data['cap'];
+          buy_link.style.display = 'block'
+          sell_link.style.display = 'none'
+        }
+
+      }
+
+      function updateData() {
+        console.log("Update Data");
+
+        const headerz = {
+          'X-CSRFtoken': csrftoken,
+        }
+        $.getJSON("/access/met/value/", headerz, addData);
+        $.getJSON("/checking/", headerz, addMet);
+        setTimeout(updateData, updateInterval);
+      }
+
+      updateData();
+    }
+  </script>
+  <style>
+    html {
+      font-family: "Open Sans", sans-serif;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      font-size: 18px;
+      margin: 0;
+      padding: 0;
+      color: #a1aed4;
+      overflow-x: hidden;
+    }
+
+    .buybtns {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 2px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+      background-image: -webkit-linear-gradient(right, #065548, #2198c0);
+      background-image: -o-linear-gradient(right, #065548, #2198c0);
+      background-image: linear-gradient(to left, #065548, #2198c0);
+    }
+    .salebtn {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 2px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#ff344d), to(#d2273c));
+  background-image: -webkit-linear-gradient(right, #ff344d, #d2273c);
+  background-image: -o-linear-gradient(right, #ff344d, #d2273c);
+  background-image: linear-gradient(to left, #ff344d, #d2273c);
+    }
+
+    .container {
+      display: flex;
+
+    }
+
+    .label {
+      flex: 1;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .x {
+      flex: 3;
+      text-align: center;
+      background-color: rgba(235, 113, 101, 0.73);
+      margin: 10px;
+    }
+
+    .y {
+      flex: 3;
+      text-align: center;
+      background-color: rgba(70, 163, 71, 0.64);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .z {
+      flex: 3;
+      text-align: center;
+      background-color: rgba(70, 140, 215, 0.74);
+      margin: 10px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .error {
+      background-color: rgb(138, 9, 9);
+      color: antiquewhite;
+      font-size: x-large;
+    }
+    .input-field {
+        width: 20%;
+        border: 0px;
+        height: 40px;
+        color: #a1aed4;
+        border-bottom: 2px solid rgba(248, 110, 110, 0.2);
+        border-radius: 5px;
+        margin-bottom: 0px; }
+        .newForm{
+            background-color: steelblue;
+            border: 2px dotted red;
+            padding: 5px;
+            align-items: center;
+            margin: auto;
+        }
+         .newForms{
+            background-color: rgb(95, 156, 155);
+            border: 2px dotted red;
+            padding: 5px;
+            width:90%;
+            align-items: center;
+            margin: auto;
+        }
+  </style>
+
+</head>
+
+<body>
+  {%for msg in messages%}
+  <script>
+      window.alert('{{msg}}')
+  </script>
+  {%endfor%}
+  <section class="activities">
+    <div class="tab-content" >
+      <div class="tab-pane fade show active" id="" role="tabpanel" aria-labelledby="">
+        <div class="responsive-table"style="width: 100%;" >
+          <div class="table"style="width: 98%;">
+            <div id="orientationContainer" class="container" >
+
+              <div id="met" class="z">
+                <canvas id="metChart" ></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="tab-menu-area">
+
+          <div class="tab-content" id="pills-tabContent">
+
+            <h1 id = 'sbloader' style="display: none;">
+              <i class="fa fa-circle-o-notch fa-spin" style = "color:black"></i>
+
+                        </h1>
+            <h3 class="y fade" id="Str">
+
+            </h3>
+
+            <div class="tab-pane fade " id="all-bets" role="tabpanel" aria-labelledby="pills-all-bets-tab">
+              <div class="responsive-table">
+                <form method="post" id='buyform' class="newForm nav-lend">
+                    <div class="row" >
+                        <div class="col" style="width: 40%;">
+                            <p  class="buybtns" style="font-size:small;"><i style="text-decoration-style:solid;">B</i>alance: <small style="font-size: xx-large;">{{request.user.account.balance|floatformat:3}}</small> <b style="font-size: 8px;">MTC</b></p>
+
+                        </div>
+                        <div class="col" >
+                            <div class="form-group">
+                                <input type="number" step="0.00000005" name='amount' required class="input-field" id="buy_amount"
+                                  placeholder="Amount" style="width:100%; border-radius: 15px;"> <small id = "account_usdt"> </small>
+                              </div>
+
+                              <div class="form-group">
+                                <button type="submit" class="buybtns" onclick="hidForm('buy')" style="width:100%; border-radius: 15px;"><small>Trade</small></button>
+                              </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+              </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="my-bets" role="tabpanel" aria-labelledby="pills-my-bets-tab">
+                <div class="responsive-table">
+
+                    <form method="post" id='sellform' class="nav-lend">
+                        <div class="row">
+                            <div class="col" style="width: 40%;">
+                                <p style="font-size: small;"><i style="text-decoration-style:wavy;">B</i>alance :<small style="font-size: xx-large;" id = 'mtc'>{{request.user.account.balance|floatformat:3}}</small> <b style="font-size: 8px;">MTC</b></p>
+                                <button type="submit" class="buybtns" onclick="hidForm('sale')" style="width:100%; border-radius: 15px;"><small>End Trade</small></button>
+
+                            </div>
+                            <div class="col" >
+                                
+
+                                  <div class="form-group">
+                                    <button type="button" class="buybtns" style="width:100%; border-radius: 15px; background: rgb(243, 242, 242);"><small id = 'counts' style="color:rgb(118, 116, 116)"></small></button>
+                                  </div>
+                                  
+                                  <div class="form-group">
+                                    <span>Trade Amount  </span><input disabled class="input-field"  name="amount" id="selling_amount" value="0.00"
+                                      placeholder="amount" style="width:75px; border-radius: 5px; height:15px;color:white;background:black"> <small id = "account_usdt"> </small>
+                                  </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+              </div>
+            </div>
+
+            <ul class="nav nav-lend mb-3" id="pills-tab" role="tablist">
+
+              <li class="nav-item" id = 'sell_link'>
+
+                    <div class="form-group" >
+                      <button type="button" class="nav-link active sell" id="sell_met"  data-toggle="pill" href="#pills-my-bets" role="tab"
+                      aria-controls="pills-my-bets"  aria-selected="false"><small>End Trade</small></button>
+                    </div>
+                </li>
+
+
+                <li class="nav-item buy" id = 'buy_link'>
+                    <div class="form-group buy">
+                        <button class="nav-link active buy" id="buy_met" data-toggle="pill" href="#pills-all-bets" role="tab"
+                            aria-controls="pills-all-bets"  aria-selected="false"><small>Enter Trade</small></button>
+                    </div>
+                </li>
+                <p>Cap Rate <small id = 'cap_rate'></small>%</p>
+            </ul>
+            <script>
+              const sbloader = document.getElementById('sbloader')
+              const usdt = document.getElementById('account_usdt')
+              const mtc = document.getElementById('mtc')
+              const buybtn = document.getElementById('buy_met')
+              const sellbtn = document.getElementById('sell_met')
+              const sellform = document.getElementById('my-bets')
+              const buyforms = document.getElementById('all-bets')
+              const buyStr = document.getElementById('Str')
+
+              const buyform = document.getElementById('buyform')
+              const saleform = document.getElementById('sellform')
+              const buyAmount = document.getElementById('buy_amount')
+              const saleAmount = document.getElementById('selling_amount')
+              buybtn.addEventListener('click', showform)
+              sellbtn.addEventListener('click', showSform)
+
+              function showform(e) {
+                e.preventDefault();
+                sellform.classList.remove('show', 'active')
+                buyforms.classList.add('show', 'active')
+              
+
+              }
+              function showSform(e) {
+                e.preventDefault();
+                  buyforms.classList.remove('show', 'active')
+                  sellform.classList.add('show', 'active')
+
+              }
+            function hidForm(arr){
+              if (arr=='buy'){
+              setTimeout(()=>{
+
+              buyforms.classList.remove('show', 'active')
+              },300)
+              }
+              if (arr=='sale'){
+                setTimeout(()=>{
+                sellform.classList.remove('show', 'active')
+                },200)
+
+              }
+
+              }
+
+              buyform.addEventListener('submit', handleSubmit)
+              saleform.addEventListener('submit', handleSubmits)
+              const url = '/trading/mtc/'
+
+              function handleSubmit(e) {
+
+                e.preventDefault();
+                const amount = buyAmount.value
+                const status = 'buy'
+                sbloader.style.display ='block'
+                fetch(url, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFtoken': csrftoken,
+                  },
+                  body: JSON.stringify({ "amount": amount, 'status': status })
+                }).then((response) => response.json())
+                  .then((data) =>{
+                    setTimeout(() => {
+
+                      if (data['status'] == 'Success!') {
+                        sbloader.style.display ='none'
+                        buyStr.classList.add('show', 'active')
+                        buyStr.classList.remove('fade')
+                        buyStr.innerHTML = data['status']
+                        setTimeout(()=>{
+                        buyStr.classList.remove('show', 'active')
+                       buyStr.classList.add('fade')
+                       fetch('/users/get/account/', {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/json',
+                              'X-CSRFtoken': csrftoken,
+                            },
+                          }).then((response) => response.json())
+                            .then((data) =>{
+                              mtc.innerHTML = data['mtc']
+                              })
+                        },1500)
+
+
+                      }
+                      else if (data['status'] == 'Failed!') {
+                        sbloader.style.display ='none'
+                        buyStr.classList.add('show', 'active', 'error')
+                        buyStr.classList.remove('fade')
+                        buyStr.innerHTML = data['status']
+                      setTimeout(()=>{
+                      buyStr.classList.remove('show', 'active','error')
+                      buyStr.classList.add('fade')
+
+                        },5000)
+                      }
+                      else if(data['status'] =='Can not Trade less than 5 MTC'){
+                        sbloader.style.display ='none'
+                        buyStr.classList.add('show', 'active', 'error')
+                        buyStr.classList.remove('fade')
+                        buyStr.innerHTML = data['status']+'\n Consider depositing USDT'
+                      setTimeout(()=>{
+                      buyStr.classList.remove('show', 'active','error')
+                      buyStr.classList.add('fade')
+
+                        },5000)
+                      }
+                      else {
+                        sbloader.style.display ='none'
+                        buyStr.classList.add('show', 'active', 'error')
+                        buyStr.classList.remove('fade')
+                        buyStr.innerHTML = data['status']
+                      setTimeout(()=>{
+                      buyStr.classList.remove('show', 'active','error')
+                      buyStr.classList.add('fade')
+                      setTimeout(()=>{
+                          window.location.href= '/users/link/mtc/wallet/'
+
+                        },1000)
+                        },3000)
+
+                      }
+
+
+                    }, 1000);
+                  }
+
+                  )                    ;
+
+              }
+              function handleSubmits(e) {
+                e.preventDefault();
+                const samount = saleAmount.value
+                const status = 'sale'
+                sbloader.style.display ='block'
+
+                fetch(url, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFtoken': csrftoken,
+                  },
+                  body: JSON.stringify({ "amount": samount, 'status': status })
+                }).then((response) => response.json())
+                  .then((data) =>{
+                    setTimeout(() => {
+
+                      if (data['status'] == 'Success!') {
+                        sbloader.style.display ='none'
+                        buyStr.classList.add('show', 'active')
+                        buyStr.classList.remove('fade')
+                        buyStr.innerHTML = data['status']
+
+                        setTimeout(()=>{
+                          buyStr.classList.remove('show', 'active')
+                          buyStr.classList.add('fade')
+                          fetch('/users/get/account/', {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/json',
+                              'X-CSRFtoken': csrftoken,
+                            },
+                          }).then((response) => response.json())
+                            .then((data) =>{
+                              mtc.innerHTML = data['mtc']
+                              })
+                        },1500)
+
+                      }
+                      else if (data['status'] == 'Failed!') {
+                        sbloader.style.display ='none'
+                        buyStr.classList.add('show', 'active', 'error')
+                        buyStr.classList.remove('fade')
+                        buyStr.innerHTML = data['status']
+                      setTimeout(()=>{
+                        buyStr.classList.remove('show', 'active','error')
+                        buyStr.classList.add('fade')
+                        },1500)
+                      }
+                      else {
+                        sbloader.style.display ='none'
+                        buyStr.classList.add('show', 'active', 'error')
+                        buyStr.classList.remove('fade')
+                        buyStr.innerHTML = data['status']
+                      setTimeout(()=>{
+                        buyStr.classList.remove('show', 'active','error')
+                        buyStr.classList.add('fade')
+                        setTimeout(()=>{
+                          window.location.href= '/users/link/mtc/wallet/'
+
+                        },1000)
+                        },3000)
+                      }
+
+
+                    }, 1000);
+                  }
+
+                  )
+              }
+              window.addEventListener('load',()=>{
+                fetch('/users/get/account/', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFtoken': csrftoken,
+                  },
+                }).then((response) => response.json())
+                  .then((data) =>{
+              }
+              )})
+            </script>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+  {%include 'footer.html'%}
+	<!-- popper -->
+	<!-- bootstrap -->
+ 
+
+	
+</body>
+
+</html>

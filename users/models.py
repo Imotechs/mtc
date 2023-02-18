@@ -59,15 +59,15 @@ class Subscribers(models.Model):
 
 class BuyTrade(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
-    usdt = models.FloatField()
+    mtc_val = models.FloatField()
     mtc = models.FloatField()
     buy_time = models.DateTimeField(auto_now=True)
+    sell = models.BooleanField(default = False)
     def __str__(self) :
         return self.user.username
 
 class SellTrade(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
-    usdt = models.FloatField()
     mtc = models.FloatField()
     profit = models.FloatField(null=True,blank=True)
     sell_time = models.DateTimeField(auto_now=True)
@@ -94,3 +94,12 @@ class LockedAsset(models.Model):
     date_to = models.DateTimeField()
     def __str__(self):
         return self.user.username
+
+class Message(models.Model):
+    subject = models.CharField(max_length = 150)
+    body = models.TextField()
+    date = models.DateTimeField(auto_now=True)
+    read = models.BooleanField(default=False)
+    url = models.URLField(default='https://', blank=True,null =True)
+    def __str__(self):
+        return self.subject

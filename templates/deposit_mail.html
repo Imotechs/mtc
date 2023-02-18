@@ -1,4 +1,4 @@
- 
+
 <!DOCTYPE html>
 <html>
 <!-- CSS only -->
@@ -12,11 +12,11 @@
 <div class="card" style="width: 18rem;">
   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu34oq_soM0Q-7j13sybabkDwiWc79BM4mnQ&usqp=CAU"  class="card-img-top" alt="...">
 <div class="card-body">
-{% autoescape off %}  
+{% autoescape off %}
 <h2 class="card-title">Hi {{user}}</h2>
-<p>Your deposit of  <strong>{{deposit.usd}} USD</strong> on <b style = "color:violet;">MET</b> was approved.</p>
-http://{{ domain }}  
-{% endautoescape %} 
+<p>Your deposit of  <strong>{{deposit.amount}} USD</strong> on <b style = "color:violet;">MET</b> was approved.</p>
+http://{{ domain }}
+{% endautoescape %}
 
 </div>
 <div class="card text-center">

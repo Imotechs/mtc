@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Met.net.revolutional</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/dstyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
+    <link rel="shortcut icon" href="{%static 'mainapp/assets/images/metcoin.png'%}" type="image/x-icon">
+>
+</head>
+<style>
+    .btns{
+        font-size: 12px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 12px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+      background-image: -webkit-linear-gradient(right,  #536461, #83cbe3);
+      background-image: -o-linear-gradient(right,  #536461, #83cbe3);
+      background-image: linear-gradient(to left, #536461, #84a7b3);
+      
+    }
+    .buybtns {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: inline-block;
+      color: #fff;
+      border: 0px;
+      border-radius: 2px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      background-image: -webkit-gradient(linear, right top, left top, from(#065548), to(#2198c0));
+      background-image: -webkit-linear-gradient(right, #065548, #2198c0);
+      background-image: -o-linear-gradient(right, #065548, #2198c0);
+      background-image: linear-gradient(to left, #065548, #2198c0);
+    }
+</style>
+<body>
+    {%for msg in messages%}
+    <script>
+        window.alert('{{msg}}')
+    </script>
+    {%endfor%}
+    <section data-v-7d9ce8f6="" class="page settings-page referrals-page">
+        <div data-v-7d9ce8f6="" class="head-banner page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                         
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h1>MET Community Updates</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+       {%if not messagez%}
+        <div data-v-7d9ce8f6="" class="container" id="txt">
+            <div data-v-7d9ce8f6="" class="row">
+                <div data-v-7d9ce8f6="" class="col">
+                    <h1 data-v-7d9ce8f6="">No News available</h1>
+                    <a href="{%url 'wallet'%}" class="buybtns">Back </a>
+                </div>
+            </div>
+            {%else%}
+            <div data-v-7d9ce8f6="" class="container" id="txt">
+                <div data-v-7d9ce8f6="" class="row">
+                    <div data-v-7d9ce8f6="" class="col">
+                        <h1 data-v-7d9ce8f6="">Latest Updates</h1>
+                        <p> Met community updates for traders/Investors</p>
+                    </div>
+                </div>
+            {%endif%}
+            {%for msg in messagez%}
+            <div data-v-7d9ce8f6="" class="row">
+                <div data-v-7d9ce8f6="" class="col nav-lend">
+                    <div data-v-7d9ce8f6="" class="card my-0">
+                        <div data-v-7d9ce8f6="" class="card-body">
+                            
+                            <div data-v-7d9ce8f6="" class="form-group"><label data-v-7d9ce8f6=""
+                                    class="form-label opacity-50"> <b style="color: #0c7b73;"> &nbsp;{{msg.subject}}</b> <small></small><small style="margin-left: 30px;">&nbsp;{{msg.date|date:'d,M,Y'}}</small></label>
+                                <div class="right" style="float: right;">
+                                    <img class="text-rounded card my-0"src="{{msg.url}}" alt="img" srcset="">
+                                </div>
+                                    <div data-v-7d9ce8f6=""><span data-v-7d9ce8f6="" id="referral-link"
+                                        class="fw-bold">
+                                        <h1>{{msg.body}} &nbsp; <small style="font-size: xx-small;"></small></h1>
+
+                                    </span>
+                                    
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {%endfor%}
+        </div>
+        <div id="loader" style="display: none;">
+            <div data-v-7d9ce8f6="" class="container">
+                <div data-v-7d9ce8f6="" class="row">
+                    <div data-v-7d9ce8f6="" class="col">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+                    
+                        <h1 class="" >
+                            <img src="{%static 'mainapp/assets/images/metcoin.png'%}" class="id fa-spin" width="150"height = "150" alt="">
+
+                        </h1>
+                    </div>
+                </div>
+        </div>
+       
+        <div data-v-7d9ce8f6="" class="col">
+            <div data-v-7d9ce8f6="" class="mb-5">
+              
+                <h6 data-v-7d9ce8f6=""></h6>
+                <p data-v-7d9ce8f6=""></p>
+            </div>
+        </div>
+    </section>
+{%include 'footer.html'%}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  
+</body>
+
+</html>

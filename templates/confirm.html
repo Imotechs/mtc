@@ -26,19 +26,19 @@
 			<div class="lds-pos"></div>
 				<div class="lds-pos"></div>
 
-		
+
 		</div>
 	</div>
 	<!-- preloader area end -->
 
 	<!-- Header Area Start  -->
 	<header class="header">
-		
-		
+
+
 		<!--Main-Menu Area Start-->
 	</header>
 	<!-- Header Area End  -->
-	
+
 	{%for message in messages%}
 	<script>
 		alert('{{message}}')
@@ -48,10 +48,14 @@
 	<!-- Breadcrumb Area Start -->
 	<!-- <section class="breadcrumb-area bc-contact">
 		<img class="bc-img" src="assets/images/breadcrumb/contact.png" alt="">
-		
+
 	</section> -->
 	<!-- Breadcrumb Area End -->
-
+	<style>
+	    body{
+	        background:black;
+	    }
+	</style>
 <div class="login-modal sign-in" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -61,21 +65,21 @@
                     <img class="logo" src="" alt="">
             </div>
             <div class="header-area">
-            
-                <h5 class="title">EMail Verification :::<b style="color: aqua;">Met</b></h5>
+
+                <h5 class="title">Welcome  &nbsp; <b style="color: aqua;text-transform:none"> METner</b></h5>
                 <p class="sub-title">Success!</p>
-               
+
             </div>
             <div class="form-area">
-                
+
                  <p>Your account has been activated!</p>
-				 <small>Click to  go back and login</small> 
-                    
+				 <small>Click to  go back and login</small>
+
             </div>
 			<form>
 			<div class="form-group">
 
-			<a href="{%url 'login'%}" class="mybtn1">back to login</a> 
+			<a href="{%url 'login'%}" class="mybtn1">back to login</a>
 			</div>
 		</form>
         </div>

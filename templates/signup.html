@@ -6,9 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> Met.com</title>
+	<title> Met.net.rev.com</title>
 	<!-- favicon -->
-	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/favicon.html'%}" type="image/x-icon">
+	<link rel="shortcut icon" href="{%static 'mainapp/assets/images/metcoin.png'%}" type="image/x-icon">
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="{%static 'mainapp/assets/css/bootstrap.min.css'%}" >
 	<!-- Plugin css -->
@@ -26,19 +26,19 @@
 			<div class="lds-pos"></div>
 				<div class="lds-pos"></div>
 
-		
+
 		</div>
 	</div>
 	<!-- preloader area end -->
 
 	<!-- Header Area Start  -->
 	<header class="header">
-		
-		
+
+
 		<!--Main-Menu Area Start-->
 	</header>
 	<!-- Header Area End  -->
-	
+
 	<!-- Hero Area Start -->
 	{%for message in messages%}
 	<script>
@@ -49,21 +49,25 @@
 	<!-- Breadcrumb Area Start -->
 	<!-- <section class="breadcrumb-area bc-contact">
 		<img class="bc-img" src="assets/images/breadcrumb/contact.png" alt="">
-		
+
 	</section> -->
 	<!-- Breadcrumb Area End -->
+	<style>
+	    body{
+	        background:black;
+	    }
+	</style>
 
 <div class="login-modal sign-in" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
         <div class="modal-body">
             <div class="logo-area">
                     <img class="logo" src="" alt="">
             </div>
             <div class="header-area">
-            
-                <h5 class="title">Great to have you on <b style="color: aqua;">Met</b>!</h5>
+
+                <h5 class="title">Become a <b style="color: aqua;">METner </b></h5>
                 <p class="sub-title">User Registration</p>
                 <p>{%for error,message in msg.items%}
                     <small style="color: red;">{{error}} &nbsp;</small>
@@ -91,11 +95,11 @@
                 </div>
                     {%if ref is not None%}
                     <div class="form-group">
-                        <label for="login-input-email" >Referral</label>  
+                        <label for="login-input-email" >Referral</label>
                     <input type="number" name="ref" class="input-field" placeholder="Ref[optional]" value="{{ref}}">
                     </div>
                     {%else%}
-                   <input type="number" hidden name="ref" placeholder="Ref[optional]" > 
+                   <input type="number" hidden name="ref" placeholder="Ref[optional]" >
                     {%endif%}
                     <div class="form-group">
                         <div class="box">
@@ -105,7 +109,7 @@
                                         I agree with <a href="{%url 'terms'%}" style="color: aqua;">terms and Conditions</a> and  <a href="{%url 'terms'%}"  style="color: aqua;">privacy policy</a>
                                 </label>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -114,11 +118,11 @@
                 </form>
             </div>
             <div class="form-footer">
-                <p>Already a member? 
+                <p>Already a member?
                     <a href="{%url 'login'%}"  >Login instead <i class="fas fa-angle-double-right"></i></a>
                 </p>
             </div>
-            
+
         </div>
     </div>
     </div>
